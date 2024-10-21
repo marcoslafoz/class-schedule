@@ -1,0 +1,102 @@
+{
+  "lunes": [
+    {
+      "horaInicio": "08:30",
+      "horaFin": "10:15",
+      "asignatura": "FH"
+    },
+    {
+      "horaInicio": "10:20",
+      "horaFin": "11:10",
+      "asignatura": "IPPE"
+    },
+    {
+      "horaInicio": "11:40",
+      "horaFin": "14:20",
+      "asignatura": "GBD"
+    }
+  ],
+  "martes": [
+    {
+      "horaInicio": "08:30",
+      "horaFin": "10:15",
+      "asignatura": "ISO"
+    },
+    {
+      "horaInicio": "10:20",
+      "horaFin": "11:10",
+      "asignatura": "Inglés"
+    },
+    {
+      "horaInicio": "11:40",
+      "horaFin": "12:30",
+      "asignatura": "DASP"
+    },
+    {
+      "horaInicio": "12:35",
+      "horaFin": "14:20",
+      "asignatura": "PAR"
+    }
+  ],
+  "miercoles": [
+    {
+      "horaInicio": "08:30",
+      "horaFin": "09:20",
+      "asignatura": "LMSGI"
+    },
+    {
+      "horaInicio": "09:25",
+      "horaFin": "11:10",
+      "asignatura": "GBD"
+    },
+    {
+      "horaInicio": "11:40",
+      "horaFin": "13:25",
+      "asignatura": "ISO"
+    },
+    {
+      "horaInicio": "13:30",
+      "horaFin": "14:20",
+      "asignatura": "Inglés"
+    }
+  ],
+  "jueves": [
+    {
+      "horaInicio": "08:30",
+      "horaFin": "09:20",
+      "asignatura": "IPPE"
+    },
+    {
+      "horaInicio": "09:20",
+      "horaFin": "11:10",
+      "asignatura": "ISO"
+    },
+    {
+      "horaInicio": "11:40",
+      "horaFin": "14:20",
+      "asignatura": "PAR"
+    }
+  ],
+  "viernes": [
+    {
+      "horaInicio": "08:30",
+      "horaFin": "10:15",
+      "asignatura": "FH"
+    },
+    {
+      "horaInicio": "10:20",
+      "horaFin": "11:10",
+      "asignatura": "IPPE"
+    },
+    {
+      "horaInicio": "11:40",
+      "horaFin": "13:25",
+      "asignatura": "PAR"
+    },
+    {
+      "horaInicio": "13:30",
+      "horaFin": "14:20",
+      "asignatura": "LMSGI"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+.table-cell-base {
+  @apply rounded-xl text-right align-bottom text-white h-20 w-32 px-2 py-1 text-xs  ;
+}
+
+
+.hour-cell {
+  @apply  text-center align-middle w-auto text-white text-opacity-25 text-xs ;
+}
+
+table {
+  border-spacing: 10px;
+  border-collapse: separate;
+}
+
+
+.mat1 {
+  background-color: #b3b3b3;
+  color: white;
+  /* FH */
+}
+
+.mat2 {
+  background-color: #737373;
+  /* ISO */
+}
+
+.mat3 {
+  background-color: #868686;
+  /* Amarillo claro */
+}
+
+.mat4 {
+  background-color: #bbbbbb;
+  /* BD */
+}
+
+.mat5 {
+  background-color: #8f8f8f;
+  /* Verde claro */
+}
+
+.mat6 {
+  background-color: #b8b8b8;
+  /* Naranja claro */
+}
+
+.mat7 {
+  background-color: #c7c7c7;
+  /* Rosa claro */
+}
+
+.mat8 {
+  background-color: #666666;
+  /* IPPE */
+}
+
+
+
+
+

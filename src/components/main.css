@@ -12,7 +12,7 @@
 }
 
 body {
-  background-color: #e8e8e8;
+  background-color: #474747;
   color: var(--color-primary);
   font-family: var(--font-regular);
   font-size: var(--font-size-regular);
@@ -20,82 +20,4 @@ body {
 
 .container-fluid {
   min-height: 100vh;
-}
-
-/*========================== Font style ==========================*/
-
-.text-bold {
-  font-family: var(--font-bold);
-}
-
-.text-medium {
-  font-family: var(--font-medium);
-}
-
-/*========================== Font size ==========================*/
-
-.font-size-1 {
-  font-size: var(--font-size-1);
-}
-
-.font-size-2 {
-  font-size: var(--font-size-2);
-}
-
-.font-size-3 {
-  font-size: var(--font-size-3);
-}
-
-.font-size-4 {
-  font-size: var(--font-size-4);
-}
-
-/*========================== Font color ==========================*/
-
-.font-color-primary {
-  color: var(--color-primary);
-}
-
-.font-color-secondary {
-  color: var(--color-secondary);
-}
-
-/*========================== Main container ==========================*/
-
-.main-container {
-  border-radius: 30px;
-  border: 2px solid #323232;
-  background: #e0e0e0;
-  box-shadow: 15px 15px 30px #bebebe,
-    -15px -15px 30px #ffffff;
-}
-
-hr {
-  border-color: #858585;
-}
-
-/*========================== Small button ==========================*/
-
-.small-button {
-  --main-focus: #2d8cf0;
-  --font-color: #323232;
-  --bg-color-sub: #dedede;
-  --bg-color: #eee;
-  --main-color: #323232;
-
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid var(--main-color);
-  box-shadow: 4px 4px var(--main-color);
-  border-radius: 10px;
-  background-color: var(--bg-color-sub);
-}
-
-.small-button-img {
-  width: 20px;
-  margin: 5px;
 }
