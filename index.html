@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horario ASIR</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+</head>
+<body>
+    <div class="container">
+        <div id="counter" class="counter">Cargando contador...</div>
+        
+        <table class="horario">
+            <thead>
+                <tr>
+                    <th class="hour">Hora/Día</th>
+                    <th>Lunes</th>
+                    <th>Martes</th>
+                    <th>Miércoles</th>
+                    <th>Jueves</th>
+                    <th>Viernes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>08:30  09:20</td>
+                    <td class="mat1" rowspan="2">FH</td> 
+                    <td class="mat2" rowspan="2" >ISO</td>
+                    <td class="mat3">LMSGI</td>
+                    <td class="mat8">IPPE</td>
+                    <td class="mat1" rowspan="2">FH</td>
+                </tr>
+                <tr>
+                    <td>09:25  10:15</td>
+                    <td class="mat4" rowspan="2" >GBD</td>
+                    <td class="mat2" rowspan="2">ISO</td>
+                </tr>
+                <tr>
+                    <td>10:20  11:10</td>
+                    <td class="mat8">IPPE</td>
+                    <td class="mat7">Inglés</td>
+                    <td class="mat8">IPPE</td>
+                </tr>
+                <tr>
+                    <td>11:10  11:40</td>
+                    <td class="recreo" colspan="5">Recreo</td>
+                </tr>
+                <tr>
+                    <td>11:40  12:30</td>
+                    <td class="mat4" rowspan="3">GBD</td>
+                    <td class="mat5">DASP</td>
+                    <td class="mat1" rowspan="2">ISO</td>
+                    <td class="mat6" rowspan="3">PAR</td>
+                    <td class="mat6" rowspan="2">PAR</td>
+                </tr>
+                <tr>
+                    <td>12:35  13:25</td>
+                    <td class="mat6" rowspan="2">PAR</td>
+                </tr>
+                <tr>
+                    <td>13:30  14:20</td>
+                    <td class="mat7">Inglés</td>
+                    <td class="mat3">LMSGI</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        
+        const horarios = {
+            "lunes": [
+                { "horaInicio": "08:30", "horaFin": "10:15", "asignatura": "FH" },
+                { "horaInicio": "10:20", "horaFin": "11:10", "asignatura": "IPPE" },
+                { "horaInicio": "11:40", "horaFin": "14:20", "asignatura": "GBD" },
+
+            ],
+            "martes": [
+                { "horaInicio": "08:30", "horaFin": "10:15", "asignatura": "ISO" },
+                { "horaInicio": "10:20", "horaFin": "11:10", "asignatura": "Inglés" },
+                { "horaInicio": "11:40", "horaFin": "12:30", "asignatura": "DASP" },
+                { "horaInicio": "12:35", "horaFin": "14:20", "asignatura": "PAR" }
+            ],
+            "miercoles": [
+                { "horaInicio": "08:30", "horaFin": "09:20", "asignatura": "LMSGI" },
+                { "horaInicio": "09:25", "horaFin": "11:10", "asignatura": "GBD" },
+                { "horaInicio": "11:40", "horaFin": "13:25", "asignatura": "ISO" },
+                { "horaInicio": "13:30", "horaFin": "14:20", "asignatura": "Inglés" }
+            ],
+            "jueves": [
+                { "horaInicio": "08:30", "horaFin": "09:20", "asignatura": "IPPE" },
+                { "horaInicio": "09:20", "horaFin": "11:10", "asignatura": "ISO" },
+                { "horaInicio": "11:40", "horaFin": "14:20", "asignatura": "PAR" },
+            ],
+            "viernes": [
+                { "horaInicio": "08:30", "horaFin": "10:15", "asignatura": "FH" },
+                { "horaInicio": "10:20", "horaFin": "11:10", "asignatura": "IPPE" },
+                { "horaInicio": "11:40", "horaFin": "13:25", "asignatura": "PAR" },
+                { "horaInicio": "13:30", "horaFin": "14:20", "asignatura": "LMSGI" },
+
+            ],
+          
+        };
+
+        function actualizarContador() {
+            const now = new Date();
+            const currentDay = now.toLocaleString('es-ES', { weekday: 'long' }).toLowerCase();
+            const currentTime = now.getHours() * 60 + now.getMinutes();
+            let remainingTime = null;
+            let currentSubject = '';
+            
+            // Verificar si el día tiene clases y calcular el contador
+            if (horarios[currentDay]) {
+                for (let i = 0; i < horarios[currentDay].length; i++) {
+                    const { horaInicio, horaFin, asignatura } = horarios[currentDay][i];
+                    const [startHour, startMinute] = horaInicio.split(':').map(Number);
+                    const [endHour, endMinute] = horaFin.split(':').map(Number);
+
+                    const startTime = startHour * 60 + startMinute;
+                    const endTime = endHour * 60 + endMinute;
+
+                    if (currentTime >= startTime && currentTime <= endTime) {
+                        remainingTime = endTime - currentTime;
+                        currentSubject = asignatura;
+                        break;
+                    }
+                }
+            }
+
+            // Mostrar el mensaje del contador
+            if (remainingTime !== null && currentSubject !== '') {
+                const minutes = Math.floor(remainingTime);
+                const hours = Math.floor(minutes / 60);
+                const remainingMinutes = minutes % 60;
+                document.getElementById('counter').textContent = `Quedan ${hours} horas y ${remainingMinutes} minutos para terminar la asignatura ${currentSubject}.`;
+            } else {
+                document.getElementById('counter').textContent = "No hay clases en este momento.";
+            }
+        }
+
+        // Actualizar el contador cada minuto
+        setInterval(actualizarContador, 60000);
+        // Llamar a la función una vez al cargar la página
+        actualizarContador();
+    </script>
+</body>
+</html>
