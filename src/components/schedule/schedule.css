@@ -54,6 +54,18 @@ table {
   /* IPPE */
 }
 
+.enlace {
+  @apply rounded-xl text-white h-20 w-32 px-2 py-1 text-xs;
+  background-color: #353535;
+  width: 80px;
+
+}
+
+.enlace img{
+  width: 45px;
+  object-fit: contain;
+  filter: grayscale(1);
+}
 
 
 
