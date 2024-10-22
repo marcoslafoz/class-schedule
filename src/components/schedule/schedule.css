@@ -12,6 +12,24 @@ table {
   border-collapse: separate;
 }
 
+.enlace {
+  @apply rounded-xl text-white h-20 w-32 px-2 py-1 text-xs;
+  background-color: #353535;
+  width: 80px;
+
+}
+
+.enlace img {
+  width: 45px;
+  object-fit: contain;
+  filter: grayscale(1);
+}
+
+@media (max-width: 1050px) {
+  .enlace {
+    display: none;
+  }
+}
 
 .mat1 {
   background-color: #b3b3b3;
@@ -53,20 +71,3 @@ table {
   background-color: #666666;
   /* IPPE */
 }
-
-.enlace {
-  @apply rounded-xl text-white h-20 w-32 px-2 py-1 text-xs;
-  background-color: #353535;
-  width: 80px;
-
-}
-
-.enlace img{
-  width: 45px;
-  object-fit: contain;
-  filter: grayscale(1);
-}
-
-
-
-
