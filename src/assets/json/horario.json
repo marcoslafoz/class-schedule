@@ -3,100 +3,118 @@
     {
       "horaInicio": "08:30",
       "horaFin": "10:15",
-      "asignatura": "FH"
+      "asignatura": "FH",
+      "order": 1
     },
     {
       "horaInicio": "10:20",
       "horaFin": "11:10",
-      "asignatura": "IPPE"
+      "asignatura": "IPPE",
+      "order": 2
     },
     {
       "horaInicio": "11:40",
       "horaFin": "14:20",
-      "asignatura": "GBD"
+      "asignatura": "GBD",
+      "order": 3
     }
   ],
   "martes": [
     {
       "horaInicio": "08:30",
       "horaFin": "10:15",
-      "asignatura": "ISO"
+      "asignatura": "ISO",
+      "order": 4
     },
     {
       "horaInicio": "10:20",
       "horaFin": "11:10",
-      "asignatura": "Inglés"
+      "asignatura": "Inglés",
+      "order": 5
     },
     {
       "horaInicio": "11:40",
       "horaFin": "12:30",
-      "asignatura": "DASP"
+      "asignatura": "DASP",
+      "order": 6
     },
     {
       "horaInicio": "12:35",
       "horaFin": "14:20",
-      "asignatura": "PAR"
+      "asignatura": "PAR",
+      "order": 7
     }
   ],
   "miercoles": [
     {
       "horaInicio": "08:30",
       "horaFin": "09:20",
-      "asignatura": "LMSGI"
+      "asignatura": "LMSGI",
+      "order": 8
     },
     {
       "horaInicio": "09:25",
       "horaFin": "11:10",
-      "asignatura": "GBD"
+      "asignatura": "GBD",
+      "order": 9
     },
     {
       "horaInicio": "11:40",
       "horaFin": "13:25",
-      "asignatura": "ISO"
+      "asignatura": "ISO",
+      "order": 10
     },
     {
       "horaInicio": "13:30",
       "horaFin": "14:20",
-      "asignatura": "Inglés"
+      "asignatura": "Inglés",
+      "order": 11
     }
   ],
   "jueves": [
     {
       "horaInicio": "08:30",
       "horaFin": "09:20",
-      "asignatura": "IPPE"
+      "asignatura": "IPPE",
+      "order": 12
     },
     {
       "horaInicio": "09:20",
       "horaFin": "11:10",
-      "asignatura": "ISO"
+      "asignatura": "ISO",
+      "order": 13
     },
     {
       "horaInicio": "11:40",
       "horaFin": "14:20",
-      "asignatura": "PAR"
+      "asignatura": "PAR",
+      "order": 14
     }
   ],
   "viernes": [
     {
       "horaInicio": "08:30",
       "horaFin": "10:15",
-      "asignatura": "FH"
+      "asignatura": "FH",
+      "order": 15
     },
     {
       "horaInicio": "10:20",
       "horaFin": "11:10",
-      "asignatura": "IPPE"
+      "asignatura": "IPPE",
+      "order": 16
     },
     {
       "horaInicio": "11:40",
       "horaFin": "13:25",
-      "asignatura": "PAR"
+      "asignatura": "PAR",
+      "order": 17
     },
     {
       "horaInicio": "13:30",
       "horaFin": "14:20",
-      "asignatura": "LMSGI"
+      "asignatura": "LMSGI",
+      "order": 18
     }
   ]
 }

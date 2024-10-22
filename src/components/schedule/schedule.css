@@ -12,6 +12,11 @@ table {
   border-collapse: separate;
 }
 
+.current{
+  border-color: rgb(0, 162, 255);
+  border-width: 4px
+}
+
 .enlace {
   @apply rounded-xl text-white h-20 w-32 px-2 py-1 text-xs;
   background-color: #353535;
