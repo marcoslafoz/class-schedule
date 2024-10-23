@@ -13,7 +13,7 @@ export const Counter: React.FC = () => {
 
   // Función para obtener el día de la semana en español
   const obtenerDiaSemana = (): string => {
-    const diasSemana = ["domingo", "lunes", "martes", "miercoles", "jueves", "viernes", "sabado"];
+    const diasSemana = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sabado"];
     const fechaActual = new Date();
     return diasSemana[fechaActual.getDay()];
   };
