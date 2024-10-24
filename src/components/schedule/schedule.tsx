@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import './schedule.css';
-import { Shortcut } from './shortcut';
-import scheduleData from '../../assets/json/horario.json';
-import clsx from 'clsx';
+import React, { useState, useEffect } from 'react'
+import './schedule.css'
+import { Shortcut } from './shortcut'
+import scheduleData from '../../assets/json/horario.json'
+import clsx from 'clsx'
 
 interface Subject {
-  horaInicio: string;
-  horaFin: string;
-  asignatura: string;
-  order: number;
+  horaInicio: string
+  horaFin: string
+  asignatura: string
+  order: number
 }
 
 interface ScheduleType {
@@ -16,31 +16,30 @@ interface ScheduleType {
 }
 
 export const Schedule: React.FC = () => {
-  const [currentOrder, setCurrentOrder] = useState<number | null>(null);
+  const [currentOrder, setCurrentOrder] = useState<number | null>(null)
 
   const updateCurrentOrder = () => {
-    const now = new Date();
-    const dayOfWeek = now.toLocaleString('es-ES', { weekday: 'long' }).toLowerCase();
-    const currentTime = now.toTimeString().slice(0, 5);
+    const now = new Date()
+    const dayOfWeek = now.toLocaleString('es-ES', { weekday: 'long' }).toLowerCase()
+    const currentTime = now.toTimeString().slice(0, 5)
 
-    const schedule: ScheduleType = scheduleData as ScheduleType;
+    const schedule: ScheduleType = scheduleData as ScheduleType
 
     if (schedule[dayOfWeek]) {
-      const todayClasses = schedule[dayOfWeek];
-      const ongoingClass = todayClasses.find((cls: Subject) =>
-        currentTime >= cls.horaInicio && currentTime <= cls.horaFin
-      );
+      const todayClasses = schedule[dayOfWeek]
+      const ongoingClass = todayClasses.find(
+        (cls: Subject) => currentTime >= cls.horaInicio && currentTime <= cls.horaFin
+      )
 
-      // Update current order if it has changed
-      setCurrentOrder(ongoingClass ? ongoingClass.order : null);
+      setCurrentOrder(ongoingClass ? ongoingClass.order : null)
     }
-  };
+  }
 
   useEffect(() => {
-    updateCurrentOrder(); // Initial update
-    const interval = setInterval(updateCurrentOrder, 10000); // Update every 10 seconds
-    return () => clearInterval(interval); // Cleanup on unmount
-  }, []);
+    updateCurrentOrder()
+    const interval = setInterval(updateCurrentOrder, 10000)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <table>
@@ -93,5 +92,5 @@ export const Schedule: React.FC = () => {
         </tr>
       </tbody>
     </table>
-  );
-};
+  )
+}

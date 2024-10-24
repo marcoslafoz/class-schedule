@@ -1,89 +1,94 @@
-import React, { useEffect, useState } from 'react';
-import horarios from '../../assets/json/horario.json'; // Importa el JSON con los horarios
+import React, { useEffect, useState } from 'react'
+import horarios from '../../assets/json/horario.json'
 
 interface Horario {
-  horaInicio: string;
-  horaFin: string;
-  asignatura: string;
+  horaInicio: string
+  horaFin: string
+  asignatura: string
 }
 
 export const Counter: React.FC = () => {
-  const [asignaturaActual, setAsignaturaActual] = useState<string | null>(null);
-  const [tiempoRestante, setTiempoRestante] = useState<string | null>(null);
+  const [asignaturaActual, setAsignaturaActual] = useState<string | null>(null)
+  const [tiempoRestante, setTiempoRestante] = useState<string | null>(null)
 
-  // Función para obtener el día de la semana en español
   const obtenerDiaSemana = (): string => {
-    const diasSemana = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sabado"];
-    const fechaActual = new Date();
-    return diasSemana[fechaActual.getDay()];
-  };
+    const diasSemana = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"]
+    const fechaActual = new Date()
+    return diasSemana[fechaActual.getDay()]
+  }
 
-  // Función para convertir una hora en formato HH:MM a un objeto Date
   const convertirHora = (hora: string): Date => {
-    const [horas, minutos] = hora.split(":").map(Number);
-    const ahora = new Date();
-    ahora.setHours(horas, minutos, 0, 0);
-    return ahora;
-  };
+    const [horas, minutos] = hora.split(":").map(Number)
+    const ahora = new Date()
+    ahora.setHours(horas, minutos, 0, 0)
+    return ahora
+  }
 
-  // Función que verifica la clase actual
   const verificarAsignaturaActual = () => {
-    const diaActual = obtenerDiaSemana();
-    const horarioHoy = (horarios as Record<string, Horario[]>)[diaActual];
+    const diaActual = obtenerDiaSemana()
+    const horarioHoy = (horarios as Record<string, Horario[]>)[diaActual]
 
     if (!horarioHoy) {
-      setAsignaturaActual("No hay clases hoy");
-      setTiempoRestante(null);
-      return;
+      setAsignaturaActual("No hay clases hoy")
+      setTiempoRestante(null)
+      return
     }
 
-    const ahora = new Date();
+    const ahora = new Date()
 
     for (const clase of horarioHoy) {
-      const horaInicio = convertirHora(clase.horaInicio);
-      const horaFin = convertirHora(clase.horaFin);
+      const horaInicio = convertirHora(clase.horaInicio)
+      const horaFin = convertirHora(clase.horaFin)
 
       if (ahora >= horaInicio && ahora <= horaFin) {
-        setAsignaturaActual(clase.asignatura);
+        setAsignaturaActual(clase.asignatura)
 
-        // Calcula cuánto tiempo queda para que termine la clase
-        const diferencia = horaFin.getTime() - ahora.getTime();
-        const minutosRestantes = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
-        const horasRestantes = Math.floor(diferencia / (1000 * 60 * 60));
-        setTiempoRestante(`${horasRestantes} horas y ${minutosRestantes} minutos`);
-        return;
+        const diferencia = horaFin.getTime() - ahora.getTime()
+        const minutosRestantes = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60))
+        const horasRestantes = Math.floor(diferencia / (1000 * 60 * 60))
+
+        let tiempoFormatted = ""
+        if (horasRestantes > 0) {
+          tiempoFormatted += `${horasRestantes} ${horasRestantes === 1 ? 'hora' : 'horas'}`
+        }
+        if (minutosRestantes > 0) {
+          if (horasRestantes > 0) tiempoFormatted += ' y '
+          tiempoFormatted += `${minutosRestantes} ${minutosRestantes === 1 ? 'minuto' : 'minutos'}`
+        }
+
+        setTiempoRestante(tiempoFormatted)
+
+        const tiempoRestanteFormatted = `${horasRestantes.toString().padStart(2, '0')}:${minutosRestantes.toString().padStart(2, '0')}`
+        document.title = `Horario - ${clase.asignatura} ${tiempoRestanteFormatted}`
+        return
       }
     }
 
-    setAsignaturaActual("");
-    setTiempoRestante(null);
-  };
+    setAsignaturaActual("")
+    setTiempoRestante(null)
+  }
 
   useEffect(() => {
-    verificarAsignaturaActual(); // Verificar al montar el componente
+    verificarAsignaturaActual()
 
-    // Intervalo para actualizar cada segundo
     const intervalo = setInterval(() => {
-      verificarAsignaturaActual();
-    }, 1000); // Actualizar cada segundo
+      verificarAsignaturaActual()
+    }, 1000)
 
-    return () => clearInterval(intervalo); // Limpiar el intervalo al desmontar
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    return () => clearInterval(intervalo)
+  }, [])
 
   return (
     <div className="p-4 text-white text-opacity-50 mt-3 text text-center">
       {asignaturaActual ? (
         <>
           {tiempoRestante && (
-            <p className="text-lg ">Tiempo restante de {asignaturaActual}: {tiempoRestante}</p>
+            <p className="text-lg">Tiempo restante de {asignaturaActual}: {tiempoRestante}</p>
           )}
         </>
       ) : (
         <p className="text-lg"></p>
       )}
     </div>
-  );
-};
-
-export default Counter;
+  )
+}
