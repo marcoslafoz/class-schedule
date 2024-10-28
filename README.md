@@ -1,1 +1,1 @@
-Horario de clase 1ºASIR
+Horario de clase de 1ºASIR hecho con React TypeScript (Vite) + Tailwind
