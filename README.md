@@ -1,1 +1,1 @@
-Horario 1º Asir
+Horario de clase 1ºASIR
