@@ -9,3 +9,9 @@
 .github-button:hover {
   color: rgb(196, 196, 196);
 }
+
+@media (max-height: 777px) {
+  .github-button {
+    display: none;
+  }
+}
