@@ -1,0 +1,30 @@
+@media (min-width: 1050px) {
+.sticky-note {
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: 290px;
+    left: 160px;
+    background-image: url('../../../public/sticky-note.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-size: 24px;
+    font-family: "Indie Flower", cursive;
+    font-weight: 400;
+    font-style: normal;
+    transform: rotate(-10deg);
+  }
+
+  .sticky-list {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+}
+

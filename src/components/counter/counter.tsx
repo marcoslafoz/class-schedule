@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import horarios from '../../assets/json/horario.json'
+import './counter.css'
 
 interface Horario {
   horaInicio: string
@@ -79,7 +80,7 @@ export const Counter: React.FC = () => {
   }, [])
 
   return (
-    <div className="p-4 text-white text-opacity-50 mt-3 text text-center">
+    <div className="p-4 text-white text-opacity-50 mt-3 text text-center counter ">
       {asignaturaActual ? (
         <>
           {tiempoRestante && (
