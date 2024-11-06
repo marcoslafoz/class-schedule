@@ -4,7 +4,7 @@
     height: 250px;
     position: absolute;
     top: 290px;
-    left: 160px;
+    left: 120px;
     background-image: url('../../../public/sticky-note.webp');
     background-size: cover;
     background-position: center;
@@ -28,7 +28,7 @@
   }
 }
 
-@media (max-width: 1049px) {
+@media (max-width: 1649px) {
   .sticky-note {
     display: none;
   }
