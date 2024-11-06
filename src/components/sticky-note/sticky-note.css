@@ -27,3 +27,10 @@
     flex-direction: column;
   }
 }
+
+@media (max-width: 1050px) {
+  .sticky-note {
+    display: none;
+  }
+
+}
