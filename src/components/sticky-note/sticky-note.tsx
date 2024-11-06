@@ -9,7 +9,11 @@ export const StickyNote: React.FC = () => {
   const [notes, setNotes] = useState<Note[]>([])
 
   useEffect(() => {
-    fetch('https://raw.githubusercontent.com/marcoslafoz/Horario-ASIR/refs/heads/master/src/assets/json/sticky-notes.json')
+    fetch('https://raw.githubusercontent.com/marcoslafoz/Horario-ASIR/refs/heads/master/src/assets/json/sticky-notes.json', {
+      headers: {
+        'Cache-Control': 'no-store', 
+      }
+    })
       .then(response => response.json())
       .then(data => setNotes(data))
       .catch(error => console.error('Error al cargar los datos:', error))
