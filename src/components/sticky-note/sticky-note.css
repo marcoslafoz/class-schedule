@@ -28,7 +28,7 @@
   }
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1049px) {
   .sticky-note {
     display: none;
   }
