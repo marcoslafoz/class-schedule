@@ -12,9 +12,9 @@ table {
   border-collapse: separate;
 }
 
-.current{
-  border-color: #0588e2;
-  border-width: 3px
+.current {
+  border-color: #0099ff;
+  border-width: 4px
 }
 
 .enlace {
