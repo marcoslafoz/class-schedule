@@ -18,7 +18,7 @@ export const StickyNote: React.FC = () => {
       <ul className='sticky-list'>
         {/*TODO: REMOVE ME AFTER 5/12*/}
         <a className=' hover:underline ' target='_blank' href='https://drive.google.com/file/d/1p-BzRWNG67sIAV6i0VBnO0ExgvnilgZs/view?usp=sharing' rel="noreferrer" ><li >📚 Calendario Examenes</li></a>
-        <li >🇬🇧 29 Nov Speaking Inglés</li>
+        <li >🗣️ 29 Nov Speaking Inglés</li>
         {notes.map((note, index) => (
           <li key={index}>{note.note}</li>
         ))}
