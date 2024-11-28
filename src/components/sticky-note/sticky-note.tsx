@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import clsx from 'clsx'
 import './sticky-note.css'
 import stickyNotesData from '../../assets/json/sticky-notes.json'
@@ -10,6 +10,7 @@ interface Note {
 export const StickyNote: React.FC = () => {
   const [notes, setNotes] = useState<Note[]>([])
   const [falling, setFalling] = useState(false)
+  const stickyNoteRef = useRef<HTMLDivElement | null>(null) 
 
   useEffect(() => {
     setNotes(stickyNotesData)
@@ -23,8 +24,26 @@ export const StickyNote: React.FC = () => {
     event.stopPropagation() 
   }
 
+ 
+  useEffect(() => {
+    const element = stickyNoteRef.current
+    if (!element) return
+
+    const handleTransitionEnd = (event: TransitionEvent) => {
+      if (event.propertyName === 'opacity' && falling) {
+        element.style.display = 'none'
+      }
+    }
+
+    element.addEventListener('transitionend', handleTransitionEnd)
+    return () => {
+      element.removeEventListener('transitionend', handleTransitionEnd)
+    }
+  }, [falling])
+
   return (
     <div
+      ref={stickyNoteRef} 
       className={clsx('sticky-note', { falling })}
       onClick={handleDivClick}
     >
