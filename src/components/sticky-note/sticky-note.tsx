@@ -58,7 +58,6 @@ export const StickyNote: React.FC = () => {
         >
           <li>📚 Calendario Examenes</li>
         </a>
-        <li>🗣️ 29 Nov Speaking Inglés</li>
         {notes.map((note, index) => (
           <li key={index}>{note.note}</li>
         ))}
