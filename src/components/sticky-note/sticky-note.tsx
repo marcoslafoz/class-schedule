@@ -10,7 +10,7 @@ interface Note {
 export const StickyNote: React.FC = () => {
   const [notes, setNotes] = useState<Note[]>([])
   const [falling, setFalling] = useState(false)
-  const stickyNoteRef = useRef<HTMLDivElement | null>(null) 
+  const stickyNoteRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     setNotes(stickyNotesData)
@@ -21,10 +21,10 @@ export const StickyNote: React.FC = () => {
   }
 
   const handleLinkClick = (event: React.MouseEvent) => {
-    event.stopPropagation() 
+    event.stopPropagation()
   }
 
- 
+
   useEffect(() => {
     const element = stickyNoteRef.current
     if (!element) return
@@ -43,21 +43,11 @@ export const StickyNote: React.FC = () => {
 
   return (
     <div
-      ref={stickyNoteRef} 
+      ref={stickyNoteRef}
       className={clsx('sticky-note', { falling })}
       onClick={handleDivClick}
     >
       <ul className="sticky-list">
-        {/*TODO: REMOVE ME AFTER 5/12*/}
-        <a
-          className="hover:underline"
-          target="_blank"
-          href="https://drive.google.com/file/d/1p-BzRWNG67sIAV6i0VBnO0ExgvnilgZs/view?usp=sharing"
-          rel="noreferrer"
-          onClick={handleLinkClick} 
-        >
-          <li>📚 Calendario Examenes</li>
-        </a>
         {notes.map((note, index) => (
           <li key={index}>{note.note}</li>
         ))}
