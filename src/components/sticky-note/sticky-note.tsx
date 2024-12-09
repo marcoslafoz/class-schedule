@@ -48,7 +48,7 @@ export const StickyNote: React.FC = () => {
       onClick={handleDivClick}
     >
       <ul className="sticky-list">
-        <li>
+        {/* <li>
           <a
             href="https://studentspace.lafoz.dev/login"
             target='_blank'
@@ -57,7 +57,7 @@ export const StickyNote: React.FC = () => {
             rel="noreferrer">
             🌐 studentspace.lafoz.dev
           </a>
-        </li>
+        </li> */}
         {notes.map((note, index) => (
           <li key={index}>{note.note}</li>
         ))}
