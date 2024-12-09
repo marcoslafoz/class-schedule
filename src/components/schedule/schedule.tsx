@@ -77,7 +77,7 @@ export const Schedule: React.FC = () => {
           <td className={clsx("table-cell-base mat2", currentOrder === 10 && 'current')} rowSpan={2}>Iso</td>
           <td className={clsx("table-cell-base mat6", currentOrder === 14 && 'current')} rowSpan={3}>Par</td>
           <td className={clsx("table-cell-base mat6", currentOrder === 17 && 'current')} rowSpan={2}>Par</td>
-          <Shortcut link='https://mail.google.com/chat/u/0/#chat/space/AAAA2apm9XA' imageSrc="/chat.png" />
+          <Shortcut link='https://studentspace.lafoz.dev/login' imageSrc="/studentspace.svg" />
         </tr>
         <tr>
           <td className="table-cell-base w-[100px] hour-cell ">12:35 <br /> 13:25</td>

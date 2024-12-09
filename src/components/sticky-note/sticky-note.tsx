@@ -48,6 +48,16 @@ export const StickyNote: React.FC = () => {
       onClick={handleDivClick}
     >
       <ul className="sticky-list">
+        <li>
+          <a
+            href="https://studentspace.lafoz.dev/login"
+            target='_blank'
+            className="hover:underline"
+            onClick={handleLinkClick} 
+            rel="noreferrer">
+            🌐 studentspace.lafoz.dev
+          </a>
+        </li>
         {notes.map((note, index) => (
           <li key={index}>{note.note}</li>
         ))}
