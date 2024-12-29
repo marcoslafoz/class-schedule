@@ -58,7 +58,6 @@ export const StickyNote: React.FC = () => {
             🌐 studentspace.lafoz.dev
           </a>
         </li> */}
-        <li>- 20/12 No hay clase las <br />3 últimas horas 🫨</li>
         {notes.map((note, index) => (
           <li key={index}>{note.note}</li>
         ))}
