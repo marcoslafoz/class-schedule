@@ -87,7 +87,7 @@ export const Schedule: React.FC = () => {
         <tr>
           <td className="table-cell-base w-[100px] hour-cell ">13:30 <br /> 14:20</td>
           <td className={clsx("table-cell-base mat7", currentOrder === 11 && 'current')}>Inglés</td>
-          <td className={clsx("table-cell-base mat3", currentOrder === 18 && 'current')}>Lmsgi</td>
+          <td className={clsx("table-cell-base mat3", currentOrder === 18 && 'current')}>Lm</td>
           <Shortcut link='https://aplicaciones.aragon.es/sigaddweb/login' imageSrc="/sigad.png" />
         </tr>
       </tbody>
