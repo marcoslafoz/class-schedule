@@ -5,8 +5,8 @@ export const GitHubButton: React.FC = () => {
   return (
     <a
       className="github-button"
-      href="https://github.com/marcoslafoz/Horario-ASIR"
-      aria-label="Visita el repositorio de Horario-ASIR en GitHub"
+      href="https://github.com/marcoslafoz/class-schedule"
+      aria-label="Visita el repositorio de class-schedule en GitHub"
       target='_blank'
       rel='noreferrer'
     >
