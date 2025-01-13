@@ -10,7 +10,7 @@ export const Main: React.FC = () => {
   return (
     <div className="container-fluid p-0">
       <div className="d-flex justify-content-center ">
-        {/* <StickyNote/> */}
+        <StickyNote/>
         <GitHubButton />
         <div className="text-center">
           <Counter />
