@@ -1,5 +1,5 @@
-import React from 'react';
-import './github-button.css';
+import React from 'react'
+import './github-button.css'
 
 export const GitHubButton: React.FC = () => {
   return (
