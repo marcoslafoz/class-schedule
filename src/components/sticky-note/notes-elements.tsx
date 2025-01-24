@@ -30,7 +30,7 @@ export const NotesElement: React.FC = () => {
 
       <li>
         <div className='flex flex-row items-center gap-2' >
-          <img className='li-icon' src='https://lh3.googleusercontent.com/proxy/QH0Ms8Wbb9GWUYLMti30tB6MXFF5E20qMqpaINPGJIJHN4z9X2fCcwGVpVfFOAThEGwnU1U4RzQ1IHFL63iVH7i39OmUETRMRbV5foKSJxPE' alt='BD icon' />
+          <img className='li-icon' src='https://cdn-icons-png.flaticon.com/512/15459/15459593.png' alt='BD icon' />
           <a target='_blank' href="https://marcoslafoz.notion.site/Servidor-de-Minecraft-17c52e7bcd7d802e964ada99cea1b7bf" rel="noreferrer">
             <span className='hover:underline' >
               Minecraft Server
