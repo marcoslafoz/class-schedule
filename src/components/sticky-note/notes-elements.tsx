@@ -16,8 +16,15 @@ export const NotesElement: React.FC = () => {
 
       <li>
         <div className='flex flex-row items-center gap-2' >
+          <img className='li-icon' src='https://cdn-icons-png.flaticon.com/512/9850/9850774.png' alt='BD icon' />
+          <span>03/02 Test GBD</span>
+        </div>
+      </li>
+
+      <li>
+        <div className='flex flex-row items-center gap-2' >
           <img className='li-icon' src='https://cdn-icons-png.flaticon.com/512/689/689317.png' alt='BD icon' />
-          <span>05 / 02 Exámen ISO</span>
+          <span>05/02 Exámen ISO</span>
         </div>
       </li>
 
@@ -28,7 +35,7 @@ export const NotesElement: React.FC = () => {
         </div>
       </li>
 
-      <li>
+      {/* <li>
         <div className='flex flex-row items-center gap-2' >
           <img className='li-icon' src='https://cdn-icons-png.flaticon.com/512/15459/15459593.png' alt='BD icon' />
           <a target='_blank' href="https://marcoslafoz.notion.site/Servidor-de-Minecraft-17c52e7bcd7d802e964ada99cea1b7bf" rel="noreferrer">
@@ -37,7 +44,7 @@ export const NotesElement: React.FC = () => {
             </span>
           </a>
         </div>
-      </li>
+      </li> */}
     </>
   )
 }

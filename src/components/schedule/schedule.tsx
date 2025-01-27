@@ -46,16 +46,16 @@ export const Schedule: React.FC = () => {
       <tbody>
         <tr>
           <td className="table-cell-base w-[100px] hour-cell ">08:30 <br /> 09:20</td>
-          <td className={clsx("table-cell-base mat1 invisible", currentOrder === 1 && 'current')} rowSpan={2}>Fh</td>
+          <td className={clsx("table-cell-base mat1", currentOrder === 1 && 'current')} rowSpan={2}>Fh</td>
           <td className={clsx("table-cell-base mat2", currentOrder === 4 && 'current')} rowSpan={2}>Iso</td>
           <td className={clsx("table-cell-base mat3", currentOrder === 8 && 'current')}>Lm</td>
           <td className={clsx("table-cell-base mat8", currentOrder === 12 && 'current')}>Ippe</td>
-          <td className={clsx("table-cell-base mat1 invisible", currentOrder === 15 && 'current')} rowSpan={2}>Fh</td>
+          <td className={clsx("table-cell-base mat1", currentOrder === 15 && 'current')} rowSpan={2}>Fh</td>
           <Shortcut link='https://mail.google.com/' imageSrc="/gmail.png" />
         </tr>
         <tr>
           <td className="table-cell-base w-[100px] hour-cell ">09:25 <br /> 10:15</td>
-          <td className={clsx("table-cell-base mat4", currentOrder === 9 && 'current')} rowSpan={2}>Bd</td>
+          <td className={clsx("table-cell-base mat4", currentOrder === 9 && 'current')} rowSpan={2}>Gbd</td>
           <td className={clsx("table-cell-base mat2", currentOrder === 13 && 'current')} rowSpan={2}>Iso</td>
           <Shortcut link='https://classroom.google.com/' imageSrc="/classroom.png" />
         </tr>
@@ -72,8 +72,8 @@ export const Schedule: React.FC = () => {
         </tr>
         <tr>
           <td className="table-cell-base w-[100px] hour-cell ">11:40 <br /> 12:30</td>
-          <td className={clsx("table-cell-base mat4", currentOrder === 3 && 'current')} rowSpan={3}>Bd</td>
-          <td className={clsx("table-cell-base mat5 invisible", currentOrder === 6 && 'current')}>Dasp</td>
+          <td className={clsx("table-cell-base mat4", currentOrder === 3 && 'current')} rowSpan={3}>Gbd</td>
+          <td className={clsx("table-cell-base mat5", currentOrder === 6 && 'current')}>Dasp</td>
           <td className={clsx("table-cell-base mat2", currentOrder === 10 && 'current')} rowSpan={2}>Iso</td>
           <td className={clsx("table-cell-base mat6", currentOrder === 14 && 'current')} rowSpan={3}>Par</td>
           <td className={clsx("table-cell-base mat6", currentOrder === 17 && 'current')} rowSpan={2}>Par</td>
