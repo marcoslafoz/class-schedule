@@ -8,7 +8,7 @@
     "dev": "vite --host",
     "build": "tsc && vite build",
     "predeploy": "vite build",
-    "deploy": "gh-pages -d dist",
+    "deploy": "npm run build && gh-pages -d dist",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "pretty:all": "prettier --check \"{config,src,stories}/**/*{.js,.jsx,.ts,.tsx}\" || prettier --write \"{config,src,stories}/**/*{.js,.jsx,.ts,.tsx}\"",
