@@ -1,0 +1,37 @@
+@import url('./variables.scss');
+@import url('./fonts.scss');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*========================== Default ==========================*/
+
+body {
+  color: var(--color-primary);
+  font-family: var(--font-regular);
+  font-size: var(--font-size-regular);
+  min-height: 100vh;
+}
+
+/*========================== Font style ==========================*/
+
+.text-bold {
+  font-family: var(--font-bold);
+}
+
+.text-medium {
+  font-family: var(--font-medium);
+}
+
+/*========================== Font color ==========================*/
+
+.font-color-primary {
+  color: var(--color-primary);
+}
+
+/*========================== Schedule View ==========================*/
+
+.schedule-view-container {
+  background-color: #474747;
+}
