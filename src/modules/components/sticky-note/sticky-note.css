@@ -1,14 +1,10 @@
 .sticky-note {
   width: 250px;
   height: 250px;
-
-
-
   background-image: url("/assets/images/sticky-note.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
   color: #3f3f3f;
   font-size: 17px;
   font-family: "Indie Flower", cursive;
@@ -18,25 +14,20 @@
 }
 
 .sticky-list {
-  margin-left: 20px;
-  margin-top: 50px;
-  margin-bottom: 20px;
+  margin: 50px 0 20px 0;
+  padding-left: 10px;
   overflow-y: scroll;
   overflow-x: hidden;
-  text-overflow: clip;
+  direction: rtl;
+  height: 400px;
+  scrollbar-width: thin;
+  scrollbar-color: #00000028 #ffffff00;
 }
 
-/* Oculta la barra de desplazamiento en Chrome, Safari y Edge */
-.sticky-list::-webkit-scrollbar {
-  display: none;
-}
-
-/* Asegura que el contenido siga siendo desplazable */
-.sticky-list {
-  -ms-overflow-style: none;
-  /* Para Internet Explorer y Edge */
-  scrollbar-width: none;
-  /* Para Firefox */
+.sticky-list>* {
+  direction: ltr;
+  text-align: left;
+  white-space: normal;
 }
 
 .sticky-list li {
@@ -45,4 +36,28 @@
 
 .li-icon {
   height: 25px;
+}
+
+.sticky-list::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+}
+
+.sticky-list::-webkit-scrollbar-thumb {
+  background-color: #00000028;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.sticky-list::-webkit-scrollbar-button {
+  display: none;
+}
+
+.sticky-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sticky-list::-webkit-scrollbar-corner {
+  background: transparent;
 }

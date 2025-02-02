@@ -81,15 +81,14 @@ export const Counter: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return (
-    <div className=' lg:py-6'>
-      {asignaturaActual && tiempoRestante && (
-        <div className='text-white text-opacity-50 mt-3 text text-center flex flex-row justify-center items-center'>
-          <p className='text-lg'>
-            Tiempo restante de {asignaturaActual}: {tiempoRestante}
-          </p>
-        </div>
-      )}
+  if (asignaturaActual && tiempoRestante) return (
+    <div className='text-white text-opacity-50  text text-center flex flex-row justify-center items-center lg:py-10 py-4'>
+      <p className='text-lg'>
+        Tiempo restante de {asignaturaActual}: {tiempoRestante}
+      </p>
     </div>
   )
+
+  return <div className='lg:py-14 py-0' />
+
 }
