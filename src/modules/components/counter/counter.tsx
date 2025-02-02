@@ -82,17 +82,13 @@ export const Counter: React.FC = () => {
   }, [])
 
   return (
-    <div className='p-4 text-white text-opacity-50 mt-3 text text-center flex flex-row justify-center items-center'>
-      {asignaturaActual ? (
-        <>
-          {tiempoRestante && (
-            <p className='text-lg'>
-              Tiempo restante de {asignaturaActual}: {tiempoRestante}
-            </p>
-          )}
-        </>
-      ) : (
-        <p className='text-lg'></p>
+    <div className=' lg:py-6'>
+      {asignaturaActual && tiempoRestante && (
+        <div className='text-white text-opacity-50 mt-3 text text-center flex flex-row justify-center items-center'>
+          <p className='text-lg'>
+            Tiempo restante de {asignaturaActual}: {tiempoRestante}
+          </p>
+        </div>
       )}
     </div>
   )

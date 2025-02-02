@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { ScheduleView } from '../../modules/components/schedule-view'
+import { ScheduleView } from '../../modules/views'
 
 export const router = createBrowserRouter([
   {
