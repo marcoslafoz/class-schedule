@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "homepage": "https://horario.lafoz.dev",
+  "homepage": "https://horario.lafoz.dev/",
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",
