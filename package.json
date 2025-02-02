@@ -9,7 +9,7 @@
     "build": "tsc && vite build",
     "deploy": "npm run build && gh-pages -d dist",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
+    "preview": "vite preview --port 8085",
     "pretty:all": "prettier --check \"{config,src,stories}/**/*{.js,.jsx,.ts,.tsx}\" || prettier --write \"{config,src,stories}/**/*{.js,.jsx,.ts,.tsx}\"",
     "pretty:staged": "pretty-quick --staged --pattern \"{config,src,stories}/**/*{.js,.jsx,.ts,.tsx}\"",
     "pretty:quick": "pretty-quick --pattern \"{config,src,stories}/**/*{.js,.jsx,.ts,.tsx}\"",
