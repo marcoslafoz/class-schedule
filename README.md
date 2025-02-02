@@ -1,64 +1,25 @@
+# ⏰ Horario de Clases con React, TS, Vite y Tailwind
+
+🚀 Este proyecto es una herramienta interactiva para mostrar el horario de clases, destacando la clase actual, el tiempo restante de la clase en curso y un panel con información adicional, como fechas de exámenes y notas.
+
+## 📦 Características
+- 🟦 **[TypeScript](https://www.typescriptlang.org/):** Aprovecha el poder del tipado estático para un desarrollo más robusto.
+- ⚡ **[Vite](https://vitejs.dev/):** Un entorno de desarrollo extremadamente rápido para aplicaciones web modernas.
+- 🎨 **[TailwindCSS](https://tailwindcss.com/):** Framework CSS de utilidades que permite una personalización rápida y fácil de la interfaz.
+- 💅 **[Sass](https://sass-lang.com/):** CSS mejorado para facilitar la escritura y organización de estilos complejos.
+- 🎭 **[React Router](https://reactrouter.com/):** Navegación declarativa para la aplicación.
+- ✨ **[Prettier](https://prettier.io/):** Formateador automático de código para mantener la consistencia.
 
 
+## 🛠️ Iniciar el Proyecto
 
-# ⚛️ React TS Vite Template
-
-🚀 A template project to quickly start your applications with **React TS**, **Tailwind CSS**, and **Vite**.
-
-## 📦 Includes
-- 🟦 **[TypeScript](https://www.typescriptlang.org/):** Enhances development with static typing.
-- ⚡ **[Vite](https://vitejs.dev/):** A fast build tool for modern web applications.
-- 🎨 **[TailwindCSS](https://tailwindcss.com/):** Utility-first CSS framework for rapid UI development.
-- 💅 **[Sass](https://sass-lang.com/):** A powerful CSS extension with advanced features.
-- 🎭 **[clsx](https://github.com/lukeed/clsx):** A tiny utility for conditional classNames.
-- ✨ **[Prettier](https://prettier.io/):** Automatically formats your code to ensure consistency.
-- 🛣️ **[React Router](https://reactrouter.com/):** Declarative navigation for React applications.
-- 🧪 **[Cypress](https://www.cypress.io/):** End-to-end testing framework for reliable testing.
-- 📖 **[Storybook](https://storybook.js.org/):** UI component explorer for building and testing components in isolation.
-
-## 📖 Instructions
-1. 📝 Rename all `project-name` with your project name.
-2. ✏️ Update all `project-description` with a brief description of your project.
-
-## 🛠️ Getting Started
-
-1. Install dependencies:  
+1. Instala las dependencias:
+   
    ```bash
    npm install
    ```
-2. Start the development server:  
+2. Inicia el servidor de desarrollo
+
    ```bash
    npm run dev
    ```
-3. Start building your application! 🎉
-
-## 📂 Project Structure
-```
-📦 project-name
-├── 📂 cypress
-├── 🌐 index.html
-├── 📄 package.json
-├── 📂 public
-│   ├── 📂 assets
-│   ├── 🖼️ favicon.svg
-│   └── 🤖 robots.txt
-├── 📄 README.md
-├── 📂 src
-│   ├── 📂 assets
-│   ├── 📂 common
-│   │   ├── constants
-│   │   ├── router
-│   │   └── types
-│   ├── index.tsx
-│   ├── 📂 modules
-│   │   ├── App.tsx
-│   │   └── 📂 components
-│   │       └── 🧩 hello-world
-│   ├── 📂 stories
-│   │   ├── 📖 hello-world
-├── 🎨 tailwind.config.js
-└── ⚡ vite.config.ts
-```
-
-## 💡 Contributing
-Got suggestions or improvements? Fork the repository, create a branch, and submit a pull request! 🙌
