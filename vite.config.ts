@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  base: 'https://marcoslafoz.github.io/class-schedule',
+  base: 'https://horario.lafoz.dev/',
   plugins: [
     react(),
     VitePWA({
