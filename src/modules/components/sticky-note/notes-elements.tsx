@@ -8,13 +8,6 @@ export const NotesElement: React.FC = () => {
     <>
       <li>
         <div className='flex flex-row items-center gap-2'>
-          <img className='li-icon' src='https://cdn-icons-png.flaticon.com/512/919/919827.png' alt='BD icon' />
-          <span>07/02 Recuperación LM</span>
-        </div>
-      </li>
-
-      <li>
-        <div className='flex flex-row items-center gap-2'>
           <img className='li-icon' src='https://cdn-icons-png.flaticon.com/512/330/330425.png' alt='BD icon' />
           <span>25/02 Grammar & Vocabulary </span>
         </div>
