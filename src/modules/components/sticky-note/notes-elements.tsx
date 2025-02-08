@@ -22,7 +22,7 @@ export const NotesElement: React.FC = () => {
         </div>
       </li>
 
-      <li>
+      {/* <li>
         <div className='flex flex-row items-center gap-2'>
           <img className='li-icon' src='https://cdn-icons-png.flaticon.com/512/15459/15459593.png' alt='BD icon' />
           <a
@@ -33,7 +33,7 @@ export const NotesElement: React.FC = () => {
             <span className='hover:underline'>MC Server</span>
           </a>
         </div>
-      </li>
+      </li> */}
     </>
   )
 }
