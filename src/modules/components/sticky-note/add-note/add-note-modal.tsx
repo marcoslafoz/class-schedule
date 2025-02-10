@@ -55,7 +55,7 @@ export const NotesAddModal: React.FC<CourseAddModalProps> = props => {
           reset()
         }}
         placement='center'
-        backdrop='opaque'
+        backdrop='blur'
       >
         <ModalContent>
           <ModalHeader className='flex flex-col gap-1 text-white'>Añadir nota</ModalHeader>
