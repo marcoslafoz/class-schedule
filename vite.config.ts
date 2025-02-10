@@ -1,17 +1,28 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { createHtmlPlugin } from 'vite-plugin-html'
 import { version } from './package.json'
 
-const hash = Math.floor(Math.random() * 90000) + 10000;
+const hash = Date.now();
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    createHtmlPlugin({
+      inject: {
+        data: {
+          version: version,
+          hash: hash
+        }
+      }
+    })
+  ],
   build: {
     rollupOptions: {
       output: {
-        entryFileNames: `[name]` + version + `.js`,
-        chunkFileNames: `[name]` + version + `.js`,
-        assetFileNames: `[name]` + version + `.[ext]`
+        entryFileNames: `[name].${version}.${hash}.js`,
+        chunkFileNames: `[name].${version}.${hash}.js`,
+        assetFileNames: `[name].${version}.${hash}.[ext]`
       }
     }
   }
