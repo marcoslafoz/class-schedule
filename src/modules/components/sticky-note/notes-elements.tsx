@@ -1,39 +1,52 @@
-import React from 'react'
+import { Tooltip } from '@heroui/react'
+import { NotesContext } from '../../../common/context/notes-provider'
 import './sticky-note.css'
+import React from 'react'
+import { DeleteIcon } from '@heroui/shared-icons'
+
+export const formatDate = (stringDate?: string): string => {
+  if (!stringDate) return ''
+
+  const date = new Date(stringDate)
+  if (isNaN(date.getTime())) return ''
+
+  return `${date.getDate()}/${date.getMonth() + 1}`
+}
 
 export const NotesElement: React.FC = () => {
-  // TODO Hacer que se lea desde un json hosteado en lafoz-server
+  const { notes, deleteNote } = React.useContext(NotesContext)
+
+  const handleDelete = (id: number) => {
+    deleteNote(id)
+  }
 
   return (
-    <>
-      <li>
-        <div className='flex flex-row items-center gap-2'>
-          <img className='li-icon' src='https://cdn-icons-png.flaticon.com/512/330/330425.png' alt='BD icon' />
-          <span>25/02 Grammar & Vocabulary </span>
-        </div>
-      </li>
+    <ul className='space-y-2'>
+      {notes.map((note, index) => (
+        <li key={index}>
+          <div className='flex flex-row items-center gap-2 group'>
+            {note.icon_url && <img className='li-icon' src={note.icon_url} alt={note.title} />}
 
-      <li>
-        <div className='flex flex-row items-center gap-2'>
-          <img className='li-icon' src='https://cdn-icons-png.flaticon.com/512/9074/9074738.png' alt='BD icon' />
-          <span>
-            26/02 Listening &<br /> Writting
-          </span>
-        </div>
-      </li>
+            {note.url != null ? (
+              <a target='_blank' href={note.url} rel='noreferrer' className='hover:underline'>
+                <span>{`${formatDate(note.date)} ${note.title}`}</span>
+              </a>
+            ) : (
+              <span>{`${formatDate(note.date)} ${note.title}`}</span>
+            )}
 
-      {/* <li>
-        <div className='flex flex-row items-center gap-2'>
-          <img className='li-icon' src='https://cdn-icons-png.flaticon.com/512/15459/15459593.png' alt='BD icon' />
-          <a
-            target='_blank'
-            href='https://marcoslafoz.notion.site/Servidor-de-Minecraft-17c52e7bcd7d802e964ada99cea1b7bf'
-            rel='noreferrer'
-          >
-            <span className='hover:underline'>MC Server</span>
-          </a>
-        </div>
-      </li> */}
-    </>
+            <div className='flex flex-row flex-wrap gap-3'>
+              <button className='hidden group-hover:block' onClick={() => handleDelete(note.id)}>
+                <Tooltip content='Eliminar nota' color='danger' closeDelay={0}>
+                  <span className='text-lg text-danger cursor-pointer active:opacity-80 opacity-50'>
+                    <DeleteIcon />
+                  </span>
+                </Tooltip>
+              </button>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
   )
 }

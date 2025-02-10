@@ -5,7 +5,6 @@ export const ScheduleView: React.FC = () => {
   return (
     <>
       <div className='schedule-view-container flex flex-col lg:flex-row justify-center min-h-screen'>
-
         <div className='order-2 lg:order-1 lg:w-1/3 p-4 flex flex-col lg:mt-0 mt-10 justify-center items-center lg:items-end '>
           <GitHubButton />
           <StickyNote />

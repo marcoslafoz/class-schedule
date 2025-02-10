@@ -14,7 +14,9 @@
 }
 
 .sticky-list {
-  margin: 50px 0 20px 0;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-right: 10px;
   padding-left: 10px;
   overflow-y: scroll;
   overflow-x: hidden;
