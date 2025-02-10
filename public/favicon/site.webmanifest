@@ -1,6 +1,6 @@
 {
   "name": "Horario de clase",
-  "short_name": "Horario",
+  "short_name": "Horario de clase",
   "icons": [
     {
       "src": "/favicon/web-app-manifest-192x192.png",
@@ -16,6 +16,6 @@
     }
   ],
   "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "background_color": "#474747",
   "display": "standalone"
 }
