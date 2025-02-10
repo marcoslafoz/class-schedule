@@ -103,7 +103,7 @@ export const Schedule: React.FC = () => {
           <td className={clsx('table-cell-base mat6', currentOrder === 17 && 'current')} rowSpan={2}>
             Par
           </td>
-          <Shortcut link='https://studentspace.lafoz.dev/login' imageSrc='/assets/images/studentspace.svg' />
+          <Shortcut link='https://studentspace.app/' imageSrc='/assets/images/studentspace.svg' />
         </tr>
         <tr>
           <td className='table-cell-base w-[100px] hour-cell '>
