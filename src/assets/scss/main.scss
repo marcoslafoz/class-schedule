@@ -9,29 +9,37 @@
 
 body {
   color: var(--color-primary);
-  font-family: var(--font-regular);
+  font-family: var(--studentspace-regular);
   font-size: var(--font-size-regular);
   min-height: 100vh;
 }
 
 /*========================== Font style ==========================*/
 
-.text-bold {
-  font-family: var(--font-bold);
+.studentspace-regular {
+  font-family: var(--studentspace-regular);
 }
 
-.text-medium {
-  font-family: var(--font-medium);
+.studentspace-medium {
+  font-family: var(--studentspace-medium);
 }
 
-/*========================== Font color ==========================*/
+.studentspace-bold {
+  font-family: var(--studentspace-bold);
+}
 
-.font-color-primary {
+/*========================== Color ==========================*/
+
+.custom-color-primary {
   color: var(--color-primary);
 }
 
-/*========================== Schedule View ==========================*/
+.custom-color-secondary {
+  color: var(--color-secondary);
+}
 
-.schedule-view-container {
-  background-color: #474747;
+/*========================== Background color ==========================*/
+
+.custom-bg-color-primary {
+  background-color: var(--color-primary);
 }

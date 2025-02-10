@@ -1,25 +1,28 @@
 /*========================== Font Faces ==========================*/
 
+/*============== StudentSpace ==============*/
+
 @font-face {
-  font-family: 'Samsung Sharp Sans Regular';
+  font-family: 'StudentSpace-Regular';
   font-style: normal;
   font-weight: normal;
-  src: local('Samsung Sharp Sans Regular'), url(../../assets/fonts/samsungsharpsans.woff) format('woff');
+  src: local('StudentSpace'), url(../../assets/fonts/StudentSpace.ttf) format('truetype');
 }
 
 @font-face {
-  font-family: 'Samsung Sharp Sans Medium';
+  font-family: 'StudentSpace-Medium';
   font-style: normal;
   font-weight: normal;
-  src: local('Samsung Sharp Sans Medium'), url(../../assets/fonts/samsungsharpsans-medium.woff) format('woff');
+  src: local('StudentSpace-Medium'), url(../../assets/fonts/StudentSpace-Medium.ttf) format('truetype');
 }
 
 @font-face {
-  font-family: 'Samsung Sharp Sans Bold';
+  font-family: 'StudentSpace-Bold';
   font-style: normal;
   font-weight: normal;
-  src: local('Samsung Sharp Sans Bold'), url(../../assets/fonts/samsungsharpsans-bold.woff) format('woff');
+  src: local('StudentSpace-Bold'), url(../../assets/fonts/StudentSpace-Bold.ttf) format('truetype');
 }
 
+/*============== Indie Flowers ==============*/
 
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
