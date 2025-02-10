@@ -1,5 +1,5 @@
 services:
-  studentspace:
+  class-schedule:
     build:
       context: .
       dockerfile: Dockerfile
