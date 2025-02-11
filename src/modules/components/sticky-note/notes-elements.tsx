@@ -25,7 +25,7 @@ export const NotesElement: React.FC = () => {
       {notes.map((note, index) => (
         <li key={index}>
           <div className='flex flex-row items-center gap-2 group'>
-            {note.icon_url && <img className='w-6 object-contain' src={note.icon_url} alt={note.title} />}
+            {note.icon_url && <img className='w-7 h-7 object-contain' src={note.icon_url} alt={note.title} />}
 
             <Tooltip
               content={`@${note.autor}`}
