@@ -27,17 +27,27 @@ export const NotesElement: React.FC = () => {
           <div className='flex flex-row items-center gap-2 group'>
             {note.icon_url && <img className='li-icon' src={note.icon_url} alt={note.title} />}
 
-            {note.url != null ? (
-              <a target='_blank' href={note.url} rel='noreferrer' className='hover:underline'>
+            <Tooltip
+              content={`@${note.autor}`}
+              color='foreground'
+              closeDelay={0}
+              placement='left'
+              className='opacity-50'
+              offset={25}
+              size='sm'
+            >
+              {note.url != null ? (
+                <a target='_blank' href={note.url} rel='noreferrer' className='hover:underline'>
+                  <span>{`${formatDate(note.date)} ${note.title}`}</span>
+                </a>
+              ) : (
                 <span>{`${formatDate(note.date)} ${note.title}`}</span>
-              </a>
-            ) : (
-              <span>{`${formatDate(note.date)} ${note.title}`}</span>
-            )}
+              )}
+            </Tooltip>
 
             <div className='flex flex-row flex-wrap gap-3'>
               <button className='hidden group-hover:block' onClick={() => handleDelete(note.id)}>
-                <Tooltip content='Eliminar nota' color='danger' closeDelay={0}>
+                <Tooltip content='Eliminar nota' color='danger' closeDelay={0} showArrow={true}>
                   <span className='text-lg text-danger cursor-pointer active:opacity-80 opacity-50'>
                     <DeleteIcon />
                   </span>

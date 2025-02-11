@@ -16,7 +16,7 @@ export const StickyNote: React.FC = () => {
     <div className='sticky-note flex flex-col '>
       <div className='justify-self-start flex flex-row pt-2.5 pl-3 gap-2'>
         <AddNoteButton />
-        <Tooltip content='Actualizar notas' color='foreground' closeDelay={200}>
+        <Tooltip content='Actualizar notas' color='foreground' closeDelay={200} showArrow={true}>
           <button onClick={() => handleRefetch()}>
             <img src='/assets/images/sync.svg' alt='Sync' className='h-4 opacity-20 object-contain hover:opacity-50' />
           </button>
