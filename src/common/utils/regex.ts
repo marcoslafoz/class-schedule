@@ -12,7 +12,6 @@ export const validatePasswordRegex = (password: string): boolean => {
   return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d])[\S]{8,}$/.test(password)
 }
 
-
 /**
  * **Username regex validation (Instagram rules)**
  * - Between 1 and 30 characters.

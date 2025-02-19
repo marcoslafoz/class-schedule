@@ -145,7 +145,10 @@ export const Roulette: React.FC<RouletteProps> = props => {
       />
       <div className='flex flex-col justify-center items-center gap-6'>
         <div className='flex flex-col gap-2 h-14 w-auto justify-center items-center text-white/70'>
-          {spinEarnings != null && !mustSpin && <div className='text-2xl font-bold'>{spinEarnings}€</div>}
+          {spinEarnings != null && !mustSpin && <div className='text-4xl font-bold'>
+            {spinEarnings > 0 ? <>+{spinEarnings} 💸 🤑</> : <>{spinEarnings} 💸 🥵</> }
+           
+          </div>}
         </div>
 
         <Wheel
