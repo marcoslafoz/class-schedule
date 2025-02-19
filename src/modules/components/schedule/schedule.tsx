@@ -3,6 +3,7 @@ import './schedule.css'
 import { Shortcut } from './shortcut'
 import scheduleData from '../../../assets/json/horario.json'
 import clsx from 'clsx'
+import { RouletteShortcut } from '../roulette/roulette-shortcut'
 
 interface Subject {
   horaInicio: string
@@ -42,87 +43,102 @@ export const Schedule: React.FC = () => {
   }, [])
 
   return (
-    <table>
+    <table className='border-separate border-spacing-2.5'>
       <tbody>
         <tr>
-          <td className='table-cell-base w-[100px] hour-cell '>
-            08:30 <br /> 09:20
-          </td>
-          <td className={clsx('table-cell-base mat1', currentOrder === 1 && 'current')} rowSpan={2}>
-            Fh
-          </td>
-          <td className={clsx('table-cell-base mat2', currentOrder === 4 && 'current')} rowSpan={2}>
-            Iso
-          </td>
-          <td className={clsx('table-cell-base mat3', currentOrder === 8 && 'current')}>Lm</td>
-          <td className={clsx('table-cell-base mat8', currentOrder === 12 && 'current')}>Ippe</td>
-          <td className={clsx('table-cell-base mat1', currentOrder === 15 && 'current')} rowSpan={2}>
-            Fh
-          </td>
-          <Shortcut link='https://mail.google.com/' imageSrc='/assets/images/gmail.png' />
+          <HourCell start='08:30' end='09:20' />
+          <SubjectCell subjectName={SUBJECT_NAME.FH} rowSpan={2} active={currentOrder === 1} />
+          <SubjectCell subjectName={SUBJECT_NAME.ISO} rowSpan={2} active={currentOrder === 4} />
+          <SubjectCell subjectName={SUBJECT_NAME.LM} rowSpan={1} active={currentOrder === 8} />
+          <SubjectCell subjectName={SUBJECT_NAME.IPPE} rowSpan={1} active={currentOrder === 12} />
+          <SubjectCell subjectName={SUBJECT_NAME.FH} rowSpan={2} active={currentOrder === 15} />
+          <Shortcut link='https://mail.google.com/' imageSrc='/assets/icons/gmail.png' />
         </tr>
         <tr>
-          <td className='table-cell-base w-[100px] hour-cell '>
-            09:25 <br /> 10:15
-          </td>
-          <td className={clsx('table-cell-base mat4', currentOrder === 9 && 'current')} rowSpan={2}>
-            Gbd
-          </td>
-          <td className={clsx('table-cell-base mat2', currentOrder === 13 && 'current')} rowSpan={2}>
-            Iso
-          </td>
-          <Shortcut link='https://classroom.google.com/' imageSrc='/assets/images/classroom.png' />
+          <HourCell start='09:25' end='10:15' />
+          <SubjectCell subjectName={SUBJECT_NAME.GBD} rowSpan={2} active={currentOrder === 9} />
+          <SubjectCell subjectName={SUBJECT_NAME.ISO} rowSpan={2} active={currentOrder === 13} />
+          <Shortcut link='https://classroom.google.com/' imageSrc='/assets/icons/classroom.png' />
         </tr>
         <tr>
-          <td className='table-cell-base w-[100px] hour-cell '>
-            10:20 <br /> 11:10
-          </td>
-          <td className={clsx('table-cell-base mat8', currentOrder === 2 && 'current')}>Ippe</td>
-          <td className={clsx('table-cell-base mat7', currentOrder === 5 && 'current')}>Inglés</td>
-          <td className={clsx('table-cell-base mat8', currentOrder === 16 && 'current')}>Ippe</td>
-          <Shortcut link='https://drive.google.com/' imageSrc='/assets/images/drive.png' />
+          <HourCell start='10:20' end='11:10' />
+          <SubjectCell subjectName={SUBJECT_NAME.IPPE} rowSpan={1} active={currentOrder === 2} />
+          <SubjectCell subjectName={SUBJECT_NAME.INGLES} rowSpan={1} active={currentOrder === 5} />
+          <SubjectCell subjectName={SUBJECT_NAME.IPPE} rowSpan={1} active={currentOrder === 16} />
+          <Shortcut link='https://drive.google.com/' imageSrc='/assets/icons/drive.png' />
         </tr>
         <tr>
-          <td className='table-cell-base w-[100px] hour-cell '> </td>
-          <td className='table-cell-base' colSpan={5}></td>
+          <td className='h-20' colSpan={6}></td>
         </tr>
         <tr>
-          <td className='table-cell-base w-[100px] hour-cell '>
-            11:40 <br /> 12:30
-          </td>
-          <td className={clsx('table-cell-base mat4', currentOrder === 3 && 'current')} rowSpan={3}>
-            Gbd
-          </td>
-          <td className={clsx('table-cell-base mat5', currentOrder === 6 && 'current')}>Dasp</td>
-          <td className={clsx('table-cell-base mat2', currentOrder === 10 && 'current')} rowSpan={2}>
-            Iso
-          </td>
-          <td className={clsx('table-cell-base mat6', currentOrder === 14 && 'current')} rowSpan={3}>
-            Par
-          </td>
-          <td className={clsx('table-cell-base mat6', currentOrder === 17 && 'current')} rowSpan={2}>
-            Par
-          </td>
-          <Shortcut link='https://www.studentspace.app/' imageSrc='/assets/images/studentspace.svg' />
+          <HourCell start='11:40' end='12:30' />
+          <SubjectCell subjectName={SUBJECT_NAME.GBD} rowSpan={3} active={currentOrder === 3} />
+          <SubjectCell subjectName={SUBJECT_NAME.DASP} rowSpan={1} active={currentOrder === 6} />
+          <SubjectCell subjectName={SUBJECT_NAME.ISO} rowSpan={2} active={currentOrder === 10} />
+          <SubjectCell subjectName={SUBJECT_NAME.PAR} rowSpan={3} active={currentOrder === 14} />
+          <SubjectCell subjectName={SUBJECT_NAME.PAR} rowSpan={2} active={currentOrder === 17} />
+          <Shortcut link='https://www.studentspace.app/' imageSrc='/assets/icons/studentspace.svg' />
         </tr>
         <tr>
-          <td className='table-cell-base w-[100px] hour-cell '>
-            12:35 <br /> 13:25
-          </td>
-          <td className={clsx('table-cell-base mat6', currentOrder === 7 && 'current')} rowSpan={2}>
-            Par
-          </td>
-          <Shortcut link='https://iespabloserrano.aeducar.es/my/courses.php' imageSrc='/assets/images/aeducar.ico' />
+          <HourCell start='12:35' end='13:25' />
+          <SubjectCell subjectName={SUBJECT_NAME.PAR} rowSpan={2} active={currentOrder === 7} />
+          <RouletteShortcut />
         </tr>
         <tr>
-          <td className='table-cell-base w-[100px] hour-cell '>
-            13:30 <br /> 14:20
-          </td>
-          <td className={clsx('table-cell-base mat7', currentOrder === 11 && 'current')}>Inglés</td>
-          <td className={clsx('table-cell-base mat3', currentOrder === 18 && 'current')}>Lm</td>
-          <Shortcut link='https://aplicaciones.aragon.es/sigaddweb/login' imageSrc='/assets/images/sigad.png' />
+          <HourCell start='13:30' end='14:20' />
+          <SubjectCell subjectName={SUBJECT_NAME.INGLES} rowSpan={1} active={currentOrder === 11} />
+          <SubjectCell subjectName={SUBJECT_NAME.LM} rowSpan={1} active={currentOrder === 18} />
+          <Shortcut link='https://iespabloserrano.aeducar.es/my/courses.php' imageSrc='/assets/icons/aeducar.ico' />
         </tr>
       </tbody>
     </table>
+  )
+}
+
+enum SUBJECT_NAME {
+  FH = 'FH',
+  INGLES = 'IN',
+  DASP = 'DASP',
+  GBD = 'GBD',
+  ISO = 'ISO',
+  PAR = 'PAR',
+  LM = 'LM',
+  IPPE = 'IPPE',
+}
+interface SubjetCellProps {
+  active?: boolean
+  rowSpan?: number
+  subjectName: SUBJECT_NAME
+}
+
+const SubjectCell: React.FC<SubjetCellProps> = props => {
+  const { subjectName, active = false, rowSpan = 1 } = props
+
+  return (
+    <td
+      className={clsx(
+        'rounded-xl text-right align-bottom text-white h-20 w-32 px-2 py-1 text-xs',
+        active && 'current',
+        subjectName.toLowerCase()
+      )}
+      rowSpan={rowSpan}
+    >
+      {subjectName}
+    </td>
+  )
+}
+
+interface HourCellProps {
+  end: string
+  start: string
+}
+
+const HourCell: React.FC<HourCellProps> = props => {
+  const { start, end } = props
+  return (
+    <td className={clsx('text-center items-center text-white h-20 w-auto py-1 pr-2 text-xs opacity-20')} rowSpan={1}>
+      <div>{start}</div>
+      <div>{end}</div>
+    </td>
   )
 }

@@ -11,8 +11,15 @@ export const Shortcut: React.FC<ShortcutProps> = ({ imageSrc, link }) => {
   }
 
   return (
-    <td className='enlace flex justify-center items-center h-full' onClick={openLink}>
-      <img src={imageSrc} alt='Shortcut icon' className=' object-contain cursor-pointer ' />
+    <td
+      className='hidden lg:flex rounded-xl text-white bg-[#353535] w-20 h-20 px-2 py-1 text-xs justify-center items-center cursor-pointer'
+      onClick={openLink}
+    >
+      <img
+        src={imageSrc}
+        alt='Shortcut icon'
+        className='w-2/3 h-2/3 object-contain transition-transform duration-200 ease-in-out filter grayscale hover:grayscale-0 hover:scale-105'
+      />
     </td>
   )
 }

@@ -1,7 +1,7 @@
 .sticky-note {
   width: 250px;
   height: 250px;
-  background-image: url("/assets/images/sticky-note.webp");
+  background-image: url("/assets/icons/sticky-note.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

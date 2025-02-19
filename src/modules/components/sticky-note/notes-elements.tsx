@@ -1,5 +1,5 @@
 import { Tooltip } from '@heroui/react'
-import { NotesContext } from '../../../common/context/notes-provider'
+import { NotesContext } from '../../../common/context/notes-context'
 import './sticky-note.css'
 import React from 'react'
 import { DeleteIcon } from '@heroui/shared-icons'

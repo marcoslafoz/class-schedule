@@ -1,92 +1,36 @@
-.table-cell-base {
-  @apply rounded-xl text-right align-bottom text-white h-20 w-32 px-2 py-1 text-xs  ;
-}
-
-
-.hour-cell {
-  @apply  text-center align-middle w-auto text-white text-opacity-25 text-xs ;
-}
-
-table {
-  border-spacing: 10px;
-  border-collapse: separate;
-}
-
 .current {
   border-color: #0099ff;
   border-width: 4px
 }
 
-.enlace {
-  @apply rounded-xl text-white h-20 w-32 px-2 py-1 text-xs;
-  background-color: #353535;
-  width: 80px;
-
-}
-
-.enlace img {
-  width: 45px;
-  object-fit: contain;
-  filter: grayscale(1);
-  display: inline-block;
-  transition: transform 0.2s ease, filter 0.5s ease;
-}
-
-/* .table-cell-base:hover{
-  transform: scale(1.03);
-}  */
-
-.table-cell-base{
-  transition: transform 0.05s ease;
-}
-
-.enlace img:hover {
-  filter: grayscale(0);
-  transform: scale(1.05);
-}
-
-@media (max-width: 1050px) {
-  .enlace {
-    display: none;
-  }
-}
-
-.mat1 {
+.fh {
   background-color: #b3b3b3;
-  /* FH */
 }
 
-.mat2 {
+.iso {
   background-color: #737373;
-  /* ISO */
 }
 
-.mat3 {
+.lm {
   background-color: #868686;
-  /* Amarillo claro */
 }
 
-.mat4 {
+.gbd {
   background-color: #bbbbbb;
-  /* BD */
 }
 
-.mat5 {
+.dasp {
   background-color: #8f8f8f;
-  /* Verde claro */
 }
 
-.mat6 {
+.par {
   background-color: #b8b8b8;
-  /* Naranja claro */
 }
 
-.mat7 {
+.in {
   background-color: #c7c7c7;
-  /* Rosa claro */
 }
 
-.mat8 {
+.ippe {
   background-color: #666666;
-  /* IPPE */
 }

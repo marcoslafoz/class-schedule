@@ -1,10 +1,22 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { ScheduleView } from '../../modules/views'
+import { ScheduleScene, RouletteScene, RegisterScene } from '../../modules/views'
+import { authLoader } from './loaders'
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <ScheduleView />,
+    element: <ScheduleScene />,
     errorElement: <></>,
+  },
+  {
+    path: '/register',
+    element: <RegisterScene />,
+    errorElement: <></>,
+  },
+  {
+    path: '/roulette',
+    element: <RouletteScene />,
+    errorElement: <></>,
+    loader: authLoader,
   },
 ])

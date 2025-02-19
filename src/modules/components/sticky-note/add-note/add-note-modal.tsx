@@ -12,7 +12,7 @@ import {
 } from '@heroui/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Note } from '../../../../common/types/note.vm'
-import { NotesContext } from '../../../../common/context/notes-provider'
+import { NotesContext } from '../../../../common/context/notes-context'
 
 interface CourseAddModalProps {
   isOpen: boolean
