@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react'
+import { Button, Input, Modal, ModalBody, ModalContent, ModalHeader } from '@heroui/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { UserEditAvatar } from '../../../common/types/user.vm'
 import { TursoClient } from '../../../common/api/turso/config/client'
