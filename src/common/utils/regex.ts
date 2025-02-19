@@ -9,8 +9,9 @@
  * @returns true if is valid
  */
 export const validatePasswordRegex = (password: string): boolean => {
-  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password)
+  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d])[\S]{8,}$/.test(password)
 }
+
 
 /**
  * **Username regex validation (Instagram rules)**
