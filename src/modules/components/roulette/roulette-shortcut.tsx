@@ -38,3 +38,44 @@ export const RouletteShortcut: React.FC = () => {
     </>
   )
 }
+
+export const RouletteFlexShortcut: React.FC = () => {
+
+  const [showLoginModal, setShowLoginModal] = React.useState(false)
+
+  const { isUserLogged } = React.useContext(UserContext)
+  const navigate = useNavigate()
+
+  const openRouletteModal = async () => {
+    const isLogged: boolean = await isUserLogged()
+
+    if (isLogged) {
+      navigate('/roulette')
+      return
+    }
+
+    setShowLoginModal(true)
+  }
+
+  return (
+    <>
+      <td
+        className={'rounded-xl  text-white h-16 w-32 px-2 py-1 text-xs bg-[#353535] hover:cursor-pointer '}
+        rowSpan={1}
+        onClick={openRouletteModal}
+      >
+        <div className='w-full h-full flex items-center justify-center'>
+
+          <img
+            src={'/assets/icons/fortune-wheel.png'}
+            alt='Roulette icon'
+            className='object-contain w-3/4 h-3/4 animate-spin '
+            style={{ animationDuration: '4s' }}
+          />
+        </div>
+      </td>
+      <LoginFormModal onClose={() => setShowLoginModal(false)} showModal={showLoginModal} />
+
+    </>
+  )
+}

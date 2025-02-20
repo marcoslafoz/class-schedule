@@ -41,13 +41,13 @@ export const RouletteScene: React.FC = () => {
           <UserAvatar />
         </div>
         <div className='flex flex-col lg:md:flex-row justify-center w-full '>
-          <div className='hidden lg:md:block lg:md:order-1 lg:md:w-1/4 lg:md:gap-0' />
+          <div className='hidden lg:md:block lg:md:order-1 lg:md:w-1/5 lg:md:gap-0' />
 
-          <div className='order-1 lg:md:order-2 lg:md:w-2/4 flex flex-col justify-center items-center '>
+          <div className='order-1 lg:md:order-2 lg:md:w-3/5 flex flex-col justify-center items-center '>
             <Roulette defaultMoney={money} />
           </div>
 
-          <div className='columna order-2 lg:md:order-3 flex flex-col items-center justify-center lg:md:w-1/4'>
+          <div className='columna order-2 lg:md:order-3 flex flex-col items-center justify-center lg:md:w-1/5'>
             <TopPlayers />
           </div>
         </div>

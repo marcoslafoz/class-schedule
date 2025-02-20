@@ -145,10 +145,10 @@ export const Roulette: React.FC<RouletteProps> = props => {
       />
       <div className='flex flex-col justify-center items-center gap-6'>
         <div className='flex flex-col gap-2 h-14 w-auto justify-center items-center text-white/70'>
-          {spinEarnings != null && !mustSpin && <div className='text-4xl font-bold'>
-            {spinEarnings > 0 ? <>+{spinEarnings} 💸 🤑</> : <>{spinEarnings} 💸 🥵</> }
-           
-          </div>}
+          {(spinEarnings != null && !mustSpin && spinEarnings != 0) &&
+            <div className='text-4xl font-bold'>
+              {spinEarnings > 0 ? <>+{spinEarnings} 💸 🤑</> : <>{spinEarnings} 💸 🥵</>}
+            </div>}
         </div>
 
         <Wheel
@@ -165,9 +165,10 @@ export const Roulette: React.FC<RouletteProps> = props => {
           onStopSpinning={onStopSpinning}
         />
         <div className='text-xl flex text-center font-bold text-white/50'>{money != null && <>{money} 💸</>}</div>
+        {/* TODO: HACER QUE CUANDO money <= 0 APAREZCA UN BOTON QUE PRECARGUE UN EMAIL PARA SOLICITAR DINERO  */}
 
         <form onSubmit={handleSubmit(onSuccessSpin)}>
-          <div className='flex flex-row items-center px-5 py-3 rounded-3xl gap-4 border border-black/40 bg-black/30'>
+          <div className='flex flex-row  items-center px-5 py-3 rounded-3xl gap-4 border border-black/40 bg-black/30 lg:md:max-w-max max-w-96 '>
             <Tooltip content='Eliminar apuestas' color='danger' closeDelay={0} showArrow>
               <button
                 className='text-lg text-danger cursor-pointer active:opacity-80 opacity-50 px-1'
@@ -179,17 +180,20 @@ export const Roulette: React.FC<RouletteProps> = props => {
               </button>
             </Tooltip>
 
-            {(['x1', 'x3', 'x5', 'x10', 'x20'] as Array<keyof RouletteForm>).map(bet => (
-              <Input
-                key={bet}
-                {...register(bet, { valueAsNumber: true })}
-                placeholder={bet}
-                className='w-20'
-                size='lg'
-                type='number'
-                min={0}
-              />
-            ))}
+            <div className='justify-center items-center flex flex-row flex-wrap gap-4'>
+
+              {(['x1', 'x3', 'x5', 'x10', 'x20'] as Array<keyof RouletteForm>).map(bet => (
+                <Input
+                  key={bet}
+                  {...register(bet, { valueAsNumber: true })}
+                  placeholder={bet}
+                  className='w-20'
+                  size='lg'
+                  type='number'
+                  min={0}
+                />
+              ))}
+            </div>
 
             <div className='h-10'>
               <Button
