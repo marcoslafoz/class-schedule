@@ -2,6 +2,7 @@ import React from 'react'
 import { UserTop } from '../../../common/types'
 import { TursoClient } from '../../../common/api/turso/config/client'
 import { Tooltip } from '@heroui/react'
+import { RenderMedals } from '../../../common/utils/user'
 
 export const TopPlayers: React.FC = () => {
   const [users, setUsers] = React.useState<UserTop[]>([])
@@ -52,7 +53,7 @@ export const TopPlayers: React.FC = () => {
                 alt={user.username}
                 className='object-contain w-8 h-8 rounded-full'
               />
-              <div className='truncate max-w-36'>{user.username}</div>
+              <div className='truncate max-w-36'>{` ${RenderMedals(index)} ${user.username}`}</div>
             </div>
 
             <div>{user.money} 💸</div>
