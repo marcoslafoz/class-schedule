@@ -9,6 +9,7 @@ import { DeleteIcon } from '@heroui/shared-icons'
 import clsx from 'clsx'
 import { TursoClient } from '../../../common/api/turso/config/client'
 import confetti from 'canvas-confetti'
+import { DisplayMoney } from './display-money'
 
 interface RouletteProps {
   defaultMoney: number | null
@@ -164,7 +165,8 @@ export const Roulette: React.FC<RouletteProps> = props => {
           data={rouletteOptions}
           onStopSpinning={onStopSpinning}
         />
-        <div className='text-xl flex text-center font-bold text-white/50'>{money != null && <>{money} 💸</>}</div>
+        
+        <DisplayMoney money={money} />
         {/* TODO: HACER QUE CUANDO money <= 0 APAREZCA UN BOTON QUE PRECARGUE UN EMAIL PARA SOLICITAR DINERO  */}
 
         <form onSubmit={handleSubmit(onSuccessSpin)}>
