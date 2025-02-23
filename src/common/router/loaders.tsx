@@ -10,6 +10,11 @@ export async function authLoader() {
       args: [token],
     })
 
+    await TursoClient.execute({
+      sql: 'UPDATE user SET last_login = ? WHERE token = ?',
+      args: [new Date().toISOString(), token],
+    })
+
     if (result.rows.length > 0) {
       return null
     } else {
