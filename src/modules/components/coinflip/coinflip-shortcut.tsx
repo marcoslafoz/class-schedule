@@ -3,17 +3,17 @@ import { LoginFormModal } from '../login/login-form-modal'
 import { UserContext } from '../../../common/context/user-context'
 import { useNavigate } from 'react-router'
 
-export const RouletteShortcut: React.FC = () => {
+export const CoinFlipShortcut: React.FC = () => {
   const [showLoginModal, setShowLoginModal] = React.useState(false)
 
   const { isUserLogged } = React.useContext(UserContext)
   const navigate = useNavigate()
 
-  const openRouletteModal = async () => {
+  const openCoinFlipModal = async () => {
     const isLogged: boolean = await isUserLogged()
 
     if (isLogged) {
-      navigate('/roulette')
+      navigate('/coinflip')
       return
     }
 
@@ -23,33 +23,32 @@ export const RouletteShortcut: React.FC = () => {
   return (
     <>
       <td
-        className='roulette-icon hidden lg:flex rounded-xl text-white bg-[#353535]  w-20 h-20 px-2 py-1 text-xs justify-center items-center hover:cursor-pointer'
-        onClick={openRouletteModal}
+        className='hidden lg:flex rounded-xl text-white bg-[#353535]  w-20 h-20 px-2 py-1 text-xs justify-center items-center hover:cursor-pointer'
+        onClick={openCoinFlipModal}
       >
         <img
-          src={'/assets/icons/fortune-wheel.png'}
-          alt='Roulette icon'
-          className='object-contain w-3/4 h-3/4 animate-spin grayscale '
-          style={{ animationDuration: '4s' }}
+          src={'/assets/icons/coinflip.webp'}
+          alt='CoinFlip icon'
+          className='object-contain w-3/4 h-3/4 grayscale '
         />
       </td>
 
-      <LoginFormModal onClose={() => setShowLoginModal(false)} showModal={showLoginModal} onSuccessRoutte='/roulette' />
+      <LoginFormModal onClose={() => setShowLoginModal(false)} showModal={showLoginModal} onSuccessRoutte='/coinflip' />
     </>
   )
 }
 
-export const RouletteFlexShortcut: React.FC = () => {
+export const CoinFlipFlexShortcut: React.FC = () => {
   const [showLoginModal, setShowLoginModal] = React.useState(false)
 
   const { isUserLogged } = React.useContext(UserContext)
   const navigate = useNavigate()
 
-  const openRouletteModal = async () => {
+  const openCoinFlipModal = async () => {
     const isLogged: boolean = await isUserLogged()
 
     if (isLogged) {
-      navigate('/roulette')
+      navigate('/coinflip')
       return
     }
 
@@ -61,18 +60,17 @@ export const RouletteFlexShortcut: React.FC = () => {
       <td
         className={'rounded-xl  text-white h-16 w-32 px-2 py-1 text-xs bg-[#353535] hover:cursor-pointer '}
         rowSpan={1}
-        onClick={openRouletteModal}
+        onClick={openCoinFlipModal}
       >
         <div className='w-full h-full flex items-center justify-center'>
           <img
-            src={'/assets/icons/fortune-wheel.png'}
-            alt='Roulette icon'
-            className='object-contain w-3/4 h-3/4 animate-spin grayscale'
-            style={{ animationDuration: '4s' }}
+            src={'/assets/icons/coinflip.webp'}
+            alt='CoinFlip icon'
+            className='object-contain w-3/4 h-3/4 grayscale '
           />
         </div>
       </td>
-      <LoginFormModal onClose={() => setShowLoginModal(false)} showModal={showLoginModal} onSuccessRoutte='/roulette' />
+      <LoginFormModal onClose={() => setShowLoginModal(false)} showModal={showLoginModal} onSuccessRoutte='/coinflip' />
     </>
   )
 }

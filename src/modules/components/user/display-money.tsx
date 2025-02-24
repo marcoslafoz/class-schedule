@@ -2,13 +2,11 @@ import { Alert } from '@heroui/react'
 import React from 'react'
 import { TursoClient } from '../../../common/api/turso/config/client'
 
-
 interface DisplayMoneyProps {
   money: number | null
 }
 
 export const DisplayMoney: React.FC<DisplayMoneyProps> = props => {
-
   const { money } = props
 
   const [cooldownAlert, setCooldownAlert] = React.useState<string | undefined>()
@@ -45,10 +43,12 @@ export const DisplayMoney: React.FC<DisplayMoneyProps> = props => {
       const lastBonusString = String(lastBonusRaw) // Convertir a string de forma segura
       const lastBonusTime = new Date(lastBonusString) // Ahora siempre será un string válido
 
-      if (!isNaN(lastBonusTime.getTime())) { // Comprobamos que sea una fecha válida
+      if (!isNaN(lastBonusTime.getTime())) {
+        // Comprobamos que sea una fecha válida
         const timeSinceLastBonus = now.getTime() - lastBonusTime.getTime() // Diferencia en ms
 
-        if (timeSinceLastBonus < 3600000) { // Menos de 1 hora (60 min * 60 sec * 1000 ms)
+        if (timeSinceLastBonus < 3600000) {
+          // Menos de 1 hora (60 min * 60 sec * 1000 ms)
           const nextBonusTime = new Date(lastBonusTime.getTime() + 3600000)
           setCooldownAlert(`No puedes solicitar el bono hasta hoy a las ${nextBonusTime.toLocaleTimeString()}`)
           return
@@ -69,20 +69,23 @@ export const DisplayMoney: React.FC<DisplayMoneyProps> = props => {
 
   if (money == null) return <></>
 
-  if (money <= 0) return (
-    <>
-      <Alert
-        isVisible={successAlert !== undefined || cooldownAlert !== undefined}
-        color={successAlert !== undefined ? 'success' : cooldownAlert !== undefined ? 'danger' : 'default'}
-        title={successAlert !== undefined ? successAlert : cooldownAlert !== undefined ? cooldownAlert : ''}
-        className='fixed w-auto z-50 top-10'
-      />
-      <div className='text-xl flex flex-row flex-wrap text-center font-bold text-white/50 gap-5 items-center justify-center'>
-        <div>{money} 💸 🥵</div>
-        <button className='bg-black/40 px-3 py-1 rounded-2xl' onClick={requestBonus} >Bono de 🐶 Sanchéz</button>
-      </div>
-    </>
-  )
+  if (money <= 0)
+    return (
+      <>
+        <Alert
+          isVisible={successAlert !== undefined || cooldownAlert !== undefined}
+          color={successAlert !== undefined ? 'success' : cooldownAlert !== undefined ? 'danger' : 'default'}
+          title={successAlert !== undefined ? successAlert : cooldownAlert !== undefined ? cooldownAlert : ''}
+          className='fixed w-auto z-50 top-16 opacity-80'
+        />
+        <div className='text-xl flex flex-row flex-wrap text-center font-bold text-white/50 gap-5 items-center justify-center'>
+          <div>{money} 💸 🥵</div>
+          <button className='bg-black/40 px-3 py-1 rounded-2xl' onClick={requestBonus}>
+            Bono de 🐶 Sanchéz
+          </button>
+        </div>
+      </>
+    )
 
   return (
     <>

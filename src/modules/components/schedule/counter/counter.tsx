@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import scheduleData from '../../../assets/json/horario.json'
+import scheduleData from '../../../../assets/json/horario.json'
 
 interface Horario {
   horaInicio: string

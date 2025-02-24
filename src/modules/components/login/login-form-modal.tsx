@@ -11,10 +11,11 @@ import { UserLogin } from '../../../common/types/user.vm'
 interface LoginFormModalProps {
   showModal: boolean
   onClose: () => void
+  onSuccessRoutte: string
 }
 
 export const LoginFormModal: React.FC<LoginFormModalProps> = props => {
-  const { onClose, showModal } = props
+  const { onClose, showModal, onSuccessRoutte } = props
 
   const [isPasswordVisible, setIsPasswordVisible] = React.useState(false)
   const [errorMessage, setErrorMessage] = React.useState<string | undefined>()
@@ -32,7 +33,7 @@ export const LoginFormModal: React.FC<LoginFormModalProps> = props => {
       })
 
       if (loginUserResponse) {
-        navigate('/roulette')
+        navigate(onSuccessRoutte)
       } else {
         setErrorMessage('Contraseña o usuario incorrecto.')
       }

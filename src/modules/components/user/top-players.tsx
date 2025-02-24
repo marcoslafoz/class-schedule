@@ -51,7 +51,7 @@ export const TopPlayers: React.FC = () => {
               <img
                 src={user.avatar_url || '/assets/avatar/default.png'}
                 alt={user.username}
-                className='object-contain w-8 h-8 rounded-full'
+                className='w-10 h-10 rounded-full'
               />
               <div className='truncate max-w-36'>{` ${RenderMedals(index)} ${user.username}`}</div>
             </div>

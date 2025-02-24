@@ -4,6 +4,7 @@ import { FlexShortcut, Shortcut } from './shortcut'
 import scheduleData from '../../../assets/json/horario.json'
 import clsx from 'clsx'
 import { RouletteFlexShortcut, RouletteShortcut } from '../roulette/roulette-shortcut'
+import { CoinFlipFlexShortcut, CoinFlipShortcut } from '../coinflip/coinflip-shortcut'
 
 interface Subject {
   horaInicio: string
@@ -66,7 +67,8 @@ export const Schedule: React.FC = () => {
             <SubjectCell subjectName={SUBJECT_NAME.IPPE} rowSpan={1} active={currentOrder === 2} />
             <SubjectCell subjectName={SUBJECT_NAME.INGLES} rowSpan={1} active={currentOrder === 5} />
             <SubjectCell subjectName={SUBJECT_NAME.IPPE} rowSpan={1} active={currentOrder === 16} />
-            <Shortcut link='https://drive.google.com/' imageSrc='/assets/icons/drive.png' />
+            {/* <Shortcut link='https://drive.google.com/' imageSrc='/assets/icons/drive.png' /> */}
+            <Shortcut link='https://iespabloserrano.aeducar.es/my/courses.php' imageSrc='/assets/icons/aeducar.ico' />
           </tr>
           <tr>
             <td className='h-20' colSpan={6}></td>
@@ -89,7 +91,7 @@ export const Schedule: React.FC = () => {
             <HourCell start='13:30' end='14:20' />
             <SubjectCell subjectName={SUBJECT_NAME.INGLES} rowSpan={1} active={currentOrder === 11} />
             <SubjectCell subjectName={SUBJECT_NAME.LM} rowSpan={1} active={currentOrder === 18} />
-            <Shortcut link='https://iespabloserrano.aeducar.es/my/courses.php' imageSrc='/assets/icons/aeducar.ico' />
+            <CoinFlipShortcut />
           </tr>
         </tbody>
       </table>
@@ -99,18 +101,20 @@ export const Schedule: React.FC = () => {
           <tr>
             <HourCell start='08:30' end='09:20' hidden={true} />
             <FlexShortcut link='https://classroom.google.com/' imageSrc='/assets/icons/classroom.png' />
-            <FlexShortcut link='https://drive.google.com/' imageSrc='/assets/icons/drive.png' />
+            {/* <FlexShortcut link='https://drive.google.com/' imageSrc='/assets/icons/drive.png' /> */}
+            <FlexShortcut
+              link='https://iespabloserrano.aeducar.es/my/courses.php'
+              imageSrc='/assets/icons/aeducar.ico'
+            />
+
             <FlexShortcut link='https://www.studentspace.app/' imageSrc='/assets/icons/studentspace.svg' />
-            <RouletteFlexShortcut/>
-            <FlexShortcut link='https://iespabloserrano.aeducar.es/my/courses.php' imageSrc='/assets/icons/aeducar.ico' />
+            <RouletteFlexShortcut />
+            <CoinFlipFlexShortcut />
           </tr>
-         
         </tbody>
       </table>
-      
     </div>
   )
-
 }
 
 enum SUBJECT_NAME {
@@ -155,7 +159,13 @@ interface HourCellProps {
 const HourCell: React.FC<HourCellProps> = props => {
   const { start, end, hidden = false } = props
   return (
-    <td className={clsx(hidden && 'opacity-0 text-opacity-0','text-center items-center text-white h-20 w-auto py-1 pr-2 text-xs opacity-20')} rowSpan={1}>
+    <td
+      className={clsx(
+        hidden && 'opacity-0 text-opacity-0',
+        'text-center items-center text-white h-20 w-auto py-1 pr-2 text-xs opacity-20'
+      )}
+      rowSpan={1}
+    >
       <div>{start}</div>
       <div>{end}</div>
     </td>

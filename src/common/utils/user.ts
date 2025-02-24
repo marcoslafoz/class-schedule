@@ -1,5 +1,4 @@
 export const RenderMedals = (position: number): string => {
-
   switch (position) {
     case 0:
       return '🥇'
@@ -10,10 +9,7 @@ export const RenderMedals = (position: number): string => {
     case 2:
       return '🥉'
 
-
     default:
       return ''
-
   }
-
-} 
+}

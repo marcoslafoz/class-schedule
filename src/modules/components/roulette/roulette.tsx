@@ -2,14 +2,14 @@ import { Alert, Button, Input, Tooltip } from '@heroui/react'
 import React from 'react'
 import { Wheel } from 'react-custom-roulette'
 import { rouletteOptions } from '../../../common/constants/roulette-options'
-import { GenerateRoulettePrize } from '../../../common/utils/roulette-prize'
+import { GeneratePrize } from '../../../common/utils/roulette-prize'
 import { PRIZE_OPTIONS_ENUM, RouletteForm, RouletteOption } from '../../../common/types'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { DeleteIcon } from '@heroui/shared-icons'
 import clsx from 'clsx'
 import { TursoClient } from '../../../common/api/turso/config/client'
 import confetti from 'canvas-confetti'
-import { DisplayMoney } from './display-money'
+import { DisplayMoney } from '../user/display-money'
 
 interface RouletteProps {
   defaultMoney: number | null
@@ -18,7 +18,7 @@ interface RouletteProps {
 export const Roulette: React.FC<RouletteProps> = props => {
   const [mustSpin, setMustSpin] = React.useState(false)
   const [, setRouletteResult] = React.useState<RouletteOption | null>(null)
-  const [prizeNumber, setPrizeNumber] = React.useState<number>(GenerateRoulettePrize(rouletteOptions.length))
+  const [prizeNumber, setPrizeNumber] = React.useState<number>(GeneratePrize(rouletteOptions.length))
   const [spinEarnings, setSpinEarnings] = React.useState<number | null>(null)
   const [noMoneyAlert, setNoMoneyAlert] = React.useState<boolean>(false)
   const [money, setMoney] = React.useState<number | null>(props.defaultMoney || 0)
@@ -100,7 +100,7 @@ export const Roulette: React.FC<RouletteProps> = props => {
   // ESTO SE LANZA CON EL SPIN
   // xxxxxxxxxxxxxxxxxxxxxxxxx
   const onSuccessSpin: SubmitHandler<RouletteForm> = async values => {
-    const newPrizeNumber = GenerateRoulettePrize(rouletteOptions.length)
+    const newPrizeNumber = GeneratePrize(rouletteOptions.length)
     const newRouletteResult = rouletteOptions[newPrizeNumber]
 
     const userMoneyResult = await TursoClient.execute({
@@ -142,14 +142,15 @@ export const Roulette: React.FC<RouletteProps> = props => {
         color={'danger'}
         isVisible={noMoneyAlert}
         title={'No tienes suficiente dinero'}
-        className='fixed w-auto z-50 top-10'
+        className='fixed w-auto z-50 top-16 opacity-80'
       />
       <div className='flex flex-col justify-center items-center gap-6'>
         <div className='flex flex-col gap-2 h-14 w-auto justify-center items-center text-white/70'>
-          {(spinEarnings != null && !mustSpin && spinEarnings != 0) &&
+          {spinEarnings != null && !mustSpin && spinEarnings != 0 && (
             <div className='text-4xl font-bold'>
               {spinEarnings > 0 ? <>+{spinEarnings} 💸 🤑</> : <>{spinEarnings} 💸 🥵</>}
-            </div>}
+            </div>
+          )}
         </div>
 
         <Wheel
@@ -165,9 +166,8 @@ export const Roulette: React.FC<RouletteProps> = props => {
           data={rouletteOptions}
           onStopSpinning={onStopSpinning}
         />
-        
+
         <DisplayMoney money={money} />
-        {/* TODO: HACER QUE CUANDO money <= 0 APAREZCA UN BOTON QUE PRECARGUE UN EMAIL PARA SOLICITAR DINERO  */}
 
         <form onSubmit={handleSubmit(onSuccessSpin)}>
           <div className='flex flex-row  items-center px-5 py-3 rounded-3xl gap-4 border border-black/40 bg-black/30 lg:md:max-w-max max-w-96 '>
@@ -183,7 +183,6 @@ export const Roulette: React.FC<RouletteProps> = props => {
             </Tooltip>
 
             <div className='justify-center items-center flex flex-row flex-wrap gap-4'>
-
               {(['x1', 'x3', 'x5', 'x10', 'x20'] as Array<keyof RouletteForm>).map(bet => (
                 <Input
                   key={bet}
