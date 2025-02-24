@@ -88,8 +88,13 @@ export const CoinFlip: React.FC<CoinFlipProps> = ({ defaultMoney }) => {
         args: [balance, localStorage.getItem('token')],
       }).then(() => {
         setIsPlaying(true)
+        setEarnings(newEarnings > 0 ? newEarnings : -totalBet)
       })
-      setEarnings(newEarnings > 0 ? newEarnings : -totalBet)
+
+      await TursoClient.execute({
+        sql: 'UPDATE user SET total_bet = total_bet + ? WHERE token = ?',
+        args: [totalBet, localStorage.getItem('token')],
+      })
     } else {
       setShowNoMoneyAlert(true)
     }

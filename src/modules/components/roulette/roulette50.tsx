@@ -109,6 +109,11 @@ export const Roulette50: React.FC<RouletteProps> = props => {
         setMustSpin(true)
         setSpinEarnings(newSpinEarnings > 0 ? newSpinEarnings : -newSpinCost)
       })
+
+      await TursoClient.execute({
+        sql: 'UPDATE user SET total_bet = total_bet + ? WHERE token = ?',
+        args: [newSpinCost, localStorage.getItem('token')],
+      })
     } else {
       setNoMoneyAlert(true)
     }
