@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { CoinFlip, GoHome, TopPlayers, UserAvatar } from '../components'
+import { CoinFlip, TopPlayers, UserHeaderBar } from '../components'
 import { Helmet } from 'react-helmet'
 import { UserContext } from '../../common/context/user-context'
 import { TursoClient } from '../../common/api/turso/config/client'
@@ -37,10 +37,8 @@ export const CoinFlipScene: React.FC = () => {
     <>
       <Helmet title='Coinflip' />
       <div className='w-full min-h-screen flex flex-col  items-center bg-white/10'>
-        <div className='flex flex-row w-full h-auto p-6  justify-between items-center '>
-          <GoHome />
-          <UserAvatar />
-        </div>
+        <UserHeaderBar />
+
         <div className='flex flex-col lg:md:flex-row justify-center w-full '>
           <div className='hidden lg:md:block lg:md:order-1 lg:md:w-1/5 lg:md:gap-0' />
 

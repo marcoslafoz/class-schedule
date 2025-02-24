@@ -137,7 +137,7 @@
 .back p {
   color: rgba(236, 199, 48, 0.976);
   -webkit-text-stroke: 10px rgb(221, 181, 0);
-  font-size: 200px;
+  font-size: 150px;
   line-height: 200px;
   text-align: center;
   overflow: hidden;

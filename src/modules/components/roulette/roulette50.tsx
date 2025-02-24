@@ -1,29 +1,29 @@
 import { Alert, Button, Input, Tooltip } from '@heroui/react'
 import React from 'react'
 import { Wheel } from 'react-custom-roulette'
-import { rouletteOptions } from '../../../common/constants/roulette-options'
 import { GenerateRoulettePrize } from '../../../common/utils/roulette-prize'
-import { ROULETTE_PRIZE_OPTIONS_ENUM, RouletteForm, RouletteOption } from '../../../common/types'
+import { ROULETTE50_PRIZE_OPTIONS_ENUM, Roulette50Form, Roulette50Option } from '../../../common/types'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { DeleteIcon } from '@heroui/shared-icons'
 import clsx from 'clsx'
 import { TursoClient } from '../../../common/api/turso/config/client'
 import confetti from 'canvas-confetti'
 import { DisplayMoney } from '../user/display-money'
+import { roulette50Options } from '../../../common/constants/roulette50-options'
 
 interface RouletteProps {
   defaultMoney: number | null
 }
 
-export const Roulette: React.FC<RouletteProps> = props => {
+export const Roulette50: React.FC<RouletteProps> = props => {
   const [mustSpin, setMustSpin] = React.useState(false)
-  const [, setRouletteResult] = React.useState<RouletteOption | null>(null)
-  const [prizeNumber, setPrizeNumber] = React.useState<number>(GenerateRoulettePrize(rouletteOptions.length))
+  const [, setRouletteResult] = React.useState<Roulette50Option | null>(null)
+  const [prizeNumber, setPrizeNumber] = React.useState<number>(GenerateRoulettePrize(roulette50Options.length))
   const [spinEarnings, setSpinEarnings] = React.useState<number | null>(null)
   const [noMoneyAlert, setNoMoneyAlert] = React.useState<boolean>(false)
   const [money, setMoney] = React.useState<number | null>(props.defaultMoney || 0)
 
-  const { handleSubmit, register, reset } = useForm<RouletteForm>()
+  const { handleSubmit, register, reset } = useForm<Roulette50Form>()
 
   const onStopSpinning = async () => {
     setMustSpin(false)
@@ -39,29 +39,20 @@ export const Roulette: React.FC<RouletteProps> = props => {
     setMoney(Number(updatedMoney.rows[0]?.money) || 0)
   }
 
-  const calculateSpinCost = React.useCallback((values: RouletteForm) => {
+  const calculateSpinCost = React.useCallback((values: Roulette50Form) => {
     return Object.values(values).reduce((acc, bet) => acc + (Number(bet) || 0), 0)
   }, [])
 
-  const calculateSpinBalance = React.useCallback((values: RouletteForm, prize: RouletteOption) => {
+  const calculateSpinBalance = React.useCallback((values: Roulette50Form, prize: Roulette50Option) => {
     const totalBetCost = Object.values(values).reduce((acc, bet) => acc + (Number(bet) || 0), 0)
     let win = 0
 
     switch (prize.prize) {
-      case ROULETTE_PRIZE_OPTIONS_ENUM.X1:
-        win = (values.x1 || 0) * ROULETTE_PRIZE_OPTIONS_ENUM.X1
+      case ROULETTE50_PRIZE_OPTIONS_ENUM.APROBADO:
+        win = (values.aprobado || 0) * 2
         break
-      case ROULETTE_PRIZE_OPTIONS_ENUM.X3:
-        win = (values.x3 || 0) * ROULETTE_PRIZE_OPTIONS_ENUM.X3
-        break
-      case ROULETTE_PRIZE_OPTIONS_ENUM.X5:
-        win = (values.x5 || 0) * ROULETTE_PRIZE_OPTIONS_ENUM.X5
-        break
-      case ROULETTE_PRIZE_OPTIONS_ENUM.X10:
-        win = (values.x10 || 0) * ROULETTE_PRIZE_OPTIONS_ENUM.X10
-        break
-      case ROULETTE_PRIZE_OPTIONS_ENUM.X20:
-        win = (values.x20 || 0) * ROULETTE_PRIZE_OPTIONS_ENUM.X20
+      case ROULETTE50_PRIZE_OPTIONS_ENUM.SUSPENSO:
+        win = (values.suspenso || 0) * 2
         break
       default:
         win = 0
@@ -70,24 +61,15 @@ export const Roulette: React.FC<RouletteProps> = props => {
     return win - totalBetCost
   }, [])
 
-  const calculateSpinEarnings = React.useCallback((values: RouletteForm, prize: RouletteOption) => {
+  const calculateSpinEarnings = React.useCallback((values: Roulette50Form, prize: Roulette50Option) => {
     let win = 0
 
     switch (prize.prize) {
-      case ROULETTE_PRIZE_OPTIONS_ENUM.X1:
-        win = (values.x1 || 0) * ROULETTE_PRIZE_OPTIONS_ENUM.X1
+      case ROULETTE50_PRIZE_OPTIONS_ENUM.APROBADO:
+        win = (values.aprobado || 0) * 2
         break
-      case ROULETTE_PRIZE_OPTIONS_ENUM.X3:
-        win = (values.x3 || 0) * ROULETTE_PRIZE_OPTIONS_ENUM.X3
-        break
-      case ROULETTE_PRIZE_OPTIONS_ENUM.X5:
-        win = (values.x5 || 0) * ROULETTE_PRIZE_OPTIONS_ENUM.X5
-        break
-      case ROULETTE_PRIZE_OPTIONS_ENUM.X10:
-        win = (values.x10 || 0) * ROULETTE_PRIZE_OPTIONS_ENUM.X10
-        break
-      case ROULETTE_PRIZE_OPTIONS_ENUM.X20:
-        win = (values.x20 || 0) * ROULETTE_PRIZE_OPTIONS_ENUM.X20
+      case ROULETTE50_PRIZE_OPTIONS_ENUM.SUSPENSO:
+        win = (values.suspenso || 0) * 2
         break
       default:
         win = 0
@@ -99,9 +81,9 @@ export const Roulette: React.FC<RouletteProps> = props => {
   // xxxxxxxxxxxxxxxxxxxxxxxxx
   // ESTO SE LANZA CON EL SPIN
   // xxxxxxxxxxxxxxxxxxxxxxxxx
-  const onSuccessSpin: SubmitHandler<RouletteForm> = async values => {
-    const newPrizeNumber = GenerateRoulettePrize(rouletteOptions.length)
-    const newRouletteResult = rouletteOptions[newPrizeNumber]
+  const onSuccessSpin: SubmitHandler<Roulette50Form> = async values => {
+    const newPrizeNumber = GenerateRoulettePrize(roulette50Options.length)
+    const newRouletteResult = roulette50Options[newPrizeNumber]
 
     const userMoneyResult = await TursoClient.execute({
       sql: 'SELECT money FROM user WHERE token = ?',
@@ -163,7 +145,7 @@ export const Roulette: React.FC<RouletteProps> = props => {
           outerBorderWidth={0}
           innerBorderWidth={0}
           innerBorderColor='#000'
-          data={rouletteOptions}
+          data={roulette50Options}
           onStopSpinning={onStopSpinning}
         />
 
@@ -183,17 +165,22 @@ export const Roulette: React.FC<RouletteProps> = props => {
             </Tooltip>
 
             <div className='justify-center items-center flex flex-row flex-wrap gap-4'>
-              {(['x1', 'x3', 'x5', 'x10', 'x20'] as Array<keyof RouletteForm>).map(bet => (
-                <Input
-                  key={bet}
-                  {...register(bet, { valueAsNumber: true })}
-                  placeholder={bet}
-                  className='w-20'
-                  size='lg'
-                  type='number'
-                  min={0}
-                />
-              ))}
+              <Input
+                {...register('aprobado', { valueAsNumber: true })}
+                placeholder={'Aprobado'}
+                className='w-32'
+                size='lg'
+                type='number'
+                min={0}
+              />
+              <Input
+                {...register('suspenso', { valueAsNumber: true })}
+                placeholder={'Suspenso'}
+                className='w-32'
+                size='lg'
+                type='number'
+                min={0}
+              />
             </div>
 
             <div className='h-10'>

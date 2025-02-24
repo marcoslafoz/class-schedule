@@ -4,7 +4,6 @@ import { FlexShortcut, Shortcut } from './shortcut'
 import scheduleData from '../../../assets/json/horario.json'
 import clsx from 'clsx'
 import { RouletteFlexShortcut, RouletteShortcut } from '../roulette/roulette-shortcut'
-import { CoinFlipFlexShortcut, CoinFlipShortcut } from '../coinflip/coinflip-shortcut'
 
 interface Subject {
   horaInicio: string
@@ -67,8 +66,7 @@ export const Schedule: React.FC = () => {
             <SubjectCell subjectName={SUBJECT_NAME.IPPE} rowSpan={1} active={currentOrder === 2} />
             <SubjectCell subjectName={SUBJECT_NAME.INGLES} rowSpan={1} active={currentOrder === 5} />
             <SubjectCell subjectName={SUBJECT_NAME.IPPE} rowSpan={1} active={currentOrder === 16} />
-            {/* <Shortcut link='https://drive.google.com/' imageSrc='/assets/icons/drive.png' /> */}
-            <Shortcut link='https://iespabloserrano.aeducar.es/my/courses.php' imageSrc='/assets/icons/aeducar.ico' />
+            <Shortcut link='https://drive.google.com/' imageSrc='/assets/icons/drive.png' />
           </tr>
           <tr>
             <td className='h-20' colSpan={6}></td>
@@ -85,13 +83,13 @@ export const Schedule: React.FC = () => {
           <tr>
             <HourCell start='12:35' end='13:25' />
             <SubjectCell subjectName={SUBJECT_NAME.PAR} rowSpan={2} active={currentOrder === 7} />
-            <RouletteShortcut />
+            <Shortcut link='https://iespabloserrano.aeducar.es/my/courses.php' imageSrc='/assets/icons/aeducar.ico' />
           </tr>
           <tr>
             <HourCell start='13:30' end='14:20' />
             <SubjectCell subjectName={SUBJECT_NAME.INGLES} rowSpan={1} active={currentOrder === 11} />
             <SubjectCell subjectName={SUBJECT_NAME.LM} rowSpan={1} active={currentOrder === 18} />
-            <CoinFlipShortcut />
+            <RouletteShortcut />
           </tr>
         </tbody>
       </table>
@@ -101,7 +99,7 @@ export const Schedule: React.FC = () => {
           <tr>
             <HourCell start='08:30' end='09:20' hidden={true} />
             <FlexShortcut link='https://classroom.google.com/' imageSrc='/assets/icons/classroom.png' />
-            {/* <FlexShortcut link='https://drive.google.com/' imageSrc='/assets/icons/drive.png' /> */}
+            <FlexShortcut link='https://drive.google.com/' imageSrc='/assets/icons/drive.png' />
             <FlexShortcut
               link='https://iespabloserrano.aeducar.es/my/courses.php'
               imageSrc='/assets/icons/aeducar.ico'
@@ -109,7 +107,6 @@ export const Schedule: React.FC = () => {
 
             <FlexShortcut link='https://www.studentspace.app/' imageSrc='/assets/icons/studentspace.svg' />
             <RouletteFlexShortcut />
-            <CoinFlipFlexShortcut />
           </tr>
         </tbody>
       </table>

@@ -1,9 +1,9 @@
 import { WheelData } from 'react-custom-roulette/dist/components/Wheel/types'
 
-export interface RouletteOption extends WheelData, PrizeOption {}
+export interface RouletteOption extends WheelData, RoulettePrizeOption {}
 
-export interface PrizeOption {
-  prize: PRIZE_OPTIONS_ENUM
+export interface RoulettePrizeOption {
+  prize: ROULETTE_PRIZE_OPTIONS_ENUM | number
   title: string
 }
 
@@ -15,7 +15,7 @@ export interface RouletteForm {
   x20: number
 }
 
-export enum PRIZE_OPTIONS_ENUM {
+export enum ROULETTE_PRIZE_OPTIONS_ENUM {
   X1 = 1,
   X3 = 3,
   X5 = 5,
@@ -23,7 +23,7 @@ export enum PRIZE_OPTIONS_ENUM {
   X20 = 20,
 }
 
-export enum PRIZE_COLOR_ENUM {
+export enum ROULETTE_PRIZE_COLOR_ENUM {
   X1 = '#383838',
   X3 = '#f1c40f',
   X5 = '#3498db',
@@ -31,7 +31,7 @@ export enum PRIZE_COLOR_ENUM {
   X20 = '#e74c3c',
 }
 
-export enum PRIZE_OPTION_TITLE_ENUM {
+export enum ROULETTE_PRIZE_OPTION_TITLE_ENUM {
   X1 = 'PAR x1',
   X3 = 'GBD x3',
   X5 = 'ISO x5',

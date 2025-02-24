@@ -14,7 +14,7 @@ export const Coin: React.FC<CoinProps> = ({ prize, isPlaying, stopAnimation }) =
   // Evitar actualizaciones innecesarias de `result`
   React.useEffect(() => {
     if (!isPlaying && prize !== undefined) {
-      const newResult = prize === 0 ? '0' : '1'
+      const newResult = prize === 0 ? 'A+' : 'F'
       if (result !== newResult) {
         setResult(newResult)
       }

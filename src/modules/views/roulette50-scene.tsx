@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Roulette, TopPlayers, UserHeaderBar } from '../components'
+import { Roulette50, TopPlayers, UserHeaderBar } from '../components'
 import { Helmet } from 'react-helmet'
 import { UserContext } from '../../common/context/user-context'
 import { TursoClient } from '../../common/api/turso/config/client'
 
-export const RouletteScene: React.FC = () => {
+export const Roulette50Scene: React.FC = () => {
   const [money, setMoney] = useState<number | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
 
@@ -35,7 +35,7 @@ export const RouletteScene: React.FC = () => {
 
   return (
     <>
-      <Helmet title='Roulette' />
+      <Helmet title='50/50 Roulette' />
       <div className='w-full min-h-screen flex flex-col  items-center bg-white/10'>
         <UserHeaderBar />
 
@@ -43,7 +43,7 @@ export const RouletteScene: React.FC = () => {
           <div className='hidden lg:md:block lg:md:order-1 lg:md:w-1/5 lg:md:gap-0' />
 
           <div className='order-1 lg:md:order-2 lg:md:w-3/5 flex flex-col justify-center items-center '>
-            <Roulette defaultMoney={money} />
+            <Roulette50 defaultMoney={money} />
           </div>
 
           <div className='columna order-2 lg:md:order-3 flex flex-col items-center justify-center lg:md:w-1/5'>

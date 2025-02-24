@@ -1,6 +1,6 @@
 import { Alert, Button, Input, Tooltip } from '@heroui/react'
 import React, { useState } from 'react'
-import { GeneratePrize } from '../../../common/utils/roulette-prize'
+import { GenerateCoinFlipPrize } from '../../../common/utils/coinflip-prize'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { DeleteIcon } from '@heroui/shared-icons'
 import clsx from 'clsx'
@@ -68,7 +68,7 @@ export const CoinFlip: React.FC<CoinFlipProps> = ({ defaultMoney }) => {
   const handleSpin: SubmitHandler<CoinFlipForm> = async values => {
     if (isPlaying) return
 
-    const newPrize = GeneratePrize(2)
+    const newPrize = GenerateCoinFlipPrize()
     setCurrentPrize(newPrize)
 
     const userMoneyRes = await TursoClient.execute({
@@ -137,8 +137,8 @@ export const CoinFlip: React.FC<CoinFlipProps> = ({ defaultMoney }) => {
               </button>
             </Tooltip>
             <div className='flex flex-row gap-4'>
-              <Input {...register('cara')} placeholder='0' className='w-20' size='lg' type='number' min={0} />
-              <Input {...register('cruz')} placeholder='1' className='w-20' size='lg' type='number' min={0} />
+              <Input {...register('cara')} placeholder='A+' className='w-20' size='lg' type='number' min={0} />
+              <Input {...register('cruz')} placeholder='F' className='w-20' size='lg' type='number' min={0} />
             </div>
             <Button
               className={clsx('opacity-50 bg-transparent', isPlaying && 'opacity-20')}

@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { ScheduleScene, RouletteScene, RegisterScene, CoinFlipScene } from '../../modules/views'
+import { ScheduleScene, RouletteScene, RegisterScene, CoinFlipScene, Roulette50Scene } from '../../modules/views'
 import { authLoader } from './loaders'
 
 export const router = createBrowserRouter([
@@ -22,6 +22,12 @@ export const router = createBrowserRouter([
   {
     path: '/coinflip',
     element: <CoinFlipScene />,
+    errorElement: <></>,
+    loader: authLoader,
+  },
+  {
+    path: '/roulette-50',
+    element: <Roulette50Scene />,
     errorElement: <></>,
     loader: authLoader,
   },
