@@ -36,7 +36,7 @@ export const CoinFlipScene: React.FC = () => {
   return (
     <>
       <Helmet title='Coinflip' />
-      <div className='w-full min-h-screen flex flex-col  items-center bg-white/10'>
+      <div className='w-full min-h-screen flex flex-col overflow-x-hidden items-center bg-white/10'>
         <UserHeaderBar />
 
         <div className='flex flex-col lg:md:flex-row justify-center w-full '>

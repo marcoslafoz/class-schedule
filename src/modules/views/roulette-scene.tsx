@@ -36,7 +36,7 @@ export const RouletteScene: React.FC = () => {
   return (
     <>
       <Helmet title='Roulette' />
-      <div className='w-full min-h-screen max-w-full flex flex-col  items-center bg-white/10'>
+      <div className='w-full min-h-screen overflow-x-hidden max-w-full flex flex-col  items-center bg-white/10'>
         <UserHeaderBar />
 
         <div className='flex flex-col lg:md:flex-row justify-center w-full '>

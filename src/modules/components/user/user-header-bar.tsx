@@ -10,7 +10,7 @@ export const UserHeaderBar: React.FC = () => {
   return (
     <>
       <div className='flex lg:md:flex-row flex-col lg:md:gap-0 gap-7 flex-wrap w-full h-auto p-6  justify-between items-center '>
-        <div className='lg:md:w-1/3 lg:md:justify-start justify-center flex flex-row flex-nowrap gap-10'>
+        <div className='lg:md:w-1/5 lg:md:justify-start justify-center flex flex-row flex-nowrap gap-10'>
           <button
             className='text-white/60 hover:text-white flex flex-row flex-nowrap justify-center items-center gap-1 '
             type='button'
@@ -25,7 +25,7 @@ export const UserHeaderBar: React.FC = () => {
           </div>
         </div>
 
-        <div className='flex flex-row w-1/3 flex-wra justify-center items-center lg:sm:gap-8 gap-2 lg:sm:text-lg text-nowrap'>
+        <div className='flex flex-row lg:md:w-3/5 flex-wrap justify-center items-center lg:sm:gap-8 gap-2 lg:sm:text-lg text-nowrap'>
           <button
             onClick={() => navigate('/roulette')}
             className='text-white/60 hover:text-white/80  bg-white/5 hover:bg-white/10 rounded-full py-1 px-3'
@@ -52,7 +52,7 @@ export const UserHeaderBar: React.FC = () => {
           </button>
         </div>
 
-        <div className='lg:md:flex hidden flex-row w-1/3 justify-end items-center gap-4 text-white/60 '>
+        <div className='lg:md:flex hidden flex-row lg:md:w-1/5 justify-end items-center gap-4 text-white/60 '>
           <UserAvatar />
         </div>
       </div>

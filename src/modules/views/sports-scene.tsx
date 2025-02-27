@@ -36,7 +36,7 @@ export const SportsScene: React.FC = () => {
   return (
     <>
       <Helmet title='Deportes' />
-      <div className='w-full min-h-screen flex flex-col max-w-full items-center bg-white/10'>
+      <div className='w-full min-h-screen overflow-x-hidden flex flex-col max-w-full items-center bg-white/10'>
         <UserHeaderBar />
 
         <div className='flex flex-col lg:md:flex-row justify-center w-full '>
