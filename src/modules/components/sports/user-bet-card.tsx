@@ -15,7 +15,7 @@ export const UserBetCard: React.FC<UserBetCardProps> = props => {
         <img src={user.avatar_url} alt={user.username} className='w-6 h-6 rounded-full object-cover aspect-square' />
         <div className='truncate hidden user-card-username'>{user.username}</div>
       </div>
-      <div>{amount}§</div>
+      <div>{amount} §</div>
     </div>
   )
 }
