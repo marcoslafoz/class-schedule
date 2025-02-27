@@ -28,3 +28,10 @@
 .matchs-scroll::-webkit-scrollbar-corner {
   background: transparent;
 }
+
+
+@media (min-width: 520px) {
+  .user-card-username {
+    display: flex;
+  }
+}

@@ -25,17 +25,29 @@ export const UserHeaderBar: React.FC = () => {
           </div>
         </div>
 
-        <div className='flex flex-row w-1/3 flex-wra justify-center items-center gap-8'>
-          <button onClick={() => navigate('/roulette')} className='text-white/60 hover:text-white'>
+        <div className='flex flex-row w-1/3 flex-wra justify-center items-center lg:sm:gap-8 gap-2 lg:sm:text-lg text-nowrap'>
+          <button
+            onClick={() => navigate('/roulette')}
+            className='text-white/60 hover:text-white/80  bg-white/5 hover:bg-white/10 rounded-full py-1 px-3'
+          >
             🎰 Roulette
           </button>
-          <button onClick={() => navigate('/coinflip')} className='text-white/60 hover:text-white'>
+          <button
+            onClick={() => navigate('/coinflip')}
+            className='text-white/60 hover:text-white/80  bg-white/5 hover:bg-white/10 rounded-full py-1 px-3'
+          >
             🪙 Coinflip
           </button>
-          <button onClick={() => navigate('/roulette-50')} className='text-white/60 hover:text-white'>
+          <button
+            onClick={() => navigate('/roulette-50')}
+            className='text-white/60 hover:text-white/80  bg-white/5 hover:bg-white/10 rounded-full py-1 px-3'
+          >
             ⚖️ 50/50
           </button>
-          <button onClick={() => navigate('/sports')} className='text-white/60 hover:text-white'>
+          <button
+            onClick={() => navigate('/sports')}
+            className='text-white/60 hover:text-white/80  bg-white/5 hover:bg-white/10 rounded-full py-1 px-3'
+          >
             ⚽ Deportes
           </button>
         </div>

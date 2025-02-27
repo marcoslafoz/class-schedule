@@ -26,7 +26,9 @@ export const NewBetModal: React.FC<NewBetModalProps> = props => {
         args: [localStorage.getItem('token')],
       })
 
-      if (Number(moneyAndIdResult.rows[0]?.money || 0) <= values.amount) {
+      const money: number = Number(moneyAndIdResult.rows[0]?.money || 0)
+
+      if (money < values.amount) {
         setErrorMessage('No tienes suficiente dinero')
         return
       }
@@ -41,15 +43,13 @@ export const NewBetModal: React.FC<NewBetModalProps> = props => {
       await TursoClient.execute({
         sql: 'UPDATE user SET money = money - ? WHERE token = ?',
         args: [values.amount, localStorage.getItem('token')],
-      }).finally(
-        () =>{
-          window.location.reload()
-        })
+      }).finally(() => {
+        window.location.reload()
+      })
     } catch (error) {
       setErrorMessage('Ha ocurrido un error')
       return
     }
-
   }
 
   return (
@@ -63,7 +63,7 @@ export const NewBetModal: React.FC<NewBetModalProps> = props => {
       backdrop='blur'
     >
       <ModalContent>
-        <ModalHeader className='flex flex-row text-white gap-3'>
+        <ModalHeader className='flex flex-row text-white gap-3 flex-wrap justify-center items-center'>
           {team ? (
             <img src={team?.logo} alt={team?.name} className='w-8 h-8 aspect-square object-contain' />
           ) : (
@@ -76,14 +76,14 @@ export const NewBetModal: React.FC<NewBetModalProps> = props => {
 
         <form onSubmit={handleSubmit(onSuccessCreateBet)}>
           <ModalBody>
-            <div className='flex flex-col justify-center items-center py-4'>
+            <div className='flex flex-col justify-center items-center'>
               <div className='flex flex-row justify-between items-center w-full gap-4 pb-4'>
                 <Input
                   {...register('amount', { valueAsNumber: true })}
                   placeholder={'Cantidad'}
                   size='lg'
                   type='number'
-                  min={0}
+                  min={1}
                 />
                 <Button color='primary' size='md' type='submit'>
                   Aceptar

@@ -3,6 +3,7 @@ import { TursoClient } from '../../../common/api/turso/config/client'
 import { Bet, Match } from '../../../common/types'
 import { MatchCard } from './match-card'
 import './sports.css'
+import { DisplayMoney } from '../user/display-money'
 
 interface SportsProps {
   defaultMoney: number | null
@@ -79,8 +80,8 @@ export const Sports: React.FC<SportsProps> = props => {
 
   return (
     <div className='flex flex-col items-center justify-center w-full '>
-      <div className='flex flex-row flex-nowrap items-center justify-center text-center text-white/50 text-2xl studentspace-medium py-5 '>
-        {defaultMoney} 💸
+      <div className='flex flex-row flex-nowrap items-center justify-center text-center text-white/50 text-2xl py-5'>
+        <DisplayMoney money={defaultMoney} />
       </div>
 
       <div className='flex flex-col items-center  w-full  overflow-y-scroll overflow-x-hidden max-h-[40rem] matchs-scroll '>

@@ -18,7 +18,7 @@ export const MatchCard: React.FC<MatchCardProps> = props => {
         {formatDate(match.date)}
       </div>
 
-      <div className='flex flex-row justify-between items-center w-full p-3 rounded-2xl border-2 border-white/10 bg-white/[1%]'>
+      <div className='flex flex-row justify-between items-center w-full py-3 px-4 lg:md:px-1  rounded-2xl border-2 border-white/10 bg-[#0a0a0a23]'>
         <TeamCard
           odd={match.odds.odd_1}
           team={match.team_1}
@@ -37,7 +37,7 @@ export const MatchCard: React.FC<MatchCardProps> = props => {
       </div>
 
       <div className='flex flex-row justify-between items-start w-full p-3 rounded-2xl  mt-3 lg:md:gap-5 gap-1'>
-        <div className='w-1/3 flex flex-col items-center justify-center text-center gap-4'>
+        <div className='w-1/3 flex flex-col items-center justify-center text-center gap-2'>
           {match.bets
             .filter(x => x.bet_option == OddOptionEnum.ODD_1)
             .map((bet, index) => (
@@ -45,7 +45,7 @@ export const MatchCard: React.FC<MatchCardProps> = props => {
             ))}
         </div>
 
-        <div className='w-1/3 flex flex-col items-start justify-center text-center gap-4'>
+        <div className='w-1/3 flex flex-col items-start justify-center text-center gap-2'>
           {match.bets
             .filter(x => x.bet_option == OddOptionEnum.ODD_X)
             .map((bet, index) => (
@@ -53,7 +53,7 @@ export const MatchCard: React.FC<MatchCardProps> = props => {
             ))}
         </div>
 
-        <div className='w-1/3 flex flex-col items-center justify-center text-center gap-4'>
+        <div className='w-1/3 flex flex-col items-center justify-center text-center gap-2'>
           {match.bets
             .filter(x => x.bet_option == OddOptionEnum.ODD_2)
             .map((bet, index) => (

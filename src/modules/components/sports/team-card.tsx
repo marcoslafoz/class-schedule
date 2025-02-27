@@ -19,13 +19,13 @@ export const TeamCard: React.FC<TeamCardProps> = props => {
   if (team)
     return (
       <>
-        <div className='w-1/3 flex flex-row items-center justify-center text-center gap-4'>
+        <div className='w-1/3 flex flex-row items-center justify-center text-center lg:md:gap-4 gap-2'>
           {logoPosition == 'start' && (
             <img src={team.logo} className='w-8 h-8 aspect-square object-contain' alt={team.name} />
           )}
           <Button
             onPress={() => setShowNewBetModal(true)}
-            className='max-w-28 bg-[#27272a] text-white/50 py-2 px-6 rounded-xl text-medium hover:bg-[#3e3f47] '
+            className='max-w-28 bg-[#27272a] text-white/50 py-2 px-3 lg:md:px-7 rounded-xl text-medium hover:bg-[#3e3f47] '
           >
             {'x' + odd.toString()}
           </Button>
@@ -43,7 +43,7 @@ export const TeamCard: React.FC<TeamCardProps> = props => {
       <>
         <div className='w-1/3 flex flex-row items-center justify-center text-center gap-4'>
           <Button
-            className='max-w-28 bg-[#27272a] text-white/50 py-2 px-6 rounded-xl hover:bg-[#3e3f47] text-medium'
+            className='max-w-28 bg-[#27272a] text-white/50 py-2 px-3 lg:md:px-6 rounded-xl hover:bg-[#3e3f47] text-medium'
             onPress={() => setShowNewBetModal(true)}
           >
             {'⚔️ x' + odd.toString()}
