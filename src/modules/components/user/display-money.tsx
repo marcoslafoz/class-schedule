@@ -58,7 +58,7 @@ export const DisplayMoney: React.FC<DisplayMoneyProps> = props => {
 
     // Actualizar dinero y last_bonus
     await TursoClient.execute({
-      sql: 'UPDATE user SET money = money + 100, last_bonus = ? WHERE token = ?',
+      sql: 'UPDATE user SET money = 100, last_bonus = ? WHERE token = ?',
       args: [now.toISOString(), token],
     })
 
