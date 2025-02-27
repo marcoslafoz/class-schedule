@@ -23,3 +23,8 @@ export interface UserEditAvatar {
   avatar_url?: string
   token: string
 }
+
+export interface UserBet {
+  username: string
+  avatar_url?: string
+}

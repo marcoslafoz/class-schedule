@@ -6,7 +6,7 @@ export const ScheduleScene: React.FC = () => {
   return (
     <NotesProvider>
       <>
-        <div className='custom-bg-color-primary flex flex-col lg:flex-row justify-center min-h-screen'>
+        <div className='custom-bg-color-primary max-w-full flex flex-col lg:flex-row justify-center min-h-screen'>
           <div className='order-2 lg:order-1 lg:w-1/3 p-4 flex flex-col lg:mt-0 mt-10 justify-center items-center lg:items-end '>
             <GitHubButton />
             <StickyNote />

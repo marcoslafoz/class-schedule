@@ -188,7 +188,7 @@ export const Roulette: React.FC<RouletteProps> = props => {
             </Tooltip>
 
             <div className='justify-center items-center flex flex-row flex-wrap gap-4'>
-              {(['x1', 'x3', 'x5', 'x10', 'x20'] as Array<keyof RouletteForm>).map(bet => (
+              {(['x3', 'x5', 'x10', 'x20'] as Array<keyof RouletteForm>).map(bet => (
                 <Input
                   key={bet}
                   {...register(bet, { valueAsNumber: true })}

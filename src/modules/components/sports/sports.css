@@ -1,0 +1,30 @@
+.input-placeholder-center input::-webkit-input-placeholder {
+  text-align: center;
+}
+
+.input-placeholder-end input::-webkit-input-placeholder {
+  text-align: end;
+}
+
+.matchs-scroll::-webkit-scrollbar {
+  background: transparent;
+}
+
+.matchs-scroll::-webkit-scrollbar-thumb {
+  background-color: #50505028;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.matchs-scroll::-webkit-scrollbar-button {
+  display: none;
+}
+
+.matchs-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.matchs-scroll::-webkit-scrollbar-corner {
+  background: transparent;
+}

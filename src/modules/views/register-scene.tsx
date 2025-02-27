@@ -6,7 +6,7 @@ export const RegisterScene: React.FC = () => {
   return (
     <UserProvider>
       <>
-        <div className=' flex flex-col justify-center items-center w-full h-screen bg-black'>
+        <div className=' flex flex-col justify-center items-center w-full max-w-full h-screen bg-black'>
           <RegisterForm />
         </div>
       </>

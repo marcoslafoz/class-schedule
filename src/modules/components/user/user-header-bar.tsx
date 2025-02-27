@@ -10,7 +10,6 @@ export const UserHeaderBar: React.FC = () => {
   return (
     <>
       <div className='flex lg:md:flex-row flex-col lg:md:gap-0 gap-7 flex-wrap w-full h-auto p-6  justify-between items-center '>
-        {/* HOME */}
         <div className='lg:md:w-1/3 lg:md:justify-start justify-center flex flex-row flex-nowrap gap-10'>
           <button
             className='text-white/60 hover:text-white flex flex-row flex-nowrap justify-center items-center gap-1 '
@@ -35,6 +34,9 @@ export const UserHeaderBar: React.FC = () => {
           </button>
           <button onClick={() => navigate('/roulette-50')} className='text-white/60 hover:text-white'>
             ⚖️ 50/50
+          </button>
+          <button onClick={() => navigate('/sports')} className='text-white/60 hover:text-white'>
+            ⚽ Deportes
           </button>
         </div>
 
