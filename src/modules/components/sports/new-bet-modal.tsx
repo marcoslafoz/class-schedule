@@ -26,7 +26,7 @@ export const NewBetModal: React.FC<NewBetModalProps> = props => {
         args: [localStorage.getItem('token')],
       })
 
-      if (Number(moneyAndIdResult.rows[0]?.money || 0) <= 0) {
+      if (Number(moneyAndIdResult.rows[0]?.money || 0) <= values.amount) {
         setErrorMessage('No tienes suficiente dinero')
         return
       }
@@ -41,11 +41,15 @@ export const NewBetModal: React.FC<NewBetModalProps> = props => {
       await TursoClient.execute({
         sql: 'UPDATE user SET money = money - ? WHERE token = ?',
         args: [values.amount, localStorage.getItem('token')],
-      }).finally(() => window.location.reload())
+      }).finally(
+        () =>{
+          window.location.reload()
+        })
     } catch (error) {
       setErrorMessage('Ha ocurrido un error')
       return
     }
+
   }
 
   return (
