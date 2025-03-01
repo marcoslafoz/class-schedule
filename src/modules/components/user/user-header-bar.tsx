@@ -44,12 +44,12 @@ export const UserHeaderBar: React.FC = () => {
           >
             ⚖️ 50/50
           </button>
-          <button
+          {/* <button
             onClick={() => navigate('/sports')}
             className='text-white/60 hover:text-white/80  bg-white/5 hover:bg-white/10 rounded-full py-1 px-3'
           >
             ⚽ Deportes
-          </button>
+          </button> */}
         </div>
 
         <div className='lg:md:flex hidden flex-row lg:md:w-1/5 justify-end items-center gap-4 text-white/60 '>

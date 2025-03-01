@@ -5,7 +5,6 @@ import {
   RegisterScene,
   CoinFlipScene,
   Roulette50Scene,
-  SportsScene,
 } from '../../modules/views'
 import { authLoader } from './loaders'
 
@@ -13,7 +12,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <ScheduleScene />,
-    errorElement: <></>,
+    errorElement: <ScheduleScene />,
   },
   {
     path: '/register',
@@ -38,10 +37,10 @@ export const router = createBrowserRouter([
     errorElement: <></>,
     loader: authLoader,
   },
-  {
-    path: '/sports',
-    element: <SportsScene />,
-    errorElement: <></>,
-    loader: authLoader,
-  },
+  // {
+  //   path: '/sports',
+  //   element: <SportsScene />,
+  //   errorElement: <></>,
+  //   loader: authLoader,
+  // },
 ])
