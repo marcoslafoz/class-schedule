@@ -50,14 +50,14 @@ export const Schedule: React.FC = () => {
             <HourCell start='08:30' end='09:20' />
             <SubjectCell subjectName={SUBJECT_NAME.FH} rowSpan={2} active={currentOrder === 1} />
             <SubjectCell subjectName={SUBJECT_NAME.ISO} rowSpan={2} active={currentOrder === 4} />
-            <SubjectCell subjectName={SUBJECT_NAME.LM} rowSpan={1} active={currentOrder === 8} />
+            <SubjectCell disabled subjectName={SUBJECT_NAME.LM} rowSpan={1} active={currentOrder === 8} />
             <SubjectCell subjectName={SUBJECT_NAME.IPPE} rowSpan={1} active={currentOrder === 12} />
             <SubjectCell subjectName={SUBJECT_NAME.FH} rowSpan={2} active={currentOrder === 15} />
             <Shortcut link='https://mail.google.com/' imageSrc='/assets/icons/gmail.png' />
           </tr>
           <tr>
             <HourCell start='09:25' end='10:15' />
-            <SubjectCell subjectName={SUBJECT_NAME.GBD} rowSpan={2} active={currentOrder === 9} />
+            <SubjectCell disabled subjectName={SUBJECT_NAME.GBD} rowSpan={2} active={currentOrder === 9} />
             <SubjectCell subjectName={SUBJECT_NAME.ISO} rowSpan={2} active={currentOrder === 13} />
             <Shortcut link='https://classroom.google.com/' imageSrc='/assets/icons/classroom.png' />
           </tr>
@@ -75,7 +75,7 @@ export const Schedule: React.FC = () => {
             <HourCell start='11:40' end='12:30' />
             <SubjectCell subjectName={SUBJECT_NAME.GBD} rowSpan={3} active={currentOrder === 3} />
             <SubjectCell subjectName={SUBJECT_NAME.DASP} rowSpan={1} active={currentOrder === 6} />
-            <SubjectCell subjectName={SUBJECT_NAME.ISO} rowSpan={2} active={currentOrder === 10} />
+            <SubjectCell disabled subjectName={SUBJECT_NAME.ISO} rowSpan={2} active={currentOrder === 10} />
             <SubjectCell subjectName={SUBJECT_NAME.PAR} rowSpan={3} active={currentOrder === 14} />
             <SubjectCell subjectName={SUBJECT_NAME.PAR} rowSpan={2} active={currentOrder === 17} />
             <Shortcut link='https://www.studentspace.app/' imageSrc='/assets/icons/studentspace.svg' />
@@ -87,7 +87,7 @@ export const Schedule: React.FC = () => {
           </tr>
           <tr>
             <HourCell start='13:30' end='14:20' />
-            <SubjectCell subjectName={SUBJECT_NAME.INGLES} rowSpan={1} active={currentOrder === 11} />
+            <SubjectCell disabled subjectName={SUBJECT_NAME.INGLES} rowSpan={1} active={currentOrder === 11} />
             <SubjectCell subjectName={SUBJECT_NAME.LM} rowSpan={1} active={currentOrder === 18} />
             <RouletteShortcut />
           </tr>
@@ -128,15 +128,17 @@ interface SubjetCellProps {
   active?: boolean
   rowSpan?: number
   subjectName: SUBJECT_NAME
+  disabled?: boolean
 }
 
 const SubjectCell: React.FC<SubjetCellProps> = props => {
-  const { subjectName, active = false, rowSpan = 1 } = props
+  const { subjectName, active = false, rowSpan = 1, disabled = false } = props
 
   return (
     <td
       className={clsx(
         'rounded-xl text-right align-bottom text-white h-20 w-32 px-2 py-1 text-xs',
+        disabled && 'opacity-0',
         active && 'current',
         subjectName.toLowerCase()
       )}
