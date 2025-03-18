@@ -6,7 +6,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <ScheduleScene />,
-    errorElement: <Navigate to={'/'}/>,
+    errorElement: <Navigate to={'/'} />,
   },
   {
     path: '/register',
