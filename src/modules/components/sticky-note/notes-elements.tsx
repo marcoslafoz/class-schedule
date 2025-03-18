@@ -1,4 +1,4 @@
-import { Tooltip } from '@heroui/react'
+import { Spinner, Tooltip } from '@heroui/react'
 import { NotesContext } from '../../../common/context/notes-context'
 import './sticky-note.css'
 import React from 'react'
@@ -14,11 +14,14 @@ export const formatDate = (stringDate?: string): string => {
 }
 
 export const NotesElement: React.FC = () => {
-  const { notes, deleteNote } = React.useContext(NotesContext)
+  const { notes, deleteNote, loading } = React.useContext(NotesContext)
 
   const handleDelete = (id: number) => {
     deleteNote(id)
   }
+
+  if (loading)
+    return <Spinner color='default' className='w-full h-full flex flex-col items-center justify-center opacity-30' />
 
   return (
     <ul className='space-y-2'>

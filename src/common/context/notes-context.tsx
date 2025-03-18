@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState, useCallback } from 'react'
+import React, { createContext, useEffect, useCallback } from 'react'
 import { Note } from '../types/note.vm'
 import { TursoClient } from '../api/turso/config/client'
 
@@ -7,6 +7,7 @@ interface NotesContextType {
   refetch: () => Promise<void>
   addNote: (newNote: Note) => Promise<void>
   deleteNote: (id: number) => Promise<void>
+  loading?: boolean
 }
 
 export const NotesContext = createContext<NotesContextType>({
@@ -14,10 +15,12 @@ export const NotesContext = createContext<NotesContextType>({
   refetch: async () => {},
   addNote: async () => {},
   deleteNote: async () => {},
+  loading: true,
 })
 
 export const NotesProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [notes, setNotes] = useState<Note[]>([])
+  const [notes, setNotes] = React.useState<Note[]>([])
+  const [loading, setLoading] = React.useState<boolean>(true)
 
   const fetchNotes = useCallback(async () => {
     try {
@@ -31,6 +34,7 @@ export const NotesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         date: row.date != null ? row.date : undefined,
       }))
       setNotes(formattedNotes)
+      setLoading(false)
     } catch (error) {
       console.error('Error fetching notes:', error)
     }
@@ -48,6 +52,7 @@ export const NotesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
           newNote.date != null || newNote.date != undefined ? new Date(newNote.date).toISOString() : null,
         ],
       })
+      setLoading(false)
       setNotes(prevNotes => [...prevNotes, newNote])
     } catch (error) {
       console.error('Error adding note:', error)
@@ -62,6 +67,7 @@ export const NotesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       })
 
       setNotes(prevNotes => prevNotes.filter(note => note.id !== id))
+      setLoading(false)
     } catch (error) {
       console.error('Error deleting note:', error)
     }
@@ -72,7 +78,7 @@ export const NotesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, [fetchNotes])
 
   return (
-    <NotesContext.Provider value={{ notes, refetch: fetchNotes, addNote, deleteNote }}>
+    <NotesContext.Provider value={{ notes, refetch: fetchNotes, addNote, deleteNote, loading }}>
       {children}
     </NotesContext.Provider>
   )
