@@ -1,4 +1,6 @@
 /*========================== Font Faces ==========================*/
+/*============== Indie Flowers ==============*/
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 /*============== StudentSpace ==============*/
 
@@ -23,6 +25,4 @@
   src: local('StudentSpace-Bold'), url(../../assets/fonts/StudentSpace-Bold.ttf) format('truetype');
 }
 
-/*============== Indie Flowers ==============*/
 
-@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');

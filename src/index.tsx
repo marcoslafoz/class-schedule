@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client'
-import '../src/assets/scss/main.scss'
+import '../src/assets/css/main.css'
 import { App } from './modules/App.tsx'
 import React from 'react'
 
