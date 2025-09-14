@@ -36,7 +36,6 @@ export const NotesElement: React.FC = () => {
               />
             )}
 
-
             <Tooltip
               content={`@${note.autor}`}
               color='foreground'

@@ -121,7 +121,7 @@ enum SUBJECT_NAME {
   SASP = 'SASP',
   SRI = 'SRI',
   IPPE = 'IPPE',
-  PIAS = 'PIAS'
+  PIAS = 'PIAS',
 }
 interface SubjetCellProps {
   active?: boolean
