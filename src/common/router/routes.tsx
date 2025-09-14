@@ -6,35 +6,29 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <ScheduleScene />,
-    errorElement: <Navigate to={'/'} />,
+    errorElement: <Navigate to='/' />,
   },
   {
     path: '/register',
     element: <RegisterScene />,
-    errorElement: <Navigate to={'/'} />,
+    errorElement: <Navigate to='/' />,
   },
   {
     path: '/roulette',
     element: <RouletteScene />,
-    errorElement: <Navigate to={'/'} />,
+    errorElement: <Navigate to='/' />,
     loader: authLoader,
   },
   {
     path: '/coinflip',
     element: <CoinFlipScene />,
-    errorElement: <Navigate to={'/'} />,
+    errorElement: <Navigate to='/' />,
     loader: authLoader,
   },
   {
     path: '/roulette-50',
     element: <Roulette50Scene />,
-    errorElement: <Navigate to={'/'} />,
+    errorElement: <Navigate to='/' />,
     loader: authLoader,
   },
-  // {
-  //   path: '/sports',
-  //   element: <SportsScene />,
-  //   errorElement: <Navigate to={'/'} />,
-  //   loader: authLoader,
-  // },
 ])
