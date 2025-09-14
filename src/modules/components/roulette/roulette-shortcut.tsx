@@ -29,7 +29,7 @@ export const RouletteShortcut: React.FC = () => {
         <img
           src={'/assets/icons/fortune-wheel.png'}
           alt='Roulette icon'
-          className='object-contain w-3/4 h-3/4 animate-spin grayscale '
+          className='object-contain w-3/4 h-3/4 animate-spin grayscale opacity-60'
           style={{ animationDuration: '4s' }}
         />
       </td>
@@ -67,7 +67,7 @@ export const RouletteFlexShortcut: React.FC = () => {
           <img
             src={'/assets/icons/fortune-wheel.png'}
             alt='Roulette icon'
-            className='object-contain w-3/4 h-3/4 animate-spin grayscale'
+            className='object-contain w-3/4 h-3/4 animate-spin grayscale opacity-60'
             style={{ animationDuration: '4s' }}
           />
         </div>

@@ -19,7 +19,7 @@ export const Shortcut: React.FC<ShortcutProps> = ({ imageSrc, link }) => {
       <img
         src={imageSrc}
         alt='Shortcut icon'
-        className='w-2/3 h-2/3 object-contain transition-transform duration-200 ease-in-out filter grayscale hover:grayscale-0 hover:scale-105'
+        className='w-2/3 h-2/3 object-contain transition-transform duration-200 ease-in-out filter grayscale hover:grayscale-0 hover:scale-105 opacity-60'
       />
     </td>
   )
@@ -40,7 +40,7 @@ export const FlexShortcut: React.FC<ShortcutProps> = ({ imageSrc, link }) => {
         <img
           src={imageSrc}
           alt='Shortcut icon'
-          className='w-2/3 h-2/3 object-contain transition-transform duration-200 ease-in-out filter grayscale hover:grayscale-0 hover:scale-105'
+          className='w-2/3 h-2/3 object-contain transition-transform duration-200 ease-in-out filter grayscale hover:grayscale-0 hover:scale-105 opacity-60'
         />
       </div>
     </td>
