@@ -48,24 +48,22 @@ export const Schedule: React.FC = () => {
         <tbody>
           <tr>
             <HourCell start='08:30' end='09:20' />
-            <SubjectCell subjectName={SUBJECT_NAME.FH} rowSpan={2} active={currentOrder === 1} />
-            <SubjectCell subjectName={SUBJECT_NAME.ISO} rowSpan={2} active={currentOrder === 4} />
-            <SubjectCell subjectName={SUBJECT_NAME.LM} rowSpan={1} active={currentOrder === 8} />
-            <SubjectCell subjectName={SUBJECT_NAME.IPPE} rowSpan={1} active={currentOrder === 12} />
-            <SubjectCell subjectName={SUBJECT_NAME.FH} rowSpan={2} active={currentOrder === 15} />
+            <SubjectCell subjectName={SUBJECT_NAME.ASGB} rowSpan={3} active={currentOrder === 1} />
+            <SubjectCell subjectName={SUBJECT_NAME.IPPE} rowSpan={2} active={currentOrder === 4} />
+            <SubjectCell subjectName={SUBJECT_NAME.SRI} rowSpan={3} active={currentOrder === 8} />
+            <SubjectCell subjectName={SUBJECT_NAME.ASO} rowSpan={2} active={currentOrder === 10} />
+            <SubjectCell subjectName={SUBJECT_NAME.SASP} rowSpan={1} active={currentOrder === 14} />
             <Shortcut link='https://mail.google.com/' imageSrc='/assets/icons/gmail.png' />
           </tr>
           <tr>
             <HourCell start='09:25' end='10:15' />
-            <SubjectCell subjectName={SUBJECT_NAME.GBD} rowSpan={2} active={currentOrder === 9} />
-            <SubjectCell subjectName={SUBJECT_NAME.ISO} rowSpan={2} active={currentOrder === 13} />
+            <SubjectCell subjectName={SUBJECT_NAME.SAD} rowSpan={2} active={currentOrder === 15} />
             <Shortcut link='https://classroom.google.com/' imageSrc='/assets/icons/classroom.png' />
           </tr>
           <tr>
             <HourCell start='10:20' end='11:10' />
-            <SubjectCell subjectName={SUBJECT_NAME.IPPE} rowSpan={1} active={currentOrder === 2} />
-            <SubjectCell subjectName={SUBJECT_NAME.INGLES} rowSpan={1} active={currentOrder === 5} />
-            <SubjectCell subjectName={SUBJECT_NAME.IPPE} rowSpan={1} active={currentOrder === 16} />
+            <SubjectCell subjectName={SUBJECT_NAME.MPO} rowSpan={1} active={currentOrder === 5} />
+            <SubjectCell subjectName={SUBJECT_NAME.IAW} rowSpan={1} active={currentOrder === 11} />
             <Shortcut link='https://drive.google.com/' imageSrc='/assets/icons/drive.png' />
           </tr>
           <tr>
@@ -73,22 +71,23 @@ export const Schedule: React.FC = () => {
           </tr>
           <tr>
             <HourCell start='11:40' end='12:30' />
-            <SubjectCell subjectName={SUBJECT_NAME.GBD} rowSpan={3} active={currentOrder === 3} />
-            <SubjectCell subjectName={SUBJECT_NAME.DASP} rowSpan={1} active={currentOrder === 6} />
-            <SubjectCell subjectName={SUBJECT_NAME.ISO} rowSpan={2} active={currentOrder === 10} />
-            <SubjectCell subjectName={SUBJECT_NAME.PAR} rowSpan={3} active={currentOrder === 14} />
-            <SubjectCell subjectName={SUBJECT_NAME.PAR} rowSpan={2} active={currentOrder === 17} />
+            <SubjectCell subjectName={SUBJECT_NAME.IAW} rowSpan={2} active={currentOrder === 2} />
+            <SubjectCell subjectName={SUBJECT_NAME.MPO} rowSpan={1} active={currentOrder === 6} />
+            <SubjectCell subjectName={SUBJECT_NAME.SAD} rowSpan={3} active={currentOrder === 9} />
+            <SubjectCell subjectName={SUBJECT_NAME.IAW} rowSpan={1} active={currentOrder === 12} />
+            <SubjectCell subjectName={SUBJECT_NAME.SRI} rowSpan={3} active={currentOrder === 16} />
             <Shortcut link='https://www.studentspace.app/' imageSrc='/assets/icons/studentspace.svg' />
           </tr>
           <tr>
             <HourCell start='12:35' end='13:25' />
-            <SubjectCell subjectName={SUBJECT_NAME.PAR} rowSpan={2} active={currentOrder === 7} />
+            <SubjectCell subjectName={SUBJECT_NAME.ASO} rowSpan={2} active={currentOrder === 7} />
+            <SubjectCell subjectName={SUBJECT_NAME.PIAS} rowSpan={2} active={currentOrder === 13} />
+
             <Shortcut link='https://iespabloserrano.aeducar.es/my/courses.php' imageSrc='/assets/icons/aeducar.ico' />
           </tr>
           <tr>
             <HourCell start='13:30' end='14:20' />
-            <SubjectCell subjectName={SUBJECT_NAME.INGLES} rowSpan={1} active={currentOrder === 11} />
-            <SubjectCell subjectName={SUBJECT_NAME.LM} rowSpan={1} active={currentOrder === 18} />
+            <SubjectCell subjectName={SUBJECT_NAME.MPO} rowSpan={1} active={currentOrder === 3} />
             <RouletteShortcut />
           </tr>
         </tbody>
@@ -104,7 +103,6 @@ export const Schedule: React.FC = () => {
               link='https://iespabloserrano.aeducar.es/my/courses.php'
               imageSrc='/assets/icons/aeducar.ico'
             />
-
             <FlexShortcut link='https://www.studentspace.app/' imageSrc='/assets/icons/studentspace.svg' />
             <RouletteFlexShortcut />
           </tr>
@@ -115,14 +113,15 @@ export const Schedule: React.FC = () => {
 }
 
 enum SUBJECT_NAME {
-  FH = 'FH',
-  INGLES = 'IN',
-  DASP = 'DASP',
-  GBD = 'GBD',
-  ISO = 'ISO',
-  PAR = 'PAR',
-  LM = 'LM',
+  ASGB = 'ASGB',
+  MPO = 'MPO',
+  SAD = 'SAD',
+  ASO = 'ASO',
+  IAW = 'IAW',
+  SASP = 'SASP',
+  SRI = 'SRI',
   IPPE = 'IPPE',
+  PIAS = 'PIAS'
 }
 interface SubjetCellProps {
   active?: boolean

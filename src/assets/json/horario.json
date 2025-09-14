@@ -2,20 +2,20 @@
   "lunes": [
     {
       "horaInicio": "08:30",
-      "horaFin": "10:15",
-      "asignatura": "FH",
+      "horaFin": "11:10",
+      "asignatura": "ASGB",
       "order": 1
     },
     {
-      "horaInicio": "10:20",
-      "horaFin": "11:10",
-      "asignatura": "IPPE",
+      "horaInicio": "11:40",
+      "horaFin": "13:25",
+      "asignatura": "IAW",
       "order": 2
     },
     {
-      "horaInicio": "11:40",
+      "horaInicio": "13:30",
       "horaFin": "14:20",
-      "asignatura": "GBD",
+      "asignatura": "MPO",
       "order": 3
     }
   ],
@@ -23,98 +23,86 @@
     {
       "horaInicio": "08:30",
       "horaFin": "10:15",
-      "asignatura": "ISO",
+      "asignatura": "IPPE",
       "order": 4
     },
     {
       "horaInicio": "10:20",
       "horaFin": "11:10",
-      "asignatura": "Inglés",
+      "asignatura": "MPO",
       "order": 5
     },
     {
       "horaInicio": "11:40",
       "horaFin": "12:30",
-      "asignatura": "DASP",
+      "asignatura": "MPO",
       "order": 6
     },
     {
       "horaInicio": "12:35",
       "horaFin": "14:20",
-      "asignatura": "PAR",
+      "asignatura": "ASO",
       "order": 7
     }
   ],
   "miércoles": [
     {
       "horaInicio": "08:30",
-      "horaFin": "09:20",
-      "asignatura": "LMSGI",
+      "horaFin": "11:10",
+      "asignatura": "SRI",
       "order": 8
     },
     {
-      "horaInicio": "09:25",
-      "horaFin": "11:10",
-      "asignatura": "GBD",
-      "order": 9
-    },
-    {
       "horaInicio": "11:40",
-      "horaFin": "13:25",
-      "asignatura": "ISO",
-      "order": 10
-    },
-    {
-      "horaInicio": "13:30",
       "horaFin": "14:20",
-      "asignatura": "Inglés",
-      "order": 11
+      "asignatura": "SAD",
+      "order": 9
     }
   ],
   "jueves": [
     {
       "horaInicio": "08:30",
-      "horaFin": "09:20",
-      "asignatura": "IPPE",
-      "order": 12
+      "horaFin": "10:15",
+      "asignatura": "ASO",
+      "order": 10
     },
     {
-      "horaInicio": "09:25",
+      "horaInicio": "10:20",
       "horaFin": "11:10",
-      "asignatura": "ISO",
-      "order": 13
+      "asignatura": "IAW",
+      "order": 11
     },
     {
       "horaInicio": "11:40",
+      "horaFin": "12:30",
+      "asignatura": "IAW",
+      "order": 12
+    },
+    {
+      "horaInicio": "12:35",
       "horaFin": "14:20",
-      "asignatura": "PAR",
-      "order": 14
+      "asignatura": "PIAS",
+      "order": 13
     }
   ],
   "viernes": [
     {
       "horaInicio": "08:30",
-      "horaFin": "10:15",
-      "asignatura": "FH",
+      "horaFin": "09:20",
+      "asignatura": "SASP",
+      "order": 14
+    },
+    {
+      "horaInicio": "09:25",
+      "horaFin": "11:10",
+      "asignatura": "SAD",
       "order": 15
     },
     {
-      "horaInicio": "10:20",
-      "horaFin": "11:10",
-      "asignatura": "IPPE",
-      "order": 16
-    },
-    {
       "horaInicio": "11:40",
-      "horaFin": "13:25",
-      "asignatura": "PAR",
-      "order": 17
-    },
-    {
-      "horaInicio": "13:30",
       "horaFin": "14:20",
-      "asignatura": "LMSGI",
-      "order": 18
+      "asignatura": "SRI",
+      "order": 16
     }
   ]
 }

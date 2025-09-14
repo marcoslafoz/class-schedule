@@ -32,9 +32,9 @@ export enum ROULETTE_PRIZE_COLOR_ENUM {
 }
 
 export enum ROULETTE_PRIZE_OPTION_TITLE_ENUM {
-  X1 = 'PAR x1',
-  X3 = 'GBD x3',
-  X5 = 'ISO x5',
-  X10 = 'INGLÉS x10',
-  X20 = 'DASP x20',
+  X1 = 'x1',
+  X3 = 'x3',
+  X5 = 'x5',
+  X10 = 'x10',
+  X20 = 'x20',
 }
