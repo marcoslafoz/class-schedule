@@ -13,7 +13,7 @@ export const Shortcut: React.FC<ShortcutProps> = ({ imageSrc, link }) => {
 
   return (
     <td
-      className='hidden lg:flex rounded-xl text-white bg-[#353535] w-20 h-20 px-2 py-1 text-xs justify-center items-center cursor-pointer'
+      className='hidden lg:flex rounded-xl text-white bg-[#35353570] w-20 h-20 px-2 py-1 text-xs justify-center items-center cursor-pointer'
       onClick={openLink}
     >
       <img
@@ -32,7 +32,7 @@ export const FlexShortcut: React.FC<ShortcutProps> = ({ imageSrc, link }) => {
 
   return (
     <td
-      className={clsx('rounded-xl  text-white h-20 w-32 px-2 py-1 text-xs bg-[#353535] hover:cursor-pointer')}
+      className={clsx('rounded-xl  text-white h-20 w-32 px-2 py-1 text-xs bg-[#35353570] hover:cursor-pointer')}
       rowSpan={1}
       onClick={openLink}
     >

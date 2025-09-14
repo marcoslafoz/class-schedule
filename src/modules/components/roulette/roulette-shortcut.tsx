@@ -23,7 +23,7 @@ export const RouletteShortcut: React.FC = () => {
   return (
     <>
       <td
-        className='roulette-icon hidden lg:flex rounded-xl text-white bg-[#353535]  w-20 h-20 px-2 py-1 text-xs justify-center items-center hover:cursor-pointer'
+        className='roulette-icon hidden lg:flex rounded-xl text-white bg-[#35353570]  w-20 h-20 px-2 py-1 text-xs justify-center items-center hover:cursor-pointer'
         onClick={openRouletteModal}
       >
         <img
@@ -59,7 +59,7 @@ export const RouletteFlexShortcut: React.FC = () => {
   return (
     <>
       <td
-        className={'rounded-xl  text-white h-16 w-32 px-2 py-1 text-xs bg-[#353535] hover:cursor-pointer '}
+        className={'rounded-xl  text-white h-16 w-32 px-2 py-1 text-xs bg-[#35353570] hover:cursor-pointer '}
         rowSpan={1}
         onClick={openRouletteModal}
       >
