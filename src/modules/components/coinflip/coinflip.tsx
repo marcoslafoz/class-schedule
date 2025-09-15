@@ -121,7 +121,7 @@ export const CoinFlip: React.FC<CoinFlipProps> = ({ defaultMoney }) => {
         className='fixed w-auto z-50 top-16 opacity-80'
       />
       <div className='flex flex-col justify-center items-center gap-6'>
-        <div className='text-4xl font-bold'>
+        <div className='text-4xl font-bold text-white/70'>
           {isPlaying == false && earnings !== null && (earnings > 0 ? `+${earnings} 💸 🤑` : `${earnings} 💸 🥵`)}
         </div>
 
