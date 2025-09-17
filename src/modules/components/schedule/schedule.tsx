@@ -58,7 +58,7 @@ const SubjectList: Record<SUBJECT_ID, Subject> = {
   },
   [SUBJECT_ID.ASGB]: {
     id: SUBJECT_ID.ASGB,
-    full_name: 'Administración de sistemas gestores de bases de datos',
+    full_name: 'Administración de sist. gestores de bases de datos',
     teacher: 'José Alberto Núñez Ruiz',
   },
   [SUBJECT_ID.SASP]: {
@@ -78,7 +78,7 @@ const SubjectList: Record<SUBJECT_ID, Subject> = {
   },
   [SUBJECT_ID.PIAS]: {
     id: SUBJECT_ID.PIAS,
-    full_name: 'Proyecto intermodular de administración de sistemas informáticos',
+    full_name: 'Proyecto intermodular',
     teacher: 'Pedro Martín Echeverría',
   },
 }
