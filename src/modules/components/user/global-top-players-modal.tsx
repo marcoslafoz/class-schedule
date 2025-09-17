@@ -98,9 +98,9 @@ export const GlobalTopPlayersModal: React.FC<GlobalTopPlayersProps> = ({ isOpen,
               </TableHeader>
               <TableBody>
                 {users.map((user, index) => (
-                  <TableRow key={index}>
+                  <TableRow key={index} className='text-white/50 hover:text-white/90'>
                     <TableCell>{(page - 1) * rowsPerPage + index + 1}</TableCell>
-                    <TableCell className='flex flex-row items-center gap-3 text-white/50'>
+                    <TableCell className='flex flex-row items-center gap-3'>
                       <img
                         src={user.avatar_url || '/assets/avatar/default.png'}
                         alt={user.username}
