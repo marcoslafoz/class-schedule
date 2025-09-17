@@ -197,8 +197,27 @@ const SubjectCell: React.FC<SubjetCellProps> = props => {
         </span>
       }
       color='foreground'
-      className='opacity-50'
+      className='opacity-60'
       size='md'
+      delay={800}
+      motionProps={{
+        variants: {
+          exit: {
+            opacity: 0,
+            transition: {
+              duration: 0.1,
+              ease: 'easeIn',
+            },
+          },
+          enter: {
+            opacity: 1,
+            transition: {
+              duration: 0.15,
+              ease: 'easeOut',
+            },
+          },
+        }
+      }}
     >
       <td
         className={clsx(
