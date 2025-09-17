@@ -133,6 +133,7 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
     const newDeck = [...deck]
     const newDealerHand = [...dealerHand]
 
+    // Dealer pide hasta 17
     while (calculateTotal(newDealerHand) < 17) {
       newDealerHand.push(newDeck.pop()!)
     }
@@ -140,17 +141,24 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
     setDealerHand(newDealerHand)
     setDeck(newDeck)
 
-    // 🎲 Probabilidad manipulada: 60% jugador / 40% dealer
-    const random = Math.random()
-    let outcome: 'player' | 'dealer' | 'draw'
+    const playerTotal = calculateTotal(playerHand)
+    const dealerTotal = calculateTotal(newDealerHand)
 
-    if (random < 0.6) {
-      outcome = Math.random() < 0.15 ? 'draw' : 'player'
-    } else {
+    let outcome: 'player' | 'dealer' | 'draw'
+    let earnings = 0
+
+    if (playerTotal > 21) {
       outcome = 'dealer'
+    } else if (dealerTotal > 21) {
+      outcome = 'player'
+    } else if (playerTotal > dealerTotal) {
+      outcome = 'player'
+    } else if (dealerTotal > playerTotal) {
+      outcome = 'dealer'
+    } else {
+      outcome = 'draw'
     }
 
-    let earnings = 0
     if (outcome === 'player') {
       setMessage('¡Ganaste!')
       earnings = bet * 2
@@ -159,7 +167,6 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
       earnings = bet
     } else {
       setMessage('Perdiste.')
-      earnings = 0
     }
 
     if (earnings > 0) {
@@ -197,7 +204,7 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
             size="lg"
             type="number"
             min={1}
-            max={balance} // 👈 no permite apostar más de lo que tienes
+            max={balance}
           />
 
           <button
