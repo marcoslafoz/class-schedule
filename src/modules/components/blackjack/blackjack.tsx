@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Input } from '@heroui/react'
 import { TursoClient } from '../../../common/api/turso/config/client'
+import { DisplayMoney } from '../user/display-money'
 
 interface BlackjackProps {
   defaultMoney: number | null
@@ -181,15 +182,12 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 text-white">
-      <h1 className="text-2xl font-bold mb-4">Blackjack</h1>
+    <div className="flex flex-col items-center justify-center p-6 text-white gap-10">
 
-      <div className="mb-4 text-lg">
-        <span className="font-semibold">Saldo: </span>${balance}
-      </div>
+      <DisplayMoney money={balance} />
 
       {!gameStarted ? (
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-6">
           {/* Input de HeroUI para personalizar apuesta */}
           <Input
             value={bet.toString()}
@@ -235,8 +233,7 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
                 {dealerHand.map((card, i) => (
                   <div
                     key={i}
-                    className={`px-2 py-1 bg-gray-700 rounded-lg shadow ${i === 0 || gameOver ? '' : 'blur-sm'
-                      }`}
+                    className={`px-2 py-1 bg-gray-700 rounded-lg shadow ${i === 0 || gameOver ? '' : 'blur-sm'}`}
                   >
                     {card.display}
                   </div>

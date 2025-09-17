@@ -38,7 +38,6 @@ export const DisplayMoney: React.FC<DisplayMoneyProps> = props => {
       return
     }
 
-    // Verificar si ha pasado al menos 1 hora desde el último bono
     if (lastBonusRaw) {
       const lastBonusString = String(lastBonusRaw) // Convertir a string de forma segura
       const lastBonusTime = new Date(lastBonusString) // Ahora siempre será un string válido
@@ -47,9 +46,9 @@ export const DisplayMoney: React.FC<DisplayMoneyProps> = props => {
         // Comprobamos que sea una fecha válida
         const timeSinceLastBonus = now.getTime() - lastBonusTime.getTime() // Diferencia en ms
 
-        if (timeSinceLastBonus < 3600000) {
-          // Menos de 1 hora (60 min * 60 sec * 1000 ms)
-          const nextBonusTime = new Date(lastBonusTime.getTime() + 3600000)
+        if (timeSinceLastBonus < 60000) {
+          // Menos de 1 minuto (60 sec * 1000 ms)
+          const nextBonusTime = new Date(lastBonusTime.getTime() + 60000)
           setCooldownAlert(`No puedes solicitar el bono hasta hoy a las ${nextBonusTime.toLocaleTimeString()}`)
           return
         }
