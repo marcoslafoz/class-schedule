@@ -58,7 +58,7 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
   const [bet, setBet] = useState(10)
   const [gameStarted, setGameStarted] = useState(false)
 
-  // 🔹 Cargar saldo actual de la DB
+  // 🔹 Obtener saldo real desde la DB
   const fetchUserMoney = async (): Promise<number> => {
     const userMoneyRes = await TursoClient.execute({
       sql: 'SELECT money FROM user WHERE token = ?',
@@ -67,7 +67,7 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
     return Number(userMoneyRes.rows[0]?.money) || 0
   }
 
-  // 🔹 Actualizar dinero en DB
+  // 🔹 Actualizar saldo en DB
   const updateUserMoney = async (amount: number) => {
     await TursoClient.execute({
       sql: 'UPDATE user SET money = money + ? WHERE token = ?',
@@ -75,6 +75,7 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
     })
   }
 
+  // 🔹 Guardar total apostado
   const updateTotalBet = async (amount: number) => {
     await TursoClient.execute({
       sql: 'UPDATE user SET total_bet = total_bet + ? WHERE token = ?',
@@ -104,7 +105,7 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
     setMessage('')
     setGameStarted(true)
 
-    // 🔹 Restamos la apuesta al saldo en DB
+    // 🔹 Restar apuesta al saldo en DB
     await updateUserMoney(-bet)
     await updateTotalBet(bet)
     setBalance(userMoney - bet)
@@ -138,14 +139,21 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
     setDealerHand(newDealerHand)
     setDeck(newDeck)
 
-    const playerTotal = calculateTotal(playerHand)
-    const dealerTotal = calculateTotal(newDealerHand)
-    let earnings = 0
+    // 🎲 Probabilidad manipulada: 60% jugador / 40% dealer
+    const random = Math.random()
+    let outcome: 'player' | 'dealer' | 'draw'
 
-    if (dealerTotal > 21 || playerTotal > dealerTotal) {
+    if (random < 0.6) {
+      outcome = Math.random() < 0.15 ? 'draw' : 'player'
+    } else {
+      outcome = 'dealer'
+    }
+
+    let earnings = 0
+    if (outcome === 'player') {
       setMessage('¡Ganaste!')
       earnings = bet * 2
-    } else if (playerTotal === dealerTotal) {
+    } else if (outcome === 'draw') {
       setMessage('Empate.')
       earnings = bet
     } else {
@@ -182,6 +190,7 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
 
       {!gameStarted ? (
         <div className="flex flex-col items-center gap-4">
+          {/* Input de HeroUI para personalizar apuesta */}
           <Input
             value={bet.toString()}
             onChange={e => setBet(Number(e.target.value))}
@@ -190,6 +199,7 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
             size="lg"
             type="number"
             min={1}
+            max={balance} // 👈 no permite apostar más de lo que tienes
           />
 
           <button
@@ -205,7 +215,9 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
         <>
           <div className="flex gap-6 mb-6">
             <div>
-              <h2 className="font-semibold mb-2">Tus cartas ({calculateTotal(playerHand)})</h2>
+              <h2 className="font-semibold mb-2">
+                Tus cartas ({calculateTotal(playerHand)})
+              </h2>
               <div className="flex gap-2">
                 {playerHand.map((card, i) => (
                   <div key={i} className="px-2 py-1 bg-gray-700 rounded-lg shadow">
@@ -223,7 +235,8 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
                 {dealerHand.map((card, i) => (
                   <div
                     key={i}
-                    className={`px-2 py-1 bg-gray-700 rounded-lg shadow ${i === 0 || gameOver ? '' : 'blur-sm'}`}
+                    className={`px-2 py-1 bg-gray-700 rounded-lg shadow ${i === 0 || gameOver ? '' : 'blur-sm'
+                      }`}
                   >
                     {card.display}
                   </div>
