@@ -4,16 +4,83 @@ import { FlexShortcut, Shortcut } from './shortcut'
 import scheduleData from '../../../assets/json/horario.json'
 import clsx from 'clsx'
 import { RouletteFlexShortcut, RouletteShortcut } from '../roulette/roulette-shortcut'
+import { Tooltip } from '@heroui/react'
 
-interface Subject {
+interface TimerSubject {
   horaInicio: string
   horaFin: string
   asignatura: string
   order: number
 }
 
-interface ScheduleType {
-  [key: string]: Subject[]
+interface ScheduleTimerType {
+  [key: string]: TimerSubject[]
+}
+
+enum SUBJECT_ID {
+  IAW = 'IAW',
+  MPO = 'MPO',
+  SAD = 'SAD',
+  ASO = 'ASO',
+  ASGB = 'ASGB',
+  SASP = 'SASP',
+  IPPE = 'IPPE',
+  SRI = 'SRI',
+  PIAS = 'PIAS',
+}
+
+interface Subject {
+  id: SUBJECT_ID;
+  full_name: string;
+  teacher: string;
+}
+
+const SubjectList: Record<SUBJECT_ID, Subject> = {
+  [SUBJECT_ID.IAW]: {
+    id: SUBJECT_ID.IAW,
+    full_name: 'Implantación de aplicaciones web',
+    teacher: 'Enrique González Revilla',
+  },
+  [SUBJECT_ID.MPO]: {
+    id: SUBJECT_ID.MPO,
+    full_name: 'Módulo profesional optativo',
+    teacher: 'Enrique Ruiz Meseguer',
+  },
+  [SUBJECT_ID.SAD]: {
+    id: SUBJECT_ID.SAD,
+    full_name: 'Seguridad y alta disponibilidad',
+    teacher: 'Enrique Ruiz Meseguer',
+  },
+  [SUBJECT_ID.ASO]: {
+    id: SUBJECT_ID.ASO,
+    full_name: 'Administración de sistemas operativos',
+    teacher: 'Gorka Sanz Lopategui',
+  },
+  [SUBJECT_ID.ASGB]: {
+    id: SUBJECT_ID.ASGB,
+    full_name: 'Administración de sistemas gestores de bases de datos',
+    teacher: 'José Alberto Núñez Ruiz',
+  },
+  [SUBJECT_ID.SASP]: {
+    id: SUBJECT_ID.SASP,
+    full_name: 'Sostenibilidad aplicada a los sistemas informáticos',
+    teacher: 'Juan Ignacio Pulido Trullen',
+  },
+  [SUBJECT_ID.IPPE]: {
+    id: SUBJECT_ID.IPPE,
+    full_name: 'Itinerario personal para la empleabilidad',
+    teacher: 'Marta Oliván Bascones',
+  },
+  [SUBJECT_ID.SRI]: {
+    id: SUBJECT_ID.SRI,
+    full_name: 'Servicios de red e Internet',
+    teacher: 'Miguel Ángel Calle Pérez',
+  },
+  [SUBJECT_ID.PIAS]: {
+    id: SUBJECT_ID.PIAS,
+    full_name: 'Proyecto intermodular de administración de sistemas informáticos',
+    teacher: 'Pedro Martín Echeverría',
+  },
 }
 
 export const Schedule: React.FC = () => {
@@ -24,12 +91,12 @@ export const Schedule: React.FC = () => {
     const dayOfWeek = now.toLocaleString('es-ES', { weekday: 'long' }).toLowerCase()
     const currentTime = now.toTimeString().slice(0, 5)
 
-    const schedule: ScheduleType = scheduleData as ScheduleType
+    const schedule: ScheduleTimerType = scheduleData as ScheduleTimerType
 
     if (schedule[dayOfWeek]) {
       const todayClasses = schedule[dayOfWeek]
       const ongoingClass = todayClasses.find(
-        (cls: Subject) => currentTime >= cls.horaInicio && currentTime <= cls.horaFin
+        (cls: TimerSubject) => currentTime >= cls.horaInicio && currentTime <= cls.horaFin
       )
 
       setCurrentOrder(ongoingClass ? ongoingClass.order : null)
@@ -48,22 +115,22 @@ export const Schedule: React.FC = () => {
         <tbody>
           <tr>
             <HourCell start='08:30' end='09:20' />
-            <SubjectCell subjectName={SUBJECT_NAME.ASGB} rowSpan={3} active={currentOrder === 1} />
-            <SubjectCell subjectName={SUBJECT_NAME.IPPE} rowSpan={2} active={currentOrder === 4} />
-            <SubjectCell subjectName={SUBJECT_NAME.SRI} rowSpan={3} active={currentOrder === 8} />
-            <SubjectCell subjectName={SUBJECT_NAME.ASO} rowSpan={2} active={currentOrder === 10} />
-            <SubjectCell subjectName={SUBJECT_NAME.SASP} rowSpan={1} active={currentOrder === 14} />
+            <SubjectCell subject={SubjectList.ASGB} rowSpan={3} active={currentOrder === 1} />
+            <SubjectCell subject={SubjectList.IPPE} rowSpan={2} active={currentOrder === 4} />
+            <SubjectCell subject={SubjectList.SRI} rowSpan={3} active={currentOrder === 8} />
+            <SubjectCell subject={SubjectList.ASO} rowSpan={2} active={currentOrder === 10} />
+            <SubjectCell subject={SubjectList.SASP} rowSpan={1} active={currentOrder === 14} />
             <Shortcut link='https://mail.google.com/' imageSrc='/assets/icons/gmail.png' />
           </tr>
           <tr>
             <HourCell start='09:25' end='10:15' />
-            <SubjectCell subjectName={SUBJECT_NAME.SAD} rowSpan={2} active={currentOrder === 15} />
+            <SubjectCell subject={SubjectList.SAD} rowSpan={2} active={currentOrder === 15} />
             <Shortcut link='https://classroom.google.com/' imageSrc='/assets/icons/classroom.png' />
           </tr>
           <tr>
             <HourCell start='10:20' end='11:10' />
-            <SubjectCell subjectName={SUBJECT_NAME.MPO} rowSpan={1} active={currentOrder === 5} />
-            <SubjectCell subjectName={SUBJECT_NAME.IAW} rowSpan={1} active={currentOrder === 11} />
+            <SubjectCell subject={SubjectList.MPO} rowSpan={1} active={currentOrder === 5} />
+            <SubjectCell subject={SubjectList.IAW} rowSpan={1} active={currentOrder === 11} />
             <Shortcut link='https://drive.google.com/' imageSrc='/assets/icons/drive.png' />
           </tr>
           <tr>
@@ -71,23 +138,23 @@ export const Schedule: React.FC = () => {
           </tr>
           <tr>
             <HourCell start='11:40' end='12:30' />
-            <SubjectCell subjectName={SUBJECT_NAME.IAW} rowSpan={2} active={currentOrder === 2} />
-            <SubjectCell subjectName={SUBJECT_NAME.MPO} rowSpan={1} active={currentOrder === 6} />
-            <SubjectCell subjectName={SUBJECT_NAME.SAD} rowSpan={3} active={currentOrder === 9} />
-            <SubjectCell subjectName={SUBJECT_NAME.IAW} rowSpan={1} active={currentOrder === 12} />
-            <SubjectCell subjectName={SUBJECT_NAME.SRI} rowSpan={3} active={currentOrder === 16} />
+            <SubjectCell subject={SubjectList.IAW} rowSpan={2} active={currentOrder === 2} />
+            <SubjectCell subject={SubjectList.MPO} rowSpan={1} active={currentOrder === 6} />
+            <SubjectCell subject={SubjectList.SAD} rowSpan={3} active={currentOrder === 9} />
+            <SubjectCell subject={SubjectList.IAW} rowSpan={1} active={currentOrder === 12} />
+            <SubjectCell subject={SubjectList.SRI} rowSpan={3} active={currentOrder === 16} />
             <Shortcut link='https://www.studentspace.app/' imageSrc='/assets/icons/studentspace.svg' />
           </tr>
           <tr>
             <HourCell start='12:35' end='13:25' />
-            <SubjectCell subjectName={SUBJECT_NAME.ASO} rowSpan={2} active={currentOrder === 7} />
-            <SubjectCell subjectName={SUBJECT_NAME.PIAS} rowSpan={2} active={currentOrder === 13} />
+            <SubjectCell subject={SubjectList.ASO} rowSpan={2} active={currentOrder === 7} />
+            <SubjectCell subject={SubjectList.PIAS} rowSpan={2} active={currentOrder === 13} />
 
             <Shortcut link='https://iespabloserrano.aeducar.es/my/courses.php' imageSrc='/assets/icons/aeducar.ico' />
           </tr>
           <tr>
             <HourCell start='13:30' end='14:20' />
-            <SubjectCell subjectName={SUBJECT_NAME.MPO} rowSpan={1} active={currentOrder === 3} />
+            <SubjectCell subject={SubjectList.MPO} rowSpan={1} active={currentOrder === 3} />
             <RouletteShortcut />
           </tr>
         </tbody>
@@ -112,39 +179,39 @@ export const Schedule: React.FC = () => {
   )
 }
 
-enum SUBJECT_NAME {
-  ASGB = 'ASGB',
-  MPO = 'MPO',
-  SAD = 'SAD',
-  ASO = 'ASO',
-  IAW = 'IAW',
-  SASP = 'SASP',
-  SRI = 'SRI',
-  IPPE = 'IPPE',
-  PIAS = 'PIAS',
-}
 interface SubjetCellProps {
   active?: boolean
   rowSpan?: number
-  subjectName: SUBJECT_NAME
+  subject: Subject
   disabled?: boolean
 }
 
 const SubjectCell: React.FC<SubjetCellProps> = props => {
-  const { subjectName, active = false, rowSpan = 1, disabled = false } = props
+  const { subject, active = false, rowSpan = 1, disabled = false } = props
 
   return (
-    <td
-      className={clsx(
-        'rounded-xl text-right align-bottom text-white h-20 w-32 px-2 py-1 text-xs',
-        disabled && 'opacity-0',
-        active && 'current',
-        subjectName.toLowerCase()
-      )}
-      rowSpan={rowSpan}
+    <Tooltip
+      content={
+        <span className='text-center'>
+          {subject.teacher} <br/> {subject.full_name}
+        </span>
+      }
+      color='foreground'
+      className='opacity-50'
+      size='md'
     >
-      {subjectName}
-    </td>
+      <td
+        className={clsx(
+          'rounded-xl text-right align-bottom text-white/90 h-20 w-32 px-2 py-1 text-xs',
+          disabled && 'opacity-0',
+          active && 'current',
+          subject.id.toLowerCase()
+        )}
+        rowSpan={rowSpan}
+      >
+        {subject.id}
+      </td>
+    </Tooltip>
   )
 }
 
