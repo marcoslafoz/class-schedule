@@ -1,5 +1,12 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
-import { ScheduleScene, RouletteScene, RegisterScene, CoinFlipScene, Roulette50Scene, BlackjackScene } from '../../modules/views'
+import {
+  ScheduleScene,
+  RouletteScene,
+  RegisterScene,
+  CoinFlipScene,
+  Roulette50Scene,
+  BlackjackScene,
+} from '../../modules/views'
 import { authLoader } from './loaders'
 
 export const router = createBrowserRouter([

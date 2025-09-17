@@ -30,9 +30,9 @@ enum SUBJECT_ID {
 }
 
 interface Subject {
-  id: SUBJECT_ID;
-  full_name: string;
-  teacher: string;
+  id: SUBJECT_ID
+  full_name: string
+  teacher: string
 }
 
 const SubjectList: Record<SUBJECT_ID, Subject> = {
@@ -193,7 +193,7 @@ const SubjectCell: React.FC<SubjetCellProps> = props => {
     <Tooltip
       content={
         <span className='text-center'>
-          {subject.teacher} <br/> {subject.full_name}
+          {subject.teacher} <br /> {subject.full_name}
         </span>
       }
       color='foreground'
