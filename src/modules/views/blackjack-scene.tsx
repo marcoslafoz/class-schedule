@@ -1,5 +1,5 @@
 import React from 'react'
-import { Blackjack, Sports, TopPlayers, UserHeaderBar } from '../components'
+import { Blackjack, TopPlayers, UserHeaderBar } from '../components'
 import { Helmet } from 'react-helmet'
 import { UserContext } from '../../common/context/user-context'
 import { TursoClient } from '../../common/api/turso/config/client'
