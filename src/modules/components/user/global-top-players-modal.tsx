@@ -93,14 +93,14 @@ export const GlobalTopPlayersModal: React.FC<GlobalTopPlayersProps> = ({ isOpen,
             >
               <TableHeader>
                 <TableColumn>#</TableColumn>
-                <TableColumn>Username</TableColumn>
-                <TableColumn>Money</TableColumn>
+                <TableColumn>Usuario</TableColumn>
+                <TableColumn>Dinero</TableColumn>
               </TableHeader>
               <TableBody>
                 {users.map((user, index) => (
                   <TableRow key={index}>
                     <TableCell>{(page - 1) * rowsPerPage + index + 1}</TableCell>
-                    <TableCell className='flex flex-row items-center gap-3'>
+                    <TableCell className='flex flex-row items-center gap-3 text-white/50'>
                       <img
                         src={user.avatar_url || '/assets/avatar/default.png'}
                         alt={user.username}
