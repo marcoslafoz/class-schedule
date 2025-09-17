@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Input } from '@heroui/react'
 import { TursoClient } from '../../../common/api/turso/config/client'
 import { DisplayMoney } from '../user/display-money'
+import confetti from 'canvas-confetti'
 
 interface BlackjackProps {
   defaultMoney: number | null
@@ -49,6 +50,36 @@ const calculateTotal = (hand: Card[]) => {
   return total
 }
 
+const isBlackjack = (hand: Card[]) => {
+  return hand.length === 2 && calculateTotal(hand) === 21
+}
+
+// 🎉 Confetti launcher
+const launchConfetti = () => {
+  confetti({
+    particleCount: 120,
+    spread: 70,
+    origin: { y: 0.6 },
+  })
+}
+
+const CardUI: React.FC<{ card: Card }> = ({ card }) => {
+  const suit = card.display.slice(-1)
+  const value = card.display.slice(0, -1)
+  const isRed = suit === '♥' || suit === '♦'
+
+  return (
+    <div className="w-14 h-20 flex flex-col justify-between p-2 rounded-lg border shadow-md bg-white">
+      <span className={`text-sm font-bold ${isRed ? 'text-red-600' : 'text-black'}`}>
+        {value}{suit}
+      </span>
+      <span className={`text-sm font-bold self-end ${isRed ? 'text-red-600' : 'text-black'}`}>
+        {value}{suit}
+      </span>
+    </div>
+  )
+}
+
 export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
   const [balance, setBalance] = useState(defaultMoney ?? 0)
   const [deck, setDeck] = useState<Card[]>([])
@@ -59,7 +90,6 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
   const [bet, setBet] = useState(10)
   const [gameStarted, setGameStarted] = useState(false)
 
-  // 🔹 Obtener saldo real desde la DB
   const fetchUserMoney = async (): Promise<number> => {
     const userMoneyRes = await TursoClient.execute({
       sql: 'SELECT money FROM user WHERE token = ?',
@@ -68,7 +98,6 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
     return Number(userMoneyRes.rows[0]?.money) || 0
   }
 
-  // 🔹 Actualizar saldo en DB
   const updateUserMoney = async (amount: number) => {
     await TursoClient.execute({
       sql: 'UPDATE user SET money = money + ? WHERE token = ?',
@@ -76,7 +105,6 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
     })
   }
 
-  // 🔹 Guardar total apostado
   const updateTotalBet = async (amount: number) => {
     await TursoClient.execute({
       sql: 'UPDATE user SET total_bet = total_bet + ? WHERE token = ?',
@@ -106,12 +134,9 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
     setMessage('')
     setGameStarted(true)
 
-    // 🔹 Restar apuesta al saldo en DB
     await updateUserMoney(-bet)
     await updateTotalBet(bet)
     setBalance(userMoney - bet)
-
-    console.log('Saldo al iniciar:', userMoney - bet)
   }
 
   const hit = () => {
@@ -133,7 +158,6 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
     const newDeck = [...deck]
     const newDealerHand = [...dealerHand]
 
-    // Dealer pide hasta 17
     while (calculateTotal(newDealerHand) < 17) {
       newDealerHand.push(newDeck.pop()!)
     }
@@ -144,29 +168,29 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
     const playerTotal = calculateTotal(playerHand)
     const dealerTotal = calculateTotal(newDealerHand)
 
-    let outcome: 'player' | 'dealer' | 'draw'
     let earnings = 0
 
     if (playerTotal > 21) {
-      outcome = 'dealer'
+      setMessage('Te pasaste! Pierdes.')
     } else if (dealerTotal > 21) {
-      outcome = 'player'
-    } else if (playerTotal > dealerTotal) {
-      outcome = 'player'
-    } else if (dealerTotal > playerTotal) {
-      outcome = 'dealer'
-    } else {
-      outcome = 'draw'
-    }
-
-    if (outcome === 'player') {
-      setMessage('¡Ganaste!')
+      setMessage('El dealer se pasó. ¡Ganaste!')
       earnings = bet * 2
-    } else if (outcome === 'draw') {
-      setMessage('Empate.')
-      earnings = bet
-    } else {
+      launchConfetti()
+    } else if (isBlackjack(playerHand) && !isBlackjack(newDealerHand)) {
+      earnings = Math.floor(bet * 2.5)
+      setMessage('¡Blackjack! Ganaste 1.5x')
+      launchConfetti()
+    } else if (!isBlackjack(playerHand) && isBlackjack(newDealerHand)) {
+      setMessage('El dealer tiene Blackjack. Pierdes.')
+    } else if (playerTotal > dealerTotal) {
+      earnings = bet * 2
+      setMessage('¡Ganaste!')
+      launchConfetti()
+    } else if (dealerTotal > playerTotal) {
       setMessage('Perdiste.')
+    } else {
+      earnings = bet
+      setMessage('Empate.')
     }
 
     if (earnings > 0) {
@@ -177,7 +201,6 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
     setBalance(newBalance)
 
     setGameOver(true)
-    console.log('Saldo al terminar:', newBalance)
   }
 
   const resetGame = () => {
@@ -195,7 +218,6 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
 
       {!gameStarted ? (
         <div className="flex flex-col items-center gap-6">
-          {/* Input de HeroUI para personalizar apuesta */}
           <Input
             value={bet.toString()}
             onChange={e => setBet(Number(e.target.value))}
@@ -209,25 +231,25 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
 
           <button
             onClick={startGame}
-            className="px-4 py-2 rounded-2xl bg-green-600 hover:bg-green-700 transition"
+            className="px-8 py-3 rounded-xl bg-gradient-to-r from-green-500 to-green-700 
+                       shadow-lg hover:scale-105 hover:from-green-400 hover:to-green-600 
+                       transition-all duration-200 font-semibold"
           >
-            Empezar Juego (Apuesta: ${bet})
+            🎰 Empezar Juego (Apuesta: ${bet})
           </button>
 
           {message && <div className="text-red-400">{message}</div>}
         </div>
       ) : (
         <>
-          <div className="flex gap-6 mb-6">
+          <div className="flex gap-12 mb-6">
             <div>
               <h2 className="font-semibold mb-2">
                 Tus cartas ({calculateTotal(playerHand)})
               </h2>
               <div className="flex gap-2">
                 {playerHand.map((card, i) => (
-                  <div key={i} className="px-2 py-1 bg-gray-700 rounded-lg shadow">
-                    {card.display}
-                  </div>
+                  <CardUI key={i} card={card} />
                 ))}
               </div>
             </div>
@@ -238,11 +260,12 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
               </h2>
               <div className="flex gap-2">
                 {dealerHand.map((card, i) => (
-                  <div
-                    key={i}
-                    className={`px-2 py-1 bg-gray-700 rounded-lg shadow ${i === 0 || gameOver ? '' : 'blur-sm'}`}
-                  >
-                    {card.display}
+                  <div key={i}>
+                    {i === 0 || gameOver ? (
+                      <CardUI card={card} />
+                    ) : (
+                      <div className="w-14 h-20 bg-gray-600 rounded-lg shadow-md"></div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -250,27 +273,36 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
           </div>
 
           {!gameOver ? (
-            <div className="flex gap-4">
+            <div className="flex gap-6 justify-center mt-4">
               <button
                 onClick={hit}
-                className="px-4 py-2 rounded-2xl bg-blue-600 hover:bg-blue-700 transition"
+                className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-blue-700 
+                           shadow-lg hover:scale-105 hover:from-blue-400 hover:to-blue-600 
+                           transition-all duration-200 font-semibold"
               >
-                Pedir
+                🃏 Pedir
               </button>
+
               <button
                 onClick={stand}
-                className="px-4 py-2 rounded-2xl bg-yellow-600 hover:bg-yellow-700 transition"
+                className="px-6 py-3 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-600 
+                           shadow-lg hover:scale-105 hover:from-yellow-400 hover:to-orange-500 
+                           transition-all duration-200 font-semibold"
               >
-                Plantarse
+                ✋ Plantarse
               </button>
             </div>
           ) : (
-            <button
-              onClick={resetGame}
-              className="px-4 py-2 rounded-2xl bg-purple-600 hover:bg-purple-700 transition"
-            >
-              Jugar otra vez
-            </button>
+            <div className="flex justify-center mt-6">
+              <button
+                onClick={resetGame}
+                className="px-8 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-purple-800 
+                           shadow-lg hover:scale-105 hover:from-purple-500 hover:to-purple-700 
+                           transition-all duration-200 font-semibold"
+              >
+                🔄 Jugar otra vez
+              </button>
+            </div>
           )}
 
           <div className="mt-4 text-xl font-semibold">{message}</div>
