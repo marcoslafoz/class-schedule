@@ -42,7 +42,7 @@ export const BlackjackScene: React.FC = () => {
         <div className='flex flex-col lg:md:flex-row justify-center w-full '>
           <div className='hidden lg:md:block lg:md:order-1 lg:md:w-1/5 lg:md:gap-0' />
 
-          <div className='order-1 lg:md:order-2 lg:md:w-3/5 flex flex-col '>
+          <div className='order-1 lg:md:order-2 lg:md:w-3/5 flex flex-col justify-center items-center'>
             <Blackjack defaultMoney={money} />
           </div>
 

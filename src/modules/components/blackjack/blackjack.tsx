@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Input } from '@heroui/react'
+import { Button, Input } from '@heroui/react'
 import { TursoClient } from '../../../common/api/turso/config/client'
 import { DisplayMoney } from '../user/display-money'
 import confetti from 'canvas-confetti'
+import clsx from 'clsx'
 
 interface BlackjackProps {
   defaultMoney: number | null
@@ -87,7 +88,7 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
   const [dealerHand, setDealerHand] = useState<Card[]>([])
   const [gameOver, setGameOver] = useState(false)
   const [message, setMessage] = useState('')
-  const [bet, setBet] = useState(50)
+  const [bet, setBet] = useState(10)
   const [gameStarted, setGameStarted] = useState(false)
 
   const fetchUserMoney = async (): Promise<number> => {
@@ -212,32 +213,37 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 text-white gap-10">
+    <div className="flex flex-col items-center justify-center text-white ">
 
-      <DisplayMoney money={balance} />
+      <span className='py-4' >
+        <DisplayMoney money={balance} />
+      </span>
 
       {!gameStarted ? (
-        <div className="flex flex-col items-center gap-6">
-          <Input
-            value={bet.toString()}
-            onChange={e => setBet(Number(e.target.value))}
-            placeholder="Apuesta"
-            className="w-24"
-            size="lg"
-            type="number"
-            min={1}
-            max={balance}
-          />
+        <div className='flex flex-col items-center justify-center gap-3'>
+          <h2 className="text-xl font-semibold mb-4 text-white/50">Apuesta para jugar</h2>
+          <div className="flex flex-row items-center gap-2">
+            <Input
+              value={bet.toString()}
+              onChange={e => setBet(Number(e.target.value))}
+              placeholder="Apuesta"
+              className="w-24"
+              size="lg"
+              type="number"
+              min={1}
+              max={balance}
+            />
 
-          <button
-            onClick={startGame}
-            className="px-8 py-3 rounded-xl bg-gradient-to-r from-green-500 to-green-700 
-                       shadow-lg hover:scale-105 hover:from-green-400 hover:to-green-600 
-                       transition-all duration-200 font-semibold"
-          >
-            🎰 Empezar Juego (Apuesta: ${bet})
-          </button>
+            <Button
+              className={clsx('opacity-50 bg-transparent')}
+              onKeyDown={e => e.key === 'Enter' && startGame()}
+              onPress={startGame}
+              isIconOnly
+            >
+              <img src='/assets/icons/play.svg' alt='Spin' className='object-contain w-6 invert' />
+            </Button>
 
+          </div>
           {message && <div className="text-red-400">{message}</div>}
         </div>
       ) : (
@@ -273,24 +279,24 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
           </div>
 
           {!gameOver ? (
-            <div className="flex gap-6 justify-center mt-4">
-              <button
-                onClick={hit}
+            <div className="flex gap-6 justify-center">
+              <Button
+                onPress={hit}
                 className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-blue-700 
                            shadow-lg hover:scale-105 hover:from-blue-400 hover:to-blue-600 
                            transition-all duration-200 font-semibold"
               >
                 🃏 Pedir
-              </button>
+              </Button>
 
-              <button
-                onClick={stand}
+              <Button
+                onPress={stand}
                 className="px-6 py-3 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-600 
                            shadow-lg hover:scale-105 hover:from-yellow-400 hover:to-orange-500 
                            transition-all duration-200 font-semibold"
               >
                 ✋ Plantarse
-              </button>
+              </Button>
             </div>
           ) : (
             <div className="flex justify-center mt-6">
