@@ -29,7 +29,7 @@ export const DisplayMoney: React.FC<DisplayMoneyProps> = props => {
     }
 
     const userMoney = Number(result.rows[0].money)
-    const lastBonusRaw = result.rows[0].last_bonus // Puede ser string, bigint, null, etc.
+    const lastBonusRaw = result.rows[0].last_bonus
 
     const now = new Date()
 
@@ -39,17 +39,15 @@ export const DisplayMoney: React.FC<DisplayMoneyProps> = props => {
     }
 
     if (lastBonusRaw) {
-      const lastBonusString = String(lastBonusRaw) // Convertir a string de forma segura
-      const lastBonusTime = new Date(lastBonusString) // Ahora siempre será un string válido
+      const lastBonusString = String(lastBonusRaw)
+      const lastBonusTime = new Date(lastBonusString)
 
       if (!isNaN(lastBonusTime.getTime())) {
-        // Comprobamos que sea una fecha válida
-        const timeSinceLastBonus = now.getTime() - lastBonusTime.getTime() // Diferencia en ms
+        const timeSinceLastBonus = now.getTime() - lastBonusTime.getTime()
 
         if (timeSinceLastBonus < 60000) {
-          // Menos de 1 minuto (60 sec * 1000 ms)
-          const nextBonusTime = new Date(lastBonusTime.getTime() + 60000)
-          setCooldownAlert(`No puedes solicitar el bono hasta hoy a las ${nextBonusTime.toLocaleTimeString()}`)
+          const remainingSeconds = Math.ceil((60000 - timeSinceLastBonus) / 1000)
+          setCooldownAlert(`Solicita el bono en ${remainingSeconds} segundos`)
           return
         }
       }
