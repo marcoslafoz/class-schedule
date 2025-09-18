@@ -87,7 +87,7 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
   const [dealerHand, setDealerHand] = useState<Card[]>([])
   const [gameOver, setGameOver] = useState(false)
   const [message, setMessage] = useState('')
-  const [bet, setBet] = useState(10)
+  const [bet, setBet] = useState(50)
   const [gameStarted, setGameStarted] = useState(false)
 
   const fetchUserMoney = async (): Promise<number> => {
