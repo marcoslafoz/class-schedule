@@ -33,6 +33,7 @@ interface Subject {
   id: SUBJECT_ID
   full_name: string
   teacher: string
+  classroom_url?: string
 }
 
 const SubjectList: Record<SUBJECT_ID, Subject> = {
@@ -40,46 +41,56 @@ const SubjectList: Record<SUBJECT_ID, Subject> = {
     id: SUBJECT_ID.IAW,
     full_name: 'Implantación de aplicaciones web',
     teacher: 'Enrique González Revilla',
+    classroom_url: 'https://classroom.google.com/u/1/c/ODA2MzQ3NjYxMTI1',
   },
   [SUBJECT_ID.MPO]: {
     id: SUBJECT_ID.MPO,
     full_name: 'Módulo profesional optativo',
     teacher: 'Enrique Ruiz Meseguer',
+    classroom_url: 'https://iespabloserrano.aeducar.es/course/view.php?id=235',
+
   },
   [SUBJECT_ID.SAD]: {
     id: SUBJECT_ID.SAD,
     full_name: 'Seguridad y alta disponibilidad',
     teacher: 'Enrique Ruiz Meseguer',
+    classroom_url: 'https://iespabloserrano.aeducar.es/course/view.php?id=43',
   },
   [SUBJECT_ID.ASO]: {
     id: SUBJECT_ID.ASO,
     full_name: 'Administración de sistemas operativos',
     teacher: 'Gorka Sanz Lopategui',
+    classroom_url: 'https://classroom.google.com/u/0/c/Nzc1MzIzMzMwMzE4',
   },
   [SUBJECT_ID.ASGB]: {
     id: SUBJECT_ID.ASGB,
     full_name: 'Administración de sist. gestores de bases de datos',
     teacher: 'José Alberto Núñez Ruiz',
+    classroom_url: 'https://iespabloserrano.aeducar.es/course/view.php?id=84',
   },
   [SUBJECT_ID.SASP]: {
     id: SUBJECT_ID.SASP,
     full_name: 'Sostenibilidad aplicada a los sistemas informáticos',
     teacher: 'Juan Ignacio Pulido Trullen',
+    classroom_url: 'https://iespabloserrano.aeducar.es/course/view.php?id=173',
   },
   [SUBJECT_ID.IPPE]: {
     id: SUBJECT_ID.IPPE,
     full_name: 'Itinerario personal para la empleabilidad',
     teacher: 'Marta Oliván Bascones',
+    classroom_url: 'https://classroom.google.com/u/0/c/ODA2NDUwNzA2NTgy'
   },
   [SUBJECT_ID.SRI]: {
     id: SUBJECT_ID.SRI,
     full_name: 'Servicios de red e Internet',
     teacher: 'Miguel Ángel Calle Pérez',
+    classroom_url: 'https://iespabloserrano.aeducar.es/course/view.php?id=128',
   },
   [SUBJECT_ID.PIAS]: {
     id: SUBJECT_ID.PIAS,
     full_name: 'Proyecto intermodular',
     teacher: 'Pedro Martín Echeverría',
+    classroom_url: 'https://iespabloserrano.aeducar.es/course/view.php?id=197'
   },
 }
 
@@ -220,8 +231,9 @@ const SubjectCell: React.FC<SubjetCellProps> = props => {
       }}
     >
       <td
+        onClick={() => window.open(subject.classroom_url, '_blank')}
         className={clsx(
-          'rounded-xl text-right align-bottom text-white/90 h-20 w-32 px-2 py-1 text-xs',
+          'rounded-xl text-right align-bottom text-white/90 h-20 w-32 px-2 py-1 text-xs hover:cursor-pointer',
           disabled && 'opacity-0',
           active && 'current',
           subject.id.toLowerCase()
