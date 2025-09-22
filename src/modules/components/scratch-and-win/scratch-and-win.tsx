@@ -9,8 +9,8 @@ interface ScratchAndWinProps {
   defaultMoney: number | null
 }
 
-const possibleNumbers = Array.from({ length: 20 }, (_, i) => i + 1)
-const multipliers = [1, 1, 1, 1, 1, 2, 2, 2, 5, 5, 10, 100]
+const possibleNumbers = Array.from({ length: 15 }, (_, i) => i + 1)
+const multipliers = [1, 1, 1, 1, 1, 1, 1.5, 2, 2, 3, 5, 10]
 
 const jackpotConfetti = () => {
   confetti({ particleCount: 200, spread: 200, origin: { y: 0.6 } })
@@ -97,6 +97,26 @@ export const ScratchAndWin: React.FC<ScratchAndWinProps> = ({ defaultMoney }) =>
         multiplier: getRandomMultiplier(),
         revealed: false,
       }))
+
+      let matchCount = 0
+      scratch.forEach(s => {
+        if (winners.includes(s.num)) matchCount++
+      })
+
+      if (matchCount > 2) {
+        for (let i = 0; i < scratch.length && matchCount > 2; i++) {
+          if (winners.includes(scratch[i].num) && Math.random() < 0.6) {
+            scratch[i].num = possibleNumbers.find(n => !winners.includes(n)) || possibleNumbers[0]
+            matchCount--
+          }
+        }
+      }
+
+      if (matchCount === 0 && Math.random() < 0.4) {
+        const randomIndex = Math.floor(Math.random() * scratch.length)
+        scratch[randomIndex].num = winners[Math.floor(Math.random() * winners.length)]
+        scratch[randomIndex].multiplier = Math.random() < 0.7 ? 1 : scratch[randomIndex].multiplier
+      }
       setScratchNumbers(scratch)
 
       const newBalance = await fetchUserMoney()
@@ -117,10 +137,12 @@ export const ScratchAndWin: React.FC<ScratchAndWinProps> = ({ defaultMoney }) =>
     setScratchNumbers(updated)
 
     if (winningNumbers.includes(updated[index].num)) {
-      const win = bet * updated[index].multiplier
+      const win = Math.floor(bet * updated[index].multiplier)
       setWinnings(prev => prev + win)
-      setMessage(`🎉 ¡Número ganador ${updated[index].num}! x${updated[index].multiplier}`)
-      jackpotConfetti()
+      setMessage(`🎉 ¡Número ganador ${updated[index].num}! +${win}`)
+      if (updated[index].multiplier >= 5) {
+        jackpotConfetti()
+      }
     }
 
     if (updated.every(c => c.revealed)) {
@@ -128,7 +150,6 @@ export const ScratchAndWin: React.FC<ScratchAndWinProps> = ({ defaultMoney }) =>
         await finishGame()
       }, 500)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playing, scratchNumbers, winningNumbers, bet])
 
   const finishGame = useCallback(async () => {
