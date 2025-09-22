@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { Button, Input } from '@heroui/react'
 import { TursoClient } from '../../../common/api/turso/config/client'
 import { DisplayMoney } from '../user/display-money'
@@ -26,66 +26,105 @@ export const Slot: React.FC<SlotProps> = ({ defaultMoney }) => {
   const autoplayRef = useRef<NodeJS.Timeout | null>(null)
 
   const fetchUserMoney = async (): Promise<number> => {
-    const userMoneyRes = await TursoClient.execute({
-      sql: 'SELECT money FROM user WHERE token = ?',
-      args: [localStorage.getItem('token')],
-    })
-    return Number(userMoneyRes.rows[0]?.money) || 0
+    try {
+      const userMoneyRes = await TursoClient.execute({
+        sql: 'SELECT money FROM user WHERE token = ?',
+        args: [localStorage.getItem('token')],
+      })
+      return Number(userMoneyRes.rows[0]?.money) || 0
+    } catch (error) {
+      console.error('Error fetching user money:', error)
+      throw error
+    }
   }
 
   const updateUserMoney = async (amount: number) => {
-    await TursoClient.execute({
-      sql: 'UPDATE user SET money = money + ? WHERE token = ?',
-      args: [amount, localStorage.getItem('token')],
-    })
+    try {
+      await TursoClient.execute({
+        sql: 'UPDATE user SET money = money + ? WHERE token = ?',
+        args: [amount, localStorage.getItem('token')],
+      })
+    } catch (error) {
+      console.error('Error updating user money:', error)
+      throw error
+    }
   }
 
   const updateTotalBet = async (amount: number) => {
-    await TursoClient.execute({
-      sql: 'UPDATE user SET total_bet = total_bet + ? WHERE token = ?',
-      args: [amount, localStorage.getItem('token')],
-    })
+    try {
+      await TursoClient.execute({
+        sql: 'UPDATE user SET total_bet = total_bet + ? WHERE token = ?',
+        args: [amount, localStorage.getItem('token')],
+      })
+    } catch (error) {
+      console.error('Error updating total bet:', error)
+      throw error
+    }
   }
 
-  const spin = async () => {
+  const spin = useCallback(async () => {
+    // Prevenir múltiples spins simultáneos
     if (spinning) return
-    const userMoney = await fetchUserMoney()
 
-    if (bet <= 0) {
-      setMessage('⚠️ La apuesta debe ser mayor a 0.')
-      return
-    }
-    if (userMoney < bet) {
-      setMessage('💸 No tienes suficiente saldo.')
-      setAutoplay(false)
-      return
-    }
-
-    await updateUserMoney(-bet)
-    await updateTotalBet(bet)
-    setBalance(userMoney - bet)
     setSpinning(true)
     setMessage('🎰 Girando...')
 
-    const spinDelays = [500, 800, 1100]
-    const result: string[] = []
+    try {
+      const userMoney = await fetchUserMoney()
 
-    spinDelays.forEach((delay, i) => {
-      setTimeout(() => {
-        const symbol = symbols[Math.floor(Math.random() * symbols.length)]
-        result[i] = symbol
-        setReels(prev => {
-          const copy = [...prev]
-          copy[i] = symbol
-          return copy
+      if (bet <= 0) {
+        setMessage('⚠️ La apuesta debe ser mayor a 0.')
+        setSpinning(false)
+        return
+      }
+
+      if (userMoney < bet) {
+        setMessage('💸 No tienes suficiente saldo.')
+        setAutoplay(false)
+        setSpinning(false)
+        return
+      }
+
+      // Actualizar dinero y apuesta total
+      await updateUserMoney(-bet)
+      await updateTotalBet(bet)
+
+      const spinDelays = [500, 800, 1100]
+      const result: string[] = []
+
+      // Promesa para esperar a que terminen todas las animaciones
+      await new Promise<void>((resolve) => {
+        let completedReels = 0
+
+        spinDelays.forEach((delay, i) => {
+          setTimeout(() => {
+            const symbol = symbols[Math.floor(Math.random() * symbols.length)]
+            result[i] = symbol
+            setReels(prev => {
+              const copy = [...prev]
+              copy[i] = symbol
+              return copy
+            })
+
+            completedReels++
+            if (completedReels === 3) {
+              resolve()
+            }
+          }, delay)
         })
-        if (i === 2) {
-          checkResult(result)
-          setSpinning(false)
-        }
-      }, delay)
-    })
-  }
+      })
+
+      // Verificar resultado y actualizar balance
+      await checkResult(result)
+
+    } catch (error) {
+      console.error('Error in spin:', error)
+      setMessage('❌ Error en la tirada. Intenta de nuevo.')
+    } finally {
+      setSpinning(false)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bet, spinning])
 
   const checkResult = async (result: string[]) => {
     let winnings = 0
@@ -106,24 +145,52 @@ export const Slot: React.FC<SlotProps> = ({ defaultMoney }) => {
       await updateUserMoney(winnings)
     }
 
+    // Actualizar balance desde la DB para mantener sincronización
     const newBalance = await fetchUserMoney()
     setBalance(newBalance)
   }
 
-  // Autoplay effect
+  // Manejo mejorado de la apuesta
+  const handleBetChange = (value: string) => {
+    const numValue = Number(value)
+
+    // Validar entrada
+    if (isNaN(numValue) || numValue < 0) {
+      return // Ignorar valores inválidos
+    }
+
+    // Limitar al balance disponible
+    const clampedValue = Math.min(numValue, balance)
+    setBet(clampedValue)
+  }
+
+  // Autoplay effect con dependencias correctas
   useEffect(() => {
-    if (autoplay) {
+    if (autoplay && !spinning) {
       autoplayRef.current = setInterval(() => {
         spin()
-      }, 1500) // ritmo natural
+      }, 2000) // Aumentado a 2 segundos para dar más tiempo
     } else if (autoplayRef.current) {
       clearInterval(autoplayRef.current)
+      autoplayRef.current = null
     }
+
     return () => {
-      if (autoplayRef.current) clearInterval(autoplayRef.current)
+      if (autoplayRef.current) {
+        clearInterval(autoplayRef.current)
+        autoplayRef.current = null
+      }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [autoplay, bet])
+  }, [autoplay, spinning, spin])
+
+  // Cleanup al desmontar
+  useEffect(() => {
+    return () => {
+      if (autoplayRef.current) {
+        clearInterval(autoplayRef.current)
+      }
+    }
+  }, [])
 
   return (
     <div className='flex flex-col items-center justify-center text-white'>
@@ -153,19 +220,20 @@ export const Slot: React.FC<SlotProps> = ({ defaultMoney }) => {
         <div className='flex flex-row items-center gap-2'>
           <Input
             value={bet.toString()}
-            onChange={e => setBet(Number(e.target.value))}
+            onChange={e => handleBetChange(e.target.value)}
             placeholder='Apuesta'
             className='w-24'
             size='lg'
             type='number'
             min={1}
             max={balance}
+            isDisabled={spinning || autoplay}
           />
 
           <Button
             className={clsx('opacity-90 bg-gradient-to-r from-green-500 to-green-700')}
             onPress={spin}
-            isDisabled={spinning}
+            isDisabled={spinning || bet <= 0 || bet > balance}
           >
             🎰 Girar
           </Button>
@@ -175,6 +243,7 @@ export const Slot: React.FC<SlotProps> = ({ defaultMoney }) => {
               autoplay ? 'bg-gradient-to-r from-red-500 to-red-700' : 'bg-gradient-to-r from-blue-500 to-blue-700'
             )}
             onPress={() => setAutoplay(!autoplay)}
+            isDisabled={spinning}
           >
             {autoplay ? '⏹️ Parar' : '▶️ Auto'}
           </Button>
