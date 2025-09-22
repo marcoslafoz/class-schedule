@@ -1,0 +1,7 @@
+@keyframes spin-reel {
+  0% { transform: translateY(0); }
+  25% { transform: translateY(-20%); }
+  50% { transform: translateY(-40%); }
+  75% { transform: translateY(-60%); }
+  100% { transform: translateY(0); }
+}

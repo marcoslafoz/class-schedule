@@ -28,7 +28,7 @@ const values = [
   { display: '10', value: 10 },
   { display: 'J', value: 10 },
   { display: 'Q', value: 10 },
-  { display: 'K', value: 10 }
+  { display: 'K', value: 10 },
 ]
 
 const createDeck = (): Card[] => {
@@ -70,12 +70,14 @@ const CardUI: React.FC<{ card: Card }> = ({ card }) => {
   const isRed = suit === '♥' || suit === '♦'
 
   return (
-    <div className="w-14 h-20 flex flex-col justify-between p-2 rounded-lg border shadow-md bg-white">
+    <div className='w-14 h-20 flex flex-col justify-between p-2 rounded-lg border shadow-md bg-white'>
       <span className={`text-sm font-bold ${isRed ? 'text-red-600' : 'text-black'}`}>
-        {value}{suit}
+        {value}
+        {suit}
       </span>
       <span className={`text-sm font-bold self-end ${isRed ? 'text-red-600' : 'text-black'}`}>
-        {value}{suit}
+        {value}
+        {suit}
       </span>
     </div>
   )
@@ -213,23 +215,22 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center text-white ">
-
-      <span className='py-4' >
+    <div className='flex flex-col items-center justify-center text-white '>
+      <span className='py-4'>
         <DisplayMoney money={balance} />
       </span>
 
       {!gameStarted ? (
         <div className='flex flex-col items-center justify-center gap-3'>
-          <h2 className="text-xl font-semibold mb-4 text-white/50">Apuesta para jugar</h2>
-          <div className="flex flex-row items-center gap-2">
+          <h2 className='text-xl font-semibold mb-4 text-white/50'>Apuesta para jugar</h2>
+          <div className='flex flex-row items-center gap-2'>
             <Input
               value={bet.toString()}
               onChange={e => setBet(Number(e.target.value))}
-              placeholder="Apuesta"
-              className="w-24"
-              size="lg"
-              type="number"
+              placeholder='Apuesta'
+              className='w-24'
+              size='lg'
+              type='number'
               min={1}
               max={balance}
             />
@@ -242,18 +243,15 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
             >
               <img src='/assets/icons/play.svg' alt='Spin' className='object-contain w-6 invert' />
             </Button>
-
           </div>
-          {message && <div className="text-red-400">{message}</div>}
+          {message && <div className='text-red-400'>{message}</div>}
         </div>
       ) : (
         <>
-          <div className="flex gap-12 mb-6">
+          <div className='flex gap-12 mb-6'>
             <div>
-              <h2 className="font-semibold mb-2">
-                Tus cartas ({calculateTotal(playerHand)})
-              </h2>
-              <div className="flex gap-2">
+              <h2 className='font-semibold mb-2'>Tus cartas ({calculateTotal(playerHand)})</h2>
+              <div className='flex gap-2'>
                 {playerHand.map((card, i) => (
                   <CardUI key={i} card={card} />
                 ))}
@@ -261,16 +259,14 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
             </div>
 
             <div>
-              <h2 className="font-semibold mb-2">
-                Dealer ({gameOver ? calculateTotal(dealerHand) : '?'})
-              </h2>
-              <div className="flex gap-2">
+              <h2 className='font-semibold mb-2'>Dealer ({gameOver ? calculateTotal(dealerHand) : '?'})</h2>
+              <div className='flex gap-2'>
                 {dealerHand.map((card, i) => (
                   <div key={i}>
                     {i === 0 || gameOver ? (
                       <CardUI card={card} />
                     ) : (
-                      <div className="w-14 h-20 bg-gray-600 rounded-lg shadow-md"></div>
+                      <div className='w-14 h-20 bg-gray-600 rounded-lg shadow-md'></div>
                     )}
                   </div>
                 ))}
@@ -279,39 +275,39 @@ export const Blackjack: React.FC<BlackjackProps> = ({ defaultMoney }) => {
           </div>
 
           {!gameOver ? (
-            <div className="flex gap-6 justify-center">
+            <div className='flex gap-6 justify-center'>
               <Button
                 onPress={hit}
-                className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-blue-700 
+                className='px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-blue-700 
                            shadow-lg hover:scale-105 hover:from-blue-400 hover:to-blue-600 
-                           transition-all duration-200 font-semibold"
+                           transition-all duration-200 font-semibold'
               >
                 🃏 Pedir
               </Button>
 
               <Button
                 onPress={stand}
-                className="px-6 py-3 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-600 
+                className='px-6 py-3 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-600 
                            shadow-lg hover:scale-105 hover:from-yellow-400 hover:to-orange-500 
-                           transition-all duration-200 font-semibold"
+                           transition-all duration-200 font-semibold'
               >
                 ✋ Plantarse
               </Button>
             </div>
           ) : (
-            <div className="flex justify-center mt-6">
+            <div className='flex justify-center mt-6'>
               <button
                 onClick={resetGame}
-                className="px-8 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-purple-800 
+                className='px-8 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-purple-800 
                            shadow-lg hover:scale-105 hover:from-purple-500 hover:to-purple-700 
-                           transition-all duration-200 font-semibold"
+                           transition-all duration-200 font-semibold'
               >
                 🔄 Jugar otra vez
               </button>
             </div>
           )}
 
-          <div className="mt-4 text-xl font-semibold">{message}</div>
+          <div className='mt-4 text-xl font-semibold'>{message}</div>
         </>
       )}
     </div>

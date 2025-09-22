@@ -48,7 +48,6 @@ const SubjectList: Record<SUBJECT_ID, Subject> = {
     full_name: 'Módulo profesional optativo',
     teacher: 'Enrique Ruiz Meseguer',
     classroom_url: 'https://iespabloserrano.aeducar.es/course/view.php?id=235',
-
   },
   [SUBJECT_ID.SAD]: {
     id: SUBJECT_ID.SAD,
@@ -78,7 +77,7 @@ const SubjectList: Record<SUBJECT_ID, Subject> = {
     id: SUBJECT_ID.IPPE,
     full_name: 'Itinerario personal para la empleabilidad',
     teacher: 'Marta Oliván Bascones',
-    classroom_url: 'https://classroom.google.com/u/0/c/ODA2NDUwNzA2NTgy'
+    classroom_url: 'https://classroom.google.com/u/0/c/ODA2NDUwNzA2NTgy',
   },
   [SUBJECT_ID.SRI]: {
     id: SUBJECT_ID.SRI,
@@ -90,7 +89,7 @@ const SubjectList: Record<SUBJECT_ID, Subject> = {
     id: SUBJECT_ID.PIAS,
     full_name: 'Proyecto intermodular',
     teacher: 'Pedro Martín Echeverría',
-    classroom_url: 'https://iespabloserrano.aeducar.es/course/view.php?id=197'
+    classroom_url: 'https://iespabloserrano.aeducar.es/course/view.php?id=197',
   },
 }
 
@@ -227,7 +226,7 @@ const SubjectCell: React.FC<SubjetCellProps> = props => {
               ease: 'easeOut',
             },
           },
-        }
+        },
       }}
     >
       <td

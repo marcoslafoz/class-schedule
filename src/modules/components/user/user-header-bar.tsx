@@ -30,13 +30,19 @@ export const UserHeaderBar: React.FC = () => {
             onClick={() => navigate('/roulette')}
             className='text-white/60 hover:text-white/80  bg-white/5 hover:bg-white/10 rounded-full py-1 px-3'
           >
-            🎰 Roulette
+            🍀 Roulette
           </button>
           <button
             onClick={() => navigate('/blackjack')}
             className='text-white/60 hover:text-white/80  bg-white/5 hover:bg-white/10 rounded-full py-1 px-3'
           >
             🃏 Blackjack
+          </button>
+          <button
+            onClick={() => navigate('/slot')}
+            className='text-white/60 hover:text-white/80  bg-white/5 hover:bg-white/10 rounded-full py-1 px-3'
+          >
+            🎰 Slot
           </button>
           <button
             onClick={() => navigate('/coinflip')}
