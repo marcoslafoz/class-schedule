@@ -23,7 +23,7 @@ export const ScratchAndWin: React.FC<ScratchAndWinProps> = ({ defaultMoney }) =>
   const [scratchNumbers, setScratchNumbers] = useState<{ num: number; multiplier: number; revealed: boolean }[]>([])
   const [playing, setPlaying] = useState(false)
   const [message, setMessage] = useState('')
-  const [winnings, setWinnings] = useState(0)
+  const [, setWinnings] = useState(0)
 
   const fetchUserMoney = async (): Promise<number> => {
     try {
@@ -136,32 +136,43 @@ export const ScratchAndWin: React.FC<ScratchAndWinProps> = ({ defaultMoney }) =>
     updated[index].revealed = true
     setScratchNumbers(updated)
 
+    let currentWinAmount = 0
     if (winningNumbers.includes(updated[index].num)) {
-      const win = Math.floor(bet * updated[index].multiplier)
-      setWinnings(prev => prev + win)
-      setMessage(`🎉 ¡Número ganador ${updated[index].num}! +${win}`)
+      currentWinAmount = Math.floor(bet * updated[index].multiplier)
+      setWinnings(prev => prev + currentWinAmount)
+      setMessage(`🎉 ¡Número ganador ${updated[index].num}! +${currentWinAmount}`)
       if (updated[index].multiplier >= 3) {
         jackpotConfetti()
       }
     }
 
+    // Verificar si todas las cartas están reveladas
     if (updated.every(c => c.revealed)) {
+      // Calcular las ganancias totales directamente desde las cartas reveladas
+      const totalWinnings = updated.reduce((total, card) => {
+        if (winningNumbers.includes(card.num)) {
+          return total + Math.floor(bet * card.multiplier)
+        }
+        return total
+      }, 0)
+
       setTimeout(async () => {
-        await finishGame()
+        await finishGame(totalWinnings)
       }, 500)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playing, scratchNumbers, winningNumbers, bet])
 
-  const finishGame = useCallback(async () => {
-    if (winnings > 0) {
-      await updateUserMoney(winnings)
+  const finishGame = useCallback(async (finalWinnings: number) => {
+    if (finalWinnings > 0) {
+      await updateUserMoney(finalWinnings)
     }
 
     const newBalance = await fetchUserMoney()
     setBalance(newBalance)
 
-    if (winnings > 0) {
-      setMessage(`Ganaste ${winnings} 💸`)
+    if (finalWinnings > 0) {
+      setMessage(`Ganaste ${finalWinnings} 💸`)
     } else {
       setMessage('😢 No hubo suerte llorón..')
     }
@@ -172,7 +183,7 @@ export const ScratchAndWin: React.FC<ScratchAndWinProps> = ({ defaultMoney }) =>
       setScratchNumbers([])
       setWinnings(0)
     }, 2000)
-  }, [winnings])
+  }, [])
 
   const handleBetChange = (value: string) => {
     const numValue = Number(value)
