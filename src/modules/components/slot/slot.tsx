@@ -63,7 +63,6 @@ export const Slot: React.FC<SlotProps> = ({ defaultMoney }) => {
   }
 
   const spin = useCallback(async () => {
-    // Prevenir múltiples spins simultáneos
     if (spinning) return
 
     setSpinning(true)
@@ -85,14 +84,12 @@ export const Slot: React.FC<SlotProps> = ({ defaultMoney }) => {
         return
       }
 
-      // Actualizar dinero y apuesta total
       await updateUserMoney(-bet)
       await updateTotalBet(bet)
 
       const spinDelays = [500, 800, 1100]
       const result: string[] = []
 
-      // Promesa para esperar a que terminen todas las animaciones
       await new Promise<void>((resolve) => {
         let completedReels = 0
 
@@ -114,7 +111,6 @@ export const Slot: React.FC<SlotProps> = ({ defaultMoney }) => {
         })
       })
 
-      // Verificar resultado y actualizar balance
       await checkResult(result)
 
     } catch (error) {
@@ -145,31 +141,26 @@ export const Slot: React.FC<SlotProps> = ({ defaultMoney }) => {
       await updateUserMoney(winnings)
     }
 
-    // Actualizar balance desde la DB para mantener sincronización
     const newBalance = await fetchUserMoney()
     setBalance(newBalance)
   }
 
-  // Manejo mejorado de la apuesta
   const handleBetChange = (value: string) => {
     const numValue = Number(value)
 
-    // Validar entrada
     if (isNaN(numValue) || numValue < 0) {
-      return // Ignorar valores inválidos
+      return 
     }
 
-    // Limitar al balance disponible
     const clampedValue = Math.min(numValue, balance)
     setBet(clampedValue)
   }
 
-  // Autoplay effect con dependencias correctas
   useEffect(() => {
     if (autoplay && !spinning) {
       autoplayRef.current = setInterval(() => {
         spin()
-      }, 2000) // Aumentado a 2 segundos para dar más tiempo
+      }, 2000) 
     } else if (autoplayRef.current) {
       clearInterval(autoplayRef.current)
       autoplayRef.current = null
@@ -183,7 +174,6 @@ export const Slot: React.FC<SlotProps> = ({ defaultMoney }) => {
     }
   }, [autoplay, spinning, spin])
 
-  // Cleanup al desmontar
   useEffect(() => {
     return () => {
       if (autoplayRef.current) {
@@ -199,9 +189,7 @@ export const Slot: React.FC<SlotProps> = ({ defaultMoney }) => {
       </span>
 
       <div className='flex flex-col items-center gap-4'>
-        <h2 className='text-xl font-semibold text-white/50'>🎰 Máquina Tragamonedas</h2>
 
-        {/* 🎞️ Reels con animación */}
         <div className='flex gap-3 text-5xl bg-black/40 rounded-xl p-4 shadow-lg'>
           {reels.map((symbol, i) => (
             <span
