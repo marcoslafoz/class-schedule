@@ -56,6 +56,12 @@ export const UserHeaderBar: React.FC = () => {
           >
             ⚖️ 50/50
           </button>
+          <button
+            onClick={() => navigate('/scratch-and-win')}
+            className='text-white/60 hover:text-white/80  bg-white/5 hover:bg-white/10 rounded-full py-1 px-3'
+          >
+            🎟️ Rasca y gana
+          </button>
           {/* <button
             onClick={() => navigate('/sports')}
             className='text-white/60 hover:text-white/80  bg-white/5 hover:bg-white/10 rounded-full py-1 px-3'

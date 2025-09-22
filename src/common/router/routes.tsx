@@ -7,6 +7,7 @@ import {
   Roulette50Scene,
   BlackjackScene,
   SlotScene,
+  ScratchAndWinScene,
 } from '../../modules/views'
 import { authLoader } from './loaders'
 
@@ -48,6 +49,12 @@ export const router = createBrowserRouter([
   {
     path: '/slot',
     element: <SlotScene />,
+    errorElement: <Navigate to='/' />,
+    loader: authLoader,
+  },
+  {
+    path: '/scratch-and-win',
+    element: <ScratchAndWinScene />,
     errorElement: <Navigate to='/' />,
     loader: authLoader,
   },
