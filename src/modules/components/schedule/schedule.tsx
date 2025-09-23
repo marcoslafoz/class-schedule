@@ -19,7 +19,7 @@ interface ScheduleTimerType {
 
 enum SUBJECT_ID {
   IAW = 'IAW',
-  MPO = 'MPO',
+  DDECCN = 'DDECCN',
   SAD = 'SAD',
   ASO = 'ASO',
   ASGB = 'ASGB',
@@ -43,9 +43,9 @@ const SubjectList: Record<SUBJECT_ID, Subject> = {
     teacher: 'Enrique González Revilla',
     classroom_url: 'https://classroom.google.com/u/1/c/ODA2MzQ3NjYxMTI1',
   },
-  [SUBJECT_ID.MPO]: {
-    id: SUBJECT_ID.MPO,
-    full_name: 'Módulo profesional optativo',
+  [SUBJECT_ID.DDECCN]: {
+    id: SUBJECT_ID.DDECCN,
+    full_name: 'Desarrollo y despliegue en entornos colaborativos',
     teacher: 'Enrique Ruiz Meseguer',
     classroom_url: 'https://iespabloserrano.aeducar.es/course/view.php?id=235',
   },
@@ -139,7 +139,7 @@ export const Schedule: React.FC = () => {
           </tr>
           <tr>
             <HourCell start='10:20' end='11:10' />
-            <SubjectCell subject={SubjectList.MPO} rowSpan={1} active={currentOrder === 5} />
+            <SubjectCell subject={SubjectList.DDECCN} rowSpan={1} active={currentOrder === 5} />
             <SubjectCell subject={SubjectList.IAW} rowSpan={1} active={currentOrder === 11} />
             <Shortcut link='https://drive.google.com/' imageSrc='/assets/icons/drive.png' />
           </tr>
@@ -149,7 +149,7 @@ export const Schedule: React.FC = () => {
           <tr>
             <HourCell start='11:40' end='12:30' />
             <SubjectCell subject={SubjectList.IAW} rowSpan={2} active={currentOrder === 2} />
-            <SubjectCell subject={SubjectList.MPO} rowSpan={1} active={currentOrder === 6} />
+            <SubjectCell subject={SubjectList.DDECCN} rowSpan={1} active={currentOrder === 6} />
             <SubjectCell subject={SubjectList.SAD} rowSpan={3} active={currentOrder === 9} />
             <SubjectCell subject={SubjectList.IAW} rowSpan={1} active={currentOrder === 12} />
             <SubjectCell subject={SubjectList.SRI} rowSpan={3} active={currentOrder === 16} />
@@ -164,7 +164,7 @@ export const Schedule: React.FC = () => {
           </tr>
           <tr>
             <HourCell start='13:30' end='14:20' />
-            <SubjectCell subject={SubjectList.MPO} rowSpan={1} active={currentOrder === 3} />
+            <SubjectCell subject={SubjectList.DDECCN} rowSpan={1} active={currentOrder === 3} />
             <RouletteShortcut />
           </tr>
         </tbody>

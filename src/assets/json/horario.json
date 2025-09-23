@@ -15,7 +15,7 @@
     {
       "horaInicio": "13:30",
       "horaFin": "14:20",
-      "asignatura": "MPO",
+      "asignatura": "DDECCN",
       "order": 3
     }
   ],
@@ -29,13 +29,13 @@
     {
       "horaInicio": "10:20",
       "horaFin": "11:10",
-      "asignatura": "MPO",
+      "asignatura": "DDECCN",
       "order": 5
     },
     {
       "horaInicio": "11:40",
       "horaFin": "12:30",
-      "asignatura": "MPO",
+      "asignatura": "DDECCN",
       "order": 6
     },
     {
