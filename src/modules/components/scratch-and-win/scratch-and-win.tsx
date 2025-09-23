@@ -234,7 +234,7 @@ export const ScratchAndWin: React.FC<ScratchAndWinProps> = ({ defaultMoney }) =>
                 {c.revealed ? (
                   <div className='flex flex-col items-center'>
                     <span>{c.num}</span>
-                    {c.multiplier > 1 && <span className='text-sm text-green-400'>x{c.multiplier}</span>}
+                    {<span className='text-sm text-green-400'>x{c.multiplier}</span>}
                   </div>
                 ) : (
                   <span className='mt-1'>🍀</span>
