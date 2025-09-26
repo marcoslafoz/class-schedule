@@ -35,7 +35,7 @@ export const ScratchAndWinScene: React.FC = () => {
 
   return (
     <>
-      <Helmet title='Slot' />
+      <Helmet title='Rasca y gana' />
       <div className='w-full min-h-screen overflow-x-hidden flex flex-col max-w-full items-center bg-white/10'>
         <UserHeaderBar />
 
