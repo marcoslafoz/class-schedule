@@ -10,7 +10,7 @@ interface ScratchAndWinProps {
 }
 
 const possibleNumbers = Array.from({ length: 25 }, (_, i) => i + 1)
-const multipliers = [0.5, 0.5, 1, 1, 1, 1, 1, 1.5, 2, 3, 5]
+const multipliers = [0.5, 0.5, 0.5, 1, 1 , 1.5, 1.5,2, 2, 3]
 
 const jackpotConfetti = () => {
   confetti({ particleCount: 200, spread: 200, origin: { y: 0.6 } })
@@ -103,9 +103,11 @@ export const ScratchAndWin: React.FC<ScratchAndWinProps> = ({ defaultMoney }) =>
         if (winners.includes(s.num)) matchCount++
       })
 
-      if (matchCount > 3) {
-        for (let i = 0; i < scratch.length && matchCount > 3; i++) {
-          if (winners.includes(scratch[i].num) && Math.random() < 0.8) {
+      const WINNING_NUMBERS = 2
+
+      if (matchCount > WINNING_NUMBERS) {
+        for (let i = 0; i < scratch.length && matchCount > WINNING_NUMBERS; i++) {
+          if (winners.includes(scratch[i].num) && Math.random() < 0.9) {
             scratch[i].num = possibleNumbers.find(n => !winners.includes(n)) || possibleNumbers[0]
             matchCount--
           }
