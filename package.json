@@ -1,6 +1,6 @@
 {
   "name": "class-schedule",
-  "version": "2.0.0",
+  "version": "1.4.2",
   "private": true,
   "type": "module",
   "homepage": "https://horario.lafoz.dev/",
@@ -26,10 +26,18 @@
     "@libsql/client": "^0.14.0",
     "@popperjs/core": "^2.11.8",
     "@remix-run/router": "^1.23.0",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
     "canvas-confetti": "^1.9.3",
     "clsx": "^2.1.0",
+    "eslint": "^8.55.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "framer-motion": "^12.4.1",
     "postcss": "^8.4.38",
+    "prettier": "^2.4.1",
+    "pretty-quick": "^3.1.1",
     "react": "^18.2.0",
     "react-custom-roulette": "^1.4.1",
     "react-dom": "^18.2.0",
@@ -39,8 +47,7 @@
     "react-router-dom": "^6.23.0",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.2.2",
-    "vite": "^7.1.7",
-    "esbuild": "0.25.10"
+    "vite": "^5.2.11"
   },
   "devDependencies": {
     "@types/canvas-confetti": "^1.9.0",
@@ -51,13 +58,10 @@
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.19",
+    "esbuild-loader": "^4.0.2",
     "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
-    "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.6",
-    "prettier": "^2.8.8",
-    "pretty-quick": "^3.1.1"
+    "eslint-plugin-react-refresh": "^0.4.6"
   }
 }
