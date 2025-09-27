@@ -10,7 +10,17 @@ interface ScratchAndWinProps {
 }
 
 const possibleNumbers = Array.from({ length: 25 }, (_, i) => i + 1)
-const multipliers = [0.5, 0.5, 0.5, 1, 1 , 1.5, 1.5,2, 2, 3]
+
+const multipliers = [
+  0, 0, 0, 0, 0, 0, 0, 0, 0,          
+  0.5, 0.5, 0.5, 0.5, 0.5,            
+  1, 1, 1,                             
+  1.5, 1.5,                             
+  2,                                    
+  5,                                    
+  10                                 
+]
+
 
 const jackpotConfetti = () => {
   confetti({ particleCount: 200, spread: 200, origin: { y: 0.6 } })
@@ -89,7 +99,12 @@ export const ScratchAndWin: React.FC<ScratchAndWinProps> = ({ defaultMoney }) =>
       await updateUserMoney(-bet)
       await updateTotalBet(bet)
 
-      const winners = Array.from({ length: 2 }, () => getRandomNumber())
+      const first = getRandomNumber()
+      let second = getRandomNumber()
+      while (second === first) {
+        second = getRandomNumber()
+      }
+      const winners = [first, second]
       setWinningNumbers(winners)
 
       const scratch = Array.from({ length: 9 }, () => ({
@@ -98,27 +113,26 @@ export const ScratchAndWin: React.FC<ScratchAndWinProps> = ({ defaultMoney }) =>
         revealed: false,
       }))
 
-      let matchCount = 0
-      scratch.forEach(s => {
-        if (winners.includes(s.num)) matchCount++
-      })
+      let matchCount = scratch.filter(s => winners.includes(s.num)).length
+      const ALLOWED_MATCHES = 1
 
-      const WINNING_NUMBERS = 2
-
-      if (matchCount > WINNING_NUMBERS) {
-        for (let i = 0; i < scratch.length && matchCount > WINNING_NUMBERS; i++) {
+      if (matchCount > ALLOWED_MATCHES) {
+        for (let i = 0; i < scratch.length && matchCount > ALLOWED_MATCHES; i++) {
           if (winners.includes(scratch[i].num) && Math.random() < 0.9) {
-            scratch[i].num = possibleNumbers.find(n => !winners.includes(n)) || possibleNumbers[0]
+            scratch[i].num =
+              possibleNumbers.find(n => !winners.includes(n)) || possibleNumbers[0]
             matchCount--
           }
         }
       }
 
-      if (matchCount === 0 && Math.random() < 0.25) {
+      if (matchCount === 0 && Math.random() < 0.15) {
         const randomIndex = Math.floor(Math.random() * scratch.length)
         scratch[randomIndex].num = winners[Math.floor(Math.random() * winners.length)]
-        scratch[randomIndex].multiplier = Math.random() < 0.8 ? 0.5 : scratch[randomIndex].multiplier
+        scratch[randomIndex].multiplier =
+          Math.random() < 0.5 ? 0 : scratch[randomIndex].multiplier
       }
+
       setScratchNumbers(scratch)
 
       const newBalance = await fetchUserMoney()
@@ -130,40 +144,41 @@ export const ScratchAndWin: React.FC<ScratchAndWinProps> = ({ defaultMoney }) =>
     }
   }, [bet, playing])
 
-  const revealScratch = useCallback(async (index: number) => {
-    if (!playing) return
-    if (scratchNumbers[index]?.revealed) return
+  const revealScratch = useCallback(
+    async (index: number) => {
+      if (!playing) return
+      if (scratchNumbers[index]?.revealed) return
 
-    const updated = [...scratchNumbers]
-    updated[index].revealed = true
-    setScratchNumbers(updated)
+      const updated = [...scratchNumbers]
+      updated[index].revealed = true
+      setScratchNumbers(updated)
 
-    let currentWinAmount = 0
-    if (winningNumbers.includes(updated[index].num)) {
-      currentWinAmount = Math.floor(bet * updated[index].multiplier)
-      setWinnings(prev => prev + currentWinAmount)
-      setMessage(`🎉 ¡Número ganador ${updated[index].num}! +${currentWinAmount}`)
-      if (updated[index].multiplier >= 3) {
-        jackpotConfetti()
-      }
-    }
-
-    // Verificar si todas las cartas están reveladas
-    if (updated.every(c => c.revealed)) {
-      // Calcular las ganancias totales directamente desde las cartas reveladas
-      const totalWinnings = updated.reduce((total, card) => {
-        if (winningNumbers.includes(card.num)) {
-          return total + Math.floor(bet * card.multiplier)
+      let currentWinAmount = 0
+      if (winningNumbers.includes(updated[index].num)) {
+        currentWinAmount = Math.floor(bet * updated[index].multiplier)
+        setWinnings(prev => prev + currentWinAmount)
+        setMessage(`🎉 ¡Número ganador ${updated[index].num}! +${currentWinAmount}`)
+        if (updated[index].multiplier >= 3) {
+          jackpotConfetti()
         }
-        return total
-      }, 0)
+      }
 
-      setTimeout(async () => {
-        await finishGame(totalWinnings)
-      }, 500)
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [playing, scratchNumbers, winningNumbers, bet])
+      if (updated.every(c => c.revealed)) {
+        const totalWinnings = updated.reduce((total, card) => {
+          if (winningNumbers.includes(card.num)) {
+            return total + Math.floor(bet * card.multiplier)
+          }
+          return total
+        }, 0)
+
+        setTimeout(async () => {
+          await finishGame(totalWinnings)
+        }, 500)
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [playing, scratchNumbers, winningNumbers, bet]
+  )
 
   const finishGame = useCallback(async (finalWinnings: number) => {
     if (finalWinnings > 0) {
@@ -214,35 +229,41 @@ export const ScratchAndWin: React.FC<ScratchAndWinProps> = ({ defaultMoney }) =>
 
         {scratchNumbers.length > 0 && (
           <div className='grid grid-cols-3 gap-3'>
-            {scratchNumbers.map((c, i) => (
-              <div
-                key={i}
-                role="button"
-                tabIndex={0}
-                onClick={() => revealScratch(i)}
-                onKeyDown={e => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    revealScratch(i)
-                  }
-                }}
-                className={clsx(
-                  'w-20 h-20 flex items-center justify-center rounded-lg cursor-pointer text-xl font-bold transition-all',
-                  c.revealed ? 'bg-gray-800 text-white' : 'bg-gray-500 hover:bg-gray-400',
-                  !playing && 'pointer-events-none'
-                )}
-                aria-pressed={c.revealed}
-              >
-                {c.revealed ? (
-                  <div className='flex flex-col items-center'>
-                    <span>{c.num}</span>
-                    {<span className='text-sm text-green-400'>x{c.multiplier}</span>}
-                  </div>
-                ) : (
-                  <span className='mt-1'>🍀</span>
-                )}
-              </div>
-            ))}
+            {scratchNumbers.map((c, i) => {
+              let multiplierColor = 'text-gray-400'
+              if (c.multiplier > 1) multiplierColor = 'text-green-400'
+              else if (c.multiplier < 1) multiplierColor = 'text-red-400'
+
+              return (
+                <div
+                  key={i}
+                  role='button'
+                  tabIndex={0}
+                  onClick={() => revealScratch(i)}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      revealScratch(i)
+                    }
+                  }}
+                  className={clsx(
+                    'w-20 h-20 flex items-center justify-center rounded-lg cursor-pointer text-xl font-bold transition-all',
+                    c.revealed ? 'bg-gray-800 text-white' : 'bg-gray-500 hover:bg-gray-400',
+                    !playing && 'pointer-events-none'
+                  )}
+                  aria-pressed={c.revealed}
+                >
+                  {c.revealed ? (
+                    <div className='flex flex-col items-center'>
+                      <span>{c.num}</span>
+                      <span className={`text-sm ${multiplierColor}`}>x{c.multiplier}</span>
+                    </div>
+                  ) : (
+                    <span className='mt-1'>🍀</span>
+                  )}
+                </div>
+              )
+            })}
           </div>
         )}
 
