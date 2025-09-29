@@ -99,12 +99,14 @@ export const ScratchAndWin: React.FC<ScratchAndWinProps> = ({ defaultMoney }) =>
       await updateUserMoney(-bet)
       await updateTotalBet(bet)
 
-      const first = getRandomNumber()
-      let second = getRandomNumber()
-      while (second === first) {
-        second = getRandomNumber()
+      const winners: number[] = []
+
+      while (winners.length < 3) {
+        const num = getRandomNumber()
+        if (!winners.includes(num)) {
+          winners.push(num)
+        }
       }
-      const winners = [first, second]
       setWinningNumbers(winners)
 
       const scratch = Array.from({ length: 9 }, () => ({
