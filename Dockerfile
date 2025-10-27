@@ -30,7 +30,7 @@ COPY .env .env
 
 
 # Expose port 80
-EXPOSE 80
+EXPOSE 5172
 
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
