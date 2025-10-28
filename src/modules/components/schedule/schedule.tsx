@@ -153,7 +153,7 @@ export const Schedule: React.FC = () => {
             <SubjectCell subject={SubjectList.SAD} rowSpan={3} active={currentOrder === 9} />
             <SubjectCell subject={SubjectList.IAW} rowSpan={1} active={currentOrder === 12} />
             <SubjectCell subject={SubjectList.SRI} rowSpan={3} active={currentOrder === 16} />
-            <Shortcut link='https://www.studentspace.app/' imageSrc='/assets/icons/studentspace.svg' />
+            <Shortcut link='https://studentspace.lafoz.dev/' imageSrc='/assets/icons/studentspace.svg' />
           </tr>
           <tr>
             <HourCell start='12:35' end='13:25' />
@@ -180,7 +180,7 @@ export const Schedule: React.FC = () => {
               link='https://iespabloserrano.aeducar.es/my/courses.php'
               imageSrc='/assets/icons/aeducar.ico'
             />
-            <FlexShortcut link='https://www.studentspace.app/' imageSrc='/assets/icons/studentspace.svg' />
+            <FlexShortcut link='https://studentspace.lafoz.dev/' imageSrc='/assets/icons/studentspace.svg' />
             <RouletteFlexShortcut />
           </tr>
         </tbody>
