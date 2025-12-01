@@ -1,0 +1,317 @@
+################################################################################
+### SECCIÓN 1: GIT HOOKS (AUTOMATIZACIÓN LOCAL)
+### Ubicación: .git/hooks/ (Sin extensión, con permisos +x)
+################################################################################
+
+--- EJEMPLO 1: commit-msg (Validar formato del mensaje) ---
+# OBJETIVO: Obligar a que el mensaje empiece por [FEAT], [FIX], [DOCS] o [WIP].
+# PREGUNTA TÍPICA: Escribe un script que rechace commits sin prefijo estándar.
+
+#!/bin/bash
+
+# $1 es el archivo que contiene el mensaje del commit
+MSG_FILE=$1
+MSG_CONTENT=$(cat $MSG_FILE)
+
+# Regex para buscar el patrón al inicio
+PATTERN="^\[(FEAT|FIX|DOCS|WIP)\]"
+
+if [[ ! $MSG_CONTENT =~ $PATTERN ]]; then
+    echo "❌ ERROR: El mensaje debe empezar por [FEAT], [FIX], [DOCS] o [WIP]."
+    echo "Ejemplo: [FEAT] Añadido login de usuarios"
+    exit 1 # Salida distinta de 0 cancela el commit
+fi
+
+echo "✅ Formato de mensaje correcto."
+exit 0
+
+--- EJEMPLO 2: pre-commit (Evitar subir claves privadas) ---
+# OBJETIVO: Escanear el código buscando "PRIVATE_KEY" antes de permitir el commit.
+# PREGUNTA TÍPICA: ¿Cómo evitas que un desarrollador suba secretos por error?
+
+#!/bin/bash
+
+# Grep busca la cadena en los archivos modificados (staged)
+if git grep -q "PRIVATE_KEY"; then
+    echo "🚨 SEGURIDAD: Se ha detectado una posible clave privada en el código."
+    echo "Por favor, elimina 'PRIVATE_KEY' antes de hacer commit."
+    exit 1
+fi
+
+exit 0
+
+--- EJEMPLO 3: pre-push (Correr tests antes de subir) ---
+# OBJETIVO: No permitir subir código al remoto si los tests fallan.
+# NOTA: Este hook es lento, pero asegura que el remoto (main) no se rompa.
+
+#!/bin/bash
+
+echo "🏃 Ejecutando tests antes del push..."
+npm test
+
+# $? captura el resultado del último comando (npm test)
+if [ $? -ne 0 ]; then
+    echo "⛔ ERROR: Los tests han fallado. No se permite el push."
+    exit 1
+fi
+
+echo "✅ Tests pasados. Subiendo código..."
+exit 0
+
+################################################################################
+### SECCIÓN 3: DOCKER Y CONTENEDORES
+### Archivo: Dockerfile
+################################################################################
+
+--- EJEMPLO 1: Dockerfile Básico (Python) ---
+# PREGUNTA: Crea una imagen para un script de Python que usa Flask.
+
+# 1. Imagen base (siempre intentar usar versiones 'slim' o 'alpine' en examen)
+FROM python:3.9-slim
+
+# 2. Directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# 3. Copiar dependencias primero (para aprovechar caché de capas)
+COPY requirements.txt .
+
+# 4. Instalar librerías
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 5. Copiar el resto del código
+COPY . .
+
+# 6. Exponer puerto (informativo)
+EXPOSE 5000
+
+# 7. Comando de arranque
+CMD ["python", "app.py"]
+
+--- EJEMPLO 2: Dockerfile Multi-stage (Optimización) ---
+# PREGUNTA AVANZADA: El contenedor final pesa mucho. Optimízalo usando multi-stage.
+# LÓGICA: Usar una imagen para compilar y otra vacía solo para ejecutar.
+
+# ETAPA 1: Builder (Compilación)
+FROM node:20 AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build  # Genera carpeta /dist
+
+# ETAPA 2: Production (Ejecución ligera con Nginx)
+FROM nginx:alpine
+# Copiamos SOLO lo generado en la etapa anterior, ignorando node_modules pesados
+COPY --from=builder /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
+--- EJEMPLO 3: Variables de Entorno y Usuario ---
+# PREGUNTA: Configura variables por defecto y no uses el usuario root.
+
+FROM node:20-alpine
+
+# Crear variable de entorno por defecto
+ENV NODE_ENV=production
+ENV PORT=3000
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install --production
+
+COPY . .
+
+# Crear un usuario 'nodeuser' para no usar root (Seguridad)
+# (Nota: la imagen node:alpine ya trae un usuario 'node', pero aquí creamos uno didáctico)
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
+
+EXPOSE 3000
+CMD ["node", "index.js"]
+
+
+################################################################################
+### SECCIÓN 4: COMANDOS DE DOCKER (CASOS DE USO)
+### Lo que debes escribir en la terminal
+################################################################################
+
+# 1. Ejecutar en segundo plano mapeando puertos
+# Caso: Arrancar Nginx accesible en localhost:8080
+docker run -d -p 8080:80 --name mi-servidor nginx
+
+# 2. Persistencia de datos (Volúmenes)
+# Caso: Ejecutar MySQL y que los datos no se borren al apagar
+docker run -d \
+  --name base-datos \
+  -e MYSQL_ROOT_PASSWORD=secreto \
+  -v ./mis-datos:/var/lib/mysql \
+  mysql:latest
+
+# 3. Modo interactivo de usar y tirar
+# Caso: Entrar a un Ubuntu rápido para probar un comando y que se borre al salir (--rm)
+docker run -it --rm ubuntu bash
+
+# 4. Conectar dos contenedores en la misma red
+# Caso: App conecta con BD
+docker network create mi-red
+docker run -d --name db --network mi-red mongo
+docker run -d --name backend --network mi-red mi-imagen-app
+
+# 5. Limpieza general (Comando de pánico)
+# Caso: El disco está lleno. Borra todo lo que no se usa.
+docker system prune -a
+
+# 6. Copiar archivos (Emergencia)
+# Caso: Sacar un log de un contenedor que está fallando
+docker cp mi-contenedor:/app/error.log ./escritorio/
+
+================================================================================
+FIN DEL ARCHIVO
+================================================================================
+################################################################################
+### SECCIÓN 2: GITHUB ACTIONS (WORKFLOWS CI/CD)
+### Ubicación: .github/workflows/*.yml
+################################################################################
+
+--- EJEMPLO 1: CI Básico para Node.js ---
+# CASO: Instalar dependencias y correr tests en cada Push a main.
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 1. Descargar repositorio
+      uses: actions/checkout@v4
+
+    - name: 2. Configurar Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: 3. Instalar dependencias
+      run: npm ci # 'ci' es más limpio que 'install' para entornos automatizados
+
+    - name: 4. Ejecutar tests
+      run: npm test
+
+--- EJEMPLO 2: Matriz de Pruebas (Matrix Strategy) ---
+# CASO: El examen pide testear el código en 3 versiones de Node y 2 Sistemas Operativos a la vez.
+# IMPORTANTE: Esto crea 6 jobs en paralelo (3x2).
+
+name: Matrix Testing
+
+on: [push]
+
+jobs:
+  multi-os-test:
+    runs-on: ${{ matrix.os }} # Variable dinámica
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node-version: [18, 20, 22]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Usando Node ${{ matrix.node-version }} en ${{ matrix.os }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm install
+    - run: npm test
+
+--- EJEMPLO 3: Gestión de Artefactos (Build & Upload) ---
+# CASO: Compilar una app Java (.jar) y guardar el archivo resultante para descargar.
+
+name: Build Java Artifact
+
+on: workflow_dispatch # Ejecución manual
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        
+    - name: Build with Maven
+      run: mvn package
+      
+    - name: Guardar el .jar generado
+      uses: actions/upload-artifact@v4
+      with:
+        name: mi-app-compilada
+        path: target/*.jar
+        retention-days: 5
+
+--- EJEMPLO 4: Cron Job (Tarea Programada) ---
+# CASO: Ejecutar un script de limpieza todas las noches a las 00:00.
+
+name: Nightly Cleanup
+on:
+  schedule:
+    - cron: '0 0 * * *' # Sintaxis cron: Min Hora Día Mes Sem
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ejecutar script
+        run: ./scripts/cleanup_db.sh
+
+
+
+#!/bin/bash
+echo "Hello, World!"
+
+
+name: Copia de seguridad 
+on:
+  push:
+    branches: [ main]
+jobs:
+  ejecutar-copia:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Crear carpeta
+        run: mkdir -p backup
+      - name: Crear copia de seguridad
+        run: tar -czf backup/backup.tar.gz datos
+      - name: Guardar el backup
+        uses: actions/upload-artifact@v4
+        with:
+          name: backup-de-datos
+          path: backup/backup.tar.gz
+
+          name: Mostrar hola
+on: 
+  push:
+    branch: [ <rama> ]
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+    - name: Checkout del repositorio
+      uses: actions/checkout@v3
+    - name: Dar permisos de ejecución
+      run: chmod +x ./src/script.sh
+    - name: Ejecutar script
+      run: ./src/script.sh
+  
