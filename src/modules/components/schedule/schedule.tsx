@@ -40,7 +40,7 @@ const SubjectList: Record<SUBJECT_ID, Subject> = {
   [SUBJECT_ID.IAW]: {
     id: SUBJECT_ID.IAW,
     full_name: 'Implantación de aplicaciones web',
-    teacher: 'Enrique González Revilla',
+    teacher: 'Victor Ramos Menendez',
     classroom_url: 'https://classroom.google.com/u/1/c/ODA2MzQ3NjYxMTI1',
   },
   [SUBJECT_ID.DDECCN]: {
